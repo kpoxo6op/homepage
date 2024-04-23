@@ -22,6 +22,12 @@ const projectsData: Project[] = [
     imgSrc: '/static/images/time-machine.jpg',
     href: '/blog/the-time-machine',
   },
+  {
+    title: 'Markdown to PDF CV builder',
+    description: `Creates PDF CV from Markdown file with Github actions`,
+    imgSrc: '/static/images/time-machine.jpg',
+    href: 'https://github.com/kpoxo6op/cv',
+  },
 ]
 
 export default projectsData
