@@ -37,7 +37,7 @@ the ground up without any infrastructure anf finish with a working Runner.
 
 ### GitHub
 
-Clone the GitHub repository
+Clone the GitHub repository.
 <!-- TODO rename gitlab-agent-pwsh-->
 
 ```sh
@@ -56,6 +56,13 @@ Install [Google Cloud SDK](https://cloud.google.com/sdk/docs/install).
 Create a new project with a unique name. I'll be using `runner-demo-xxxx` in this article. Note that project names are globally unique, so your project name will be different from mine.
 
 Enable [Billing](https://cloud.google.com/billing/docs/how-to/verify-billing-enabled#console) for your project.
+
+Enable Storage API because we will store our Terraform State in a Google Cloud Bucket. Enable Compute API because we will provision a Windows machine.
+
+```sh
+gcloud services enable storage.googleapis.com
+gcloud services enable compute.googleapis.com
+```
 
 Create Service account and the key for Terraform.
 
@@ -79,14 +86,10 @@ cat ~/terraform-admin-key.json
 
 Terraform will use the key we have created to provision Google Cloud resources.
 
-Enable Storage API because we will store our Terraform State in a Google Cloud Bucket. Enable Compute API because we will provision a Windows machine.
-
-```sh
-gcloud services enable storage.googleapis.com
-gcloud services enable compute.googleapis.com
-```
-
 <!-- TODO test creating the bucket via terraform -->
+<!-- https://cloud.google.com/docs/terraform/resource-management/store-state -->
+<!-- │ Error: googleapi: Error 403: terraform-admin@gitlab-agent-pwsh-tf-state.iam.gserviceaccount.com does not have storage.buckets.create access to the Google Cloud project. Permission 'storage.buckets.create' denied on resource (or it may not exist)., forbidden -->
+<!-- regenerated the json key, bucket creation with tf worked -->
 
 ### Gitlab
 
@@ -98,8 +101,6 @@ Create a [Personal Access Token](https://gitlab.com/-/user_settings/personal_acc
 
 Save the token on disk, we will use it later.
 
-## Prepare the environment
-
 ## Review the Terraform files
 
 ## Create the Runner
@@ -108,11 +109,11 @@ Save the token on disk, we will use it later.
 
 ## Clean Up
 
-<!-- gilab mistakes:
--> backslashes in powreshell
+<!-- gitlab mistakes:
+-> backslashes in powershell
 -> --tag-list
 
-links to other people's guies
+links to other people's guides
 
 add notes about security and account structure:
 
