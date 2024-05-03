@@ -35,6 +35,16 @@ the ground up without any infrastructure anf finish with a working Runner.
 
 ## Before you begin
 
+### GitHub
+
+Clone the GitHub repository
+<!-- TODO rename gitlab-agent-pwsh-->
+
+```sh
+git clone https://github.com/kpoxo6op/gitlab-agent-pwsh.git
+cd gitlab-agent-pwsh
+```
+
 ### Terraform
 
 Install [Terraform](https://developer.hashicorp.com/terraform/install).
@@ -47,17 +57,36 @@ Create a new project with a unique name. I'll be using `runner-demo-xxxx` in thi
 
 Enable [Billing](https://cloud.google.com/billing/docs/how-to/verify-billing-enabled#console) for your project.
 
-Create Service account for Terraform
+Create Service account and the key for Terraform.
 
 ```sh
+PROJECT_ID=$(gcloud config get-value project)
+
 gcloud iam service-accounts create terraform-admin \
     --description="Service account for Terraform operations" \
     --display-name="Terraform Admin"
 
-gcloud projects add-iam-policy-binding runner-demo-xxxx \
-    --member="serviceAccount:terraform-admin@runner-demo-xxxx.iam.gserviceaccount.com" \
+gcloud projects add-iam-policy-binding ${PROJECT_ID} \
+    --member=serviceAccount:terraform-admin@${PROJECT_ID}.iam.gserviceaccount.com \
     --role="roles/editor"
+
+gcloud iam service-accounts keys create ~/terraform-admin-key.json \
+    --iam-account terraform-admin@${PROJECT_ID}.iam.gserviceaccount.com
+
+# verify the key
+cat ~/terraform-admin-key.json
 ```
+
+Terraform will use the key we have created to provision Google Cloud resources.
+
+Enable Storage API because we will store our Terraform State in a Google Cloud Bucket. Enable Compute API because we will provision a Windows machine.
+
+```sh
+gcloud services enable storage.googleapis.com
+gcloud services enable compute.googleapis.com
+```
+
+<!-- TODO test creating the bucket via terraform -->
 
 ### Gitlab
 
@@ -85,6 +114,10 @@ Save the token on disk, we will use it later.
 
 links to other people's guies
 
-add notes about security and account structure
+add notes about security and account structure:
+
+- separate account for terraform state and resource
+- encrypt terraform state
+- use federation instead of access keys for GCP
 
 -->
