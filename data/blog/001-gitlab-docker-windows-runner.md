@@ -37,12 +37,12 @@ the ground up without any infrastructure anf finish with a working Runner.
 
 ### GitHub
 
-Clone the GitHub repository.
+Clone the GitHub repository and cd to the working folder.
 <!-- TODO rename gitlab-agent-pwsh-->
 
 ```sh
 git clone https://github.com/kpoxo6op/gitlab-agent-pwsh.git
-cd gitlab-agent-pwsh
+cd gitlab-agent-pwsh/terraform
 ```
 
 ### Terraform
@@ -57,14 +57,23 @@ Create a new project with a unique name. I'll be using `runner-demo-xxxx` in thi
 
 Enable [Billing](https://cloud.google.com/billing/docs/how-to/verify-billing-enabled#console) for your project.
 
-Enable Storage API because we will store our Terraform State in a Google Cloud Bucket. Enable Compute API because we will provision a Windows machine.
+Enable Compute API so we can provision a Windows machine.
 
 ```sh
-gcloud services enable storage.googleapis.com
 gcloud services enable compute.googleapis.com
 ```
 
 Create Service account and the key for Terraform.
+
+<!-- 
+set default zone and region
+
+Your project default Compute Engine zone has been set to [australia-southeast1-a].
+You can change it by running [gcloud config set compute/zone NAME].
+
+Your project default Compute Engine region has been set to [australia-southeast1].
+You can change it by running [gcloud config set compute/region NAME].
+ -->
 
 ```sh
 PROJECT_ID=$(gcloud config get-value project)
@@ -75,7 +84,8 @@ gcloud iam service-accounts create terraform-admin \
 
 gcloud projects add-iam-policy-binding ${PROJECT_ID} \
     --member=serviceAccount:terraform-admin@${PROJECT_ID}.iam.gserviceaccount.com \
-    --role="roles/editor"
+    --role=roles/compute.admin \
+    --role=roles/iam.serviceAccountUser
 
 gcloud iam service-accounts keys create ~/terraform-admin-key.json \
     --iam-account terraform-admin@${PROJECT_ID}.iam.gserviceaccount.com
@@ -97,9 +107,20 @@ Sign up for a [GitLab](https://gitlab.com/users/sign_up) account.
 
 Create any Group and Project names during the sign up process. We will create another group with terraform later.
 
-Create a [Personal Access Token](https://gitlab.com/-/user_settings/personal_access_tokens) with `api` scope.
+Create a [Personal Access Token](https://gitlab.com/-/user_settings/personal_access_tokens) with `api` scope. We will use it the next step.
 
-Save the token on disk, we will use it later.
+## `.env` file
+
+Create the `.env` file, assign GitLab token to `GITLAB_TOKEN` variable.
+
+Optionally set your IP address if you want to SSH to the Windows VM we are about to create.
+<!-- todo do we care about IP address? -->
+
+```sh
+cp .env.sample .env
+export GITLAB_TOKEN="glpat-xxxxxxxxxxxxxx"
+export TF_VAR_my_ip_address="0.0.0.0/32"
+```
 
 ## Review the Terraform files
 
@@ -117,8 +138,10 @@ links to other people's guides
 
 add notes about security and account structure:
 
+- don't store state locally
 - separate account for terraform state and resource
 - encrypt terraform state
 - use federation instead of access keys for GCP
+- terraform service account privs are loose
 
 -->
