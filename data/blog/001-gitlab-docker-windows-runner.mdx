@@ -45,11 +45,10 @@ to keep it short.
 
 Let me know in the comments if you'd like to see the version of the guide with hardened security.
 
-## Before you begin
+## Before you begin !!! TODO rename gitlab-agent-pwsh !!!
 
 
 Clone the GitHub repository and cd to the working folder.
-<!-- TODO rename gitlab-agent-pwsh-->
 
 ```sh
 git clone https://github.com/kpoxo6op/gitlab-agent-pwsh.git
@@ -82,15 +81,13 @@ gcloud services enable compute.googleapis.com
 
 Create Service account `Terraform Admin`.
 
-<!-- 
-set default zone and region
+!!!TODO set default zone and region
 
 Your project default Compute Engine zone has been set to [australia-southeast1-a].
 You can change it by running [gcloud config set compute/zone NAME].
 
 Your project default Compute Engine region has been set to [australia-southeast1].
 You can change it by running [gcloud config set compute/region NAME].
- -->
 
 ```sh
 PROJECT_ID=$(gcloud config get-value project)
@@ -117,11 +114,6 @@ cat ~/terraform-admin-key.json
 
 Terraform will connect to Google Cloud as `Terraform Admin` with the key in our
 home directory.
-
-<!-- TODO test creating the bucket via terraform -->
-<!-- https://cloud.google.com/docs/terraform/resource-management/store-state -->
-<!-- │ Error: googleapi: Error 403: terraform-admin@gitlab-agent-pwsh-tf-state.iam.gserviceaccount.com does not have storage.buckets.create access to the Google Cloud project. Permission 'storage.buckets.create' denied on resource (or it may not exist)., forbidden -->
-<!-- regenerated the json key, bucket creation with tf worked -->
 
 ### Setup Gitlab
 
