@@ -121,7 +121,7 @@ scope. We will use it the next step.
 
 Edit/review files in `terraform` folder.
 
-### `.env` file
+### Edit `.env` file
 
 Create the `.env` file
 
@@ -143,13 +143,13 @@ VM we are about to create.
 `GOOGLE_APPLICATION_CREDENTIALS`: Service Account keys from [Google
 Cloud](#google-cloud) step.
 
-### provider.tf
+### Review provider.tf
 
-Use envvars from `.env` to get creds for Google and Gitlab. Use local terraform
-state for simplicity.
+Both Google and GitLab providers use credentials defined in `.env`.
+
+We use local terraform state file for simplicity.
 
 ```sh
-cat provider.tf
 terraform {
   required_providers {
     gitlab = {
@@ -164,8 +164,8 @@ terraform {
 }
 
 provider "google" {
-    project = "${var.project_name}"
-    region = "australia-southeast1"
+    project = var.project_name
+    region = var.gcp_region
 }
 
 provider "gitlab" {
@@ -173,13 +173,12 @@ provider "gitlab" {
 }
 ```
 
-### variables.tf
+### Edit variables.tf
 
 Set `project_name` to your unique Google project name. Optionally, set GCP zone
 and region too.
 
 ```sh
-cat variables.tf 
 variable "my_ip_address" {
   description = "The IP address allowed for RDP access"
   type        = string
@@ -207,14 +206,13 @@ variable "gcp_region" {
   type        = string
   default     = "australia-southeast1"
 }
-
 ```
 
-### gitlab.tf
+### Review gitlab.tf
 
-Create GitLab project, add the pipeline file to the project, create the runner.
+In this file we create GitLab project, add the pipeline file to the project, create the runner.
 
-Set long `build_timeout` for the project builds. We don't want to fail the build
+We set long `build_timeout` for the project builds because we our build to fail
 while the Windows VM is being provisioned.
 
 `gitlab_user_runner` will produce the authentication
@@ -254,7 +252,7 @@ resource "gitlab_user_runner" "runner" {
 Template the authentication token `gitlab_user_runner.runner.token` into the
 Windows startup script `startup.ps1`.
 
-Allow RDP and SSH access from IP defined in the [`.env`](#env-file) file.
+Allow RDP and SSH access from IP defined in the [`.env`](#edit-env-file) file.
 
 ```sh
 cat gcp_windows_vm.tf
