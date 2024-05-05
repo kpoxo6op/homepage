@@ -53,9 +53,13 @@ Install [Terraform](https://developer.hashicorp.com/terraform/install).
 
 Install [Google Cloud SDK](https://cloud.google.com/sdk/docs/install).
 
-Create a new project with a unique name. I'll be using `runner-demo-xxxx` in this article. Note that project names are globally unique, so your project name will be different from mine.
+Create a new project with a unique name. I'll be using `runner-demo-xxxx` in
+this article. Note that project names are globally unique, so your project name
+will be different from mine.
 
-Enable [Billing](https://cloud.google.com/billing/docs/how-to/verify-billing-enabled#console) for your project.
+Enable
+[Billing](https://cloud.google.com/billing/docs/how-to/verify-billing-enabled#console)
+for your project.
 
 Enable Compute API so we can provision a Windows machine.
 
@@ -63,7 +67,7 @@ Enable Compute API so we can provision a Windows machine.
 gcloud services enable compute.googleapis.com
 ```
 
-Create Service account and the key for Terraform.
+Create Service account `Terraform Admin`.
 
 <!-- 
 set default zone and region
@@ -86,7 +90,11 @@ gcloud projects add-iam-policy-binding ${PROJECT_ID} \
     --member=serviceAccount:terraform-admin@${PROJECT_ID}.iam.gserviceaccount.com \
     --role=roles/compute.admin \
     --role=roles/iam.serviceAccountUser
+```
 
+Create the key `Terraform Admin`, save it to disk.
+
+```sh
 gcloud iam service-accounts keys create ~/terraform-admin-key.json \
     --iam-account terraform-admin@${PROJECT_ID}.iam.gserviceaccount.com
 
@@ -94,7 +102,8 @@ gcloud iam service-accounts keys create ~/terraform-admin-key.json \
 cat ~/terraform-admin-key.json
 ```
 
-Terraform will use the key we have created to provision Google Cloud resources.
+Terraform will connect to Google Cloud as `Terraform Admin` with the key in our
+home directory.
 
 <!-- TODO test creating the bucket via terraform -->
 <!-- https://cloud.google.com/docs/terraform/resource-management/store-state -->
@@ -105,26 +114,245 @@ Terraform will use the key we have created to provision Google Cloud resources.
 
 Sign up for a [GitLab](https://gitlab.com/users/sign_up) account.
 
-Create any Group and Project names during the sign up process. We will create another group with terraform later.
+Create any Group and Project names during the sign up process. We will create
+another group with terraform later.
 
-Create a [Personal Access Token](https://gitlab.com/-/user_settings/personal_access_tokens) with `api` scope. We will use it the next step.
+Create a [Personal Access
+Token](https://gitlab.com/-/user_settings/personal_access_tokens) with `api`
+scope. We will use it the next step.
 
-## `.env` file
+## Working folder
 
-Create the `.env` file, assign GitLab token to `GITLAB_TOKEN` variable.
+Edit/review files in `terraform` folder.
 
-Optionally set your IP address if you want to SSH to the Windows VM we are about to create.
-<!-- todo do we care about IP address? -->
+### `.env` file
+
+Create the `.env` file
 
 ```sh
 cp .env.sample .env
-export GITLAB_TOKEN="glpat-xxxxxxxxxxxxxx"
+cat .env
+export GITLAB_TOKEN="glpat-xxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 export TF_VAR_my_ip_address="0.0.0.0/32"
+export GOOGLE_APPLICATION_CREDENTIALS="/home/${USER}/terraform-admin-key.json"
 ```
 
-## Review the Terraform files
+Set environment variables:
 
-## Create the Runner
+`GITLAB_TOKEN`: GitLab token from the previous step.
+
+`TF_VAR_my_ip_address`: Your IP address in case you want to access the Windows
+VM we are about to create.
+
+`GOOGLE_APPLICATION_CREDENTIALS`: Service Account keys from [Google
+Cloud](#google-cloud) step.
+
+### provider.tf
+
+Use envvars from `.env` to get creds for Google and Gitlab. Use local terraform
+state for simplicity.
+
+```sh
+cat provider.tf
+terraform {
+  required_providers {
+    gitlab = {
+      source  = "gitlabhq/gitlab"
+      version = "16.11.0"
+    }
+    google = {
+      source  = "hashicorp/google"
+      version = "5.26.0"
+    }
+  }
+}
+
+provider "google" {
+    project = "${var.project_name}"
+    region = "australia-southeast1"
+}
+
+provider "gitlab" {
+  base_url = "https://gitlab.com/api/v4/"
+}
+```
+
+### variables.tf
+
+Set `project_name` to your unique Google project name. Optionally, set GCP zone
+and region too.
+
+```sh
+cat variables.tf 
+variable "my_ip_address" {
+  description = "The IP address allowed for RDP access"
+  type        = string
+}
+
+variable "project_name" {
+  description = "Google Cloud project name"
+  type        = string
+  default     = "runner-demo-xxxx"
+}
+
+variable "gitlab_token" {
+  description = "gitlab personal token"
+  type        = string
+}
+
+variable "gcp_zone" {
+  description = "Google Cloud Zone"
+  type        = string
+  default     = "australia-southeast1-a"
+}
+
+variable "gcp_region" {
+  description = "Google Cloud Region"
+  type        = string
+  default     = "australia-southeast1"
+}
+
+```
+
+### gitlab.tf
+
+Create GitLab project, add the pipeline file to the project, create the runner.
+
+Set long `build_timeout` for the project builds. We don't want to fail the build
+while Windows VM is being provisioned.
+
+`gitlab_user_runner` will produce the authentication [token](https://registry.terraform.io/providers/gitlabhq/gitlab/latest/docs/resources/user_runner#token) for the new runner. We we
+will use it later.
+
+```sh
+cat gitlab.tf
+resource "gitlab_project" "project" {
+  name             = "GitLab-${var.project_name}"
+  description      = "Build an app inside Windows Container"
+  visibility_level = "public"
+  build_timeout    = "36000"
+}
+
+resource "gitlab_repository_file" "pipeline" {
+  project        = gitlab_project.project.id
+  file_path      = ".gitlab-ci.yml"
+  branch         = "main"
+  content        = base64encode(file("${path.module}/.gitlab-ci.yml"))
+  commit_message = "Init pipeline"
+  author_name    = "Terraform"
+}
+
+resource "gitlab_user_runner" "runner" {
+  runner_type = "project_type"
+  project_id  = gitlab_project.project.id
+  description = "Runner with Docker for Windows executor"
+  tag_list    = ["windows", "docker"]
+}
+```
+
+### gcp_windows_vm.tf
+
+*Note*: this is not a full file, only the interesting parts.
+
+Template the authentication token `gitlab_user_runner.runner.token` into the
+Windows startup script `startup.ps1`.
+
+Allow RDP and SSH access from IP defined in the [`.env`](#env-file) file.
+
+```sh
+cat gcp_windows_vm.tf
+data "template_file" "startup_script" {
+  template = file("${path.module}/startup.ps1")
+  vars = {
+    runner_token = gitlab_user_runner.runner.token
+  }
+}
+
+resource "google_compute_instance" "windows_vm" {
+  metadata = {
+    windows-startup-script-ps1 = data.template_file.startup_script.rendered
+  }
+}
+
+resource "google_compute_firewall" "allow_rdp" {
+  source_ranges = [var.my_ip_address]
+
+}
+
+resource "google_compute_firewall" "allow_ssh" {
+  source_ranges = [var.my_ip_address]
+}
+```
+
+### startup.ps1
+
+*Note*: this is not a full file, only the interesting parts.
+
+The most important and confusing part of the project to get right.
+
+GitLab docs are incomplete, incorrect and outdated.
+
+We need to take into account that Docker installation script restarts the VM.
+
+We need to take care of Docker for Windows limitations.
+
+Can't utilize sysprep and startup script because Runner won't start.
+
+First, install docker for Windows with [install-docker-ce.ps1](https://github.com/microsoft/Windows-Containers/blob/Main/helpful_tools/Install-DockerCE/install-docker-ce.ps1) provided by Microsoft.
+
+The script will do some prep work, reboot the VM and start executing itself again when the VM starts.
+
+We wait until the second reboot when Docker service starts up.
+
+Second, register the runner.
+
+```powershell
+.\install-docker-ce.ps1 -Force -DockerVersion '26.1.1'
+if (Get-Service *docker* -ea SilentlyContinue) {
+  Invoke-WebRequest -Uri $gitlabRunnerUrl -OutFile $runnerExe
+  Write-Output "Register runner with token ${runner_token}"
+  $registerParams = @(
+    "register",
+    "--builds-dir", $runnerDir,
+    "--cache-dir", $runnerDir,
+    "--config", "$runnerDir\config.toml",
+    "--description", "docker for windows runner",
+    "--executor", "docker-windows",
+    "--non-interactive",
+    "--token", "${runner_token}",
+    "--url", "https://gitlab.com/",
+    "--docker-image",
+    "mcr.microsoft.com/powershell:lts-nanoserver-ltsc2022",
+    "--docker-helper-image",
+    "registry.gitlab.com/gitlab-org/gitlab-runner/gitlab-runner-helper:x86_64-bleeding-nanoserver21H2",
+    "--docker-user", "ContainerAdministrator"
+  )
+  & $runnerExe @registerParams
+
+  Write-Output "Install runner service"
+  $commonParams = @{
+    FilePath    = $runnerExe
+    NoNewWindow = $true
+    Wait        = $true
+  }
+  $installArgs = @(
+    "install",
+    "--working-directory", $runnerDir,
+    "--config", "$runnerDir\config.toml"
+  )
+  Start-Process @commonParams -ArgumentList $installArgs
+
+  Write-Output "Start runner service"
+  Start-Process @commonParams -ArgumentList "start"
+
+  Write-Output "Verify runners"
+  & $runnerExe "verify"
+  Get-WinEvent -ProviderName gitlab-runner | Format-Table -wrap -auto
+
+} else {
+  Write-Output "Waiting for Docker before registering runner"
+}
+```
 
 ## Verify the Runner is working
 
