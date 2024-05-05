@@ -1,8 +1,8 @@
 ---
 title: 'GitLab runners for Docker for Windows'
 date: '2019-10-11'
-tags: ['github', 'gitlab', 'guide', 'terraform', 'gcp']
-draft: true
+tags: ['gitlab', 'guide', 'terraform', 'gcp']
+draft: false
 summary: 'How to provision GitLab runners with executor on Docker for Windows.'
 ---
 
@@ -45,14 +45,13 @@ to keep it short.
 
 Let me know in the comments if you'd like to see the version of the guide with hardened security.
 
-## Before you begin !!! TODO rename gitlab-agent-pwsh !!!
-
+## Before you begin
 
 Clone the GitHub repository and cd to the working folder.
 
 ```sh
-git clone https://github.com/kpoxo6op/gitlab-agent-pwsh.git
-cd gitlab-agent-pwsh/terraform
+git clone https://github.com/kpoxo6op/gitlab-runner-docker-windows.git
+cd gitlab-runner-docker-windows/terraform
 ```
 
 Install [Terraform](https://developer.hashicorp.com/terraform/install).
@@ -80,14 +79,6 @@ gcloud services enable compute.googleapis.com
 ```
 
 Create Service account `Terraform Admin`.
-
-!!!TODO set default zone and region
-
-Your project default Compute Engine zone has been set to [australia-southeast1-a].
-You can change it by running [gcloud config set compute/zone NAME].
-
-Your project default Compute Engine region has been set to [australia-southeast1].
-You can change it by running [gcloud config set compute/region NAME].
 
 ```sh
 PROJECT_ID=$(gcloud config get-value project)
