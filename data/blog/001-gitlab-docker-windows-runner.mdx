@@ -1,6 +1,6 @@
 ---
 title: 'GitLab Runner with Docker for Windows Executor'
-date: '2019-10-11'
+date: '2024-05-05'
 tags: ['gitlab', 'guide', 'terraform', 'gcp']
 draft: false
 summary: 'How to provision a GitLab runner with Executor on Docker for Windows with Terraform and PowerShell.'
@@ -303,7 +303,7 @@ We wait until the second reboot when Docker service starts up.
 
 Second, register the runner with Docker for Windows executor. Terraform at
 [gcp_windows_vm.tf](#gcp_windows_vmtf) substitutes `${runner_roken}` with the
-token from [gitlab.tf](#gitlabtf). Images are set to nanoserver version because
+token from [gitlab.tf](#review-gitlabtf). Images are set to nanoserver version because
 we don't want to download over 10GB of data with the default images. Docker user
 is set to Administrator to work around 'Access Denied'
 [issue](https://gitlab.com/gitlab-org/gitlab-runner/-/issues/28768#note_1789970092).
@@ -375,8 +375,8 @@ pipeline. It should be in `pending` state while the runner VM is being
 configured.
 
 ![GitHub
-Logo](https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png)
-Format: ![Alt Text](url)
+Logo](/static/images/001-gitlab-docker-windows-runner/project-pending.png)
+Format: ![GitLab project is pending](url)
 
 Go to CI/CD settings, Runners, click `Expand`. Your runner should be displayed
 along with the message "Runner has never contacted this instance".
@@ -418,4 +418,4 @@ terraform destroy --auto-approve
 
 ## Links to Other Guides
 
-todo
+- Thomas'es guide at [codingwiththomas.com](https://www.codingwiththomas.com/blog/windows-docker-container-in-gitlab-with-conan-packages). Thomas creates his own Dockerfile for Windows container (`--docker-image` parameter for runner executable). Watch out for `--tag-list` parameter as it no longer works. Tags need to be at the server now. I set them in [gitlab.tf](#review-gitlabtf) im my guide.
