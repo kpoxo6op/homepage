@@ -1,9 +1,9 @@
 ---
-title: 'GitLab runners for Docker for Windows'
+title: 'GitLab Runner with Docker for Windows Executor'
 date: '2019-10-11'
 tags: ['gitlab', 'guide', 'terraform', 'gcp']
 draft: false
-summary: 'How to provision GitLab runners with executor on Docker for Windows.'
+summary: 'How to provision a GitLab runner with Executor on Docker for Windows with Terraform and PowerShell.'
 ---
 
 ## Introduction
@@ -56,7 +56,7 @@ cd gitlab-runner-docker-windows/terraform
 
 Install [Terraform](https://developer.hashicorp.com/terraform/install).
 
-### Setup Google Cloud
+### Google Cloud
 
 Some manual steps are required due to sensitivity of the billing details.
 
@@ -106,7 +106,7 @@ cat ~/terraform-admin-key.json
 Terraform will connect to Google Cloud as `Terraform Admin` with the key in our
 home directory.
 
-### Setup Gitlab
+### Gitlab
 
 Sign up for a [GitLab](https://gitlab.com/users/sign_up) account.
 
