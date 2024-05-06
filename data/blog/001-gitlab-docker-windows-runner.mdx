@@ -374,18 +374,12 @@ Go to GitLab [projects](https://gitlab.com/dashboard/projects), navigate to the
 pipeline. It should be in `pending` state while the runner VM is being
 configured.
 
-```
 ![GitLab project](/static/images/001-gitlab-docker-windows-runner/project-pending.png)
-Format: ![GitLab project is pending](url)
-```
 
 Go to CI/CD settings, Runners, click `Expand`. Your runner should be displayed
 along with the message "Runner has never contacted this instance".
 
-```
 ![GitHub Logo](https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png)
-Format: ![Alt Text](url)
-```
 
 Check what VM is doing. *Note*: Connection errors may occur because VM will
 restart.
@@ -406,10 +400,7 @@ Get-Eventlog Application -Source gitlab-runner -Newest 20 |
 
 Go back to Gitlab. The runner should be Online, the job should be completed.
 
-```
 ![GitHub Logo](https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png)
-Format: ![Alt Text](url)
-```
 
 ## Clean Up
 
