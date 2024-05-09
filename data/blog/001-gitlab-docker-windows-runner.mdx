@@ -247,7 +247,7 @@ resource "gitlab_user_runner" "runner" {
 
 ### gcp_windows_vm.tf
 
-*Note*: this is not a full file, only the interesting parts.
+_Note_: this is not a full file, only the interesting parts.
 
 Template the authentication token `gitlab_user_runner.runner.token` into the
 Windows startup script `startup.ps1`.
@@ -281,7 +281,7 @@ resource "google_compute_firewall" "allow_ssh" {
 
 ### startup.ps1
 
-*Note*: this is not a full file, only the interesting parts.
+_Note_: this is not a full file, only the interesting parts.
 
 The most important and confusing part of the project to get right. GitLab docs
 are incomplete, incorrect and outdated.
@@ -381,7 +381,7 @@ along with the message "Runner has never contacted this instance".
 
 ![GitHub Logo](https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png)
 
-Check what VM is doing. *Note*: Connection errors may occur because VM will
+Check what VM is doing. _Note_: Connection errors may occur because VM will
 restart.
 
 You may see a new lines being written to a log file.
