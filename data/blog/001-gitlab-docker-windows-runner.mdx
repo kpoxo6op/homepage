@@ -212,13 +212,14 @@ variable "gcp_region" {
 
 In this file we:
 
-- create GitLab project, add the pipeline file to the project, and create the Runner on Gitlab side of things.
+- create GitLab project
+- add the pipeline file to the project
+- create the Runner on Gitlab side of things
 
 We set long `build_timeout` for the project builds because we don't want our build to fail while the Windows VM is being provisioned.
 
 `gitlab_user_runner` will produce the authentication
-[token](https://registry.terraform.io/providers/gitlabhq/gitlab/latest/docs/resources/user_runner#token)
-for the new runner. We we will use it later.
+[token](https://registry.terraform.io/providers/gitlabhq/gitlab/latest/docs/resources/user_runner#token) for the new runner. We we will use it in the next file.
 
 ```sh
 cat gitlab.tf
@@ -250,10 +251,10 @@ resource "gitlab_user_runner" "runner" {
 
 _Note_: this is not a full file, only the interesting parts.
 
-Template the authentication token `gitlab_user_runner.runner.token` into the
+We template the authentication token `gitlab_user_runner.runner.token` into the
 Windows startup script `startup.ps1`.
 
-Allow RDP and SSH access from IP defined in the [`.env`](#edit-env-file) file.
+We allow RDP and SSH access from IP defined in the `.env` file.
 
 ```sh
 data "template_file" "startup_script" {
