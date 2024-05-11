@@ -10,7 +10,7 @@ Recently, I had the opportunity to provision a new GitLab Runner with Docker for
 
 I discovered that the GitLab documentation was occasionally inaccurate, outdated, or insufficiently detailed.
 
-Moreover, the machine hosting the runner needed to be created and configured automatically. I found no examples of automatic setup on the internet.
+Also, the machine hosting the runner needed to be created and configured automatically. I found no examples of automatic setup on the internet.
 
 For these reasons, I decided to publish this article. May it make the journey easier for others than it was for me.
 
@@ -316,7 +316,7 @@ we don't want to download over 10GB of data with the default images. Docker user
 is set to Administrator to work around 'Access Denied'
 [issue](https://gitlab.com/gitlab-org/gitlab-runner/-/issues/28768#note_1789970092).
 
-Finally, install, start and verify runner service.
+Finally, install, start and verify the runner service.
 
 ```powershell
 .\install-docker-ce.ps1 -Force -DockerVersion '26.1.1'
