@@ -139,7 +139,7 @@ export TF_VAR_my_ip_address="0.0.0.0/32"
 export GOOGLE_APPLICATION_CREDENTIALS="/home/${USER}/terraform-admin-key.json"
 ```
 
-Set environment variables:
+Set environment variable values:
 
 `GITLAB_TOKEN`: GitLab token from the previous step.
 
@@ -151,9 +151,7 @@ Cloud](#google-cloud) step.
 
 ### Review provider.tf
 
-Both Google and GitLab providers use credentials defined in `.env`.
-
-We use local terraform state file for simplicity.
+Both Google and GitLab providers use credentials defined in `.env` file.
 
 ```sh
 terraform {
