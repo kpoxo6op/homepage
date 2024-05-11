@@ -295,8 +295,7 @@ Second, we wait until the second reboot when Docker service starts up.
 
 Third, we register the runner with Docker for Windows executor. Let's look at the parameters:
 
-- `--token`: Terraform at [gcp_windows_vm.tf](#review-gcp_windows_vmtf) will substitute `${runner_roken}` with the
-  token from [gitlab.tf](#review-gitlabtf)
+- `--token`: Terraform from [gcp_windows_vm.tf](#review-gcp_windows_vmtf) will substitute `${runner_roken}` with the token created by [gitlab.tf](#review-gitlabtf)
 - `--docker-image`, `--docker-helper-image` are set to nanoserver version because we don't want to download over 10GB of data with the default images.
 - `--docker-user` is set to Administrator to work around 'Access Denied' [issue](https://gitlab.com/gitlab-org/gitlab-runner/-/issues/28768#note_1789970092).
 
@@ -351,7 +350,7 @@ if (Get-Service *docker* -ea SilentlyContinue) {
 }
 ```
 
-Maybe it's possible to excute Docker and Runner in [separate](https://cloud.google.com/compute/docs/instances/startup-scripts/windows) Google startup scripts to make the code simpler. I could not make it working, either Docker or Runner parts would break.
+It may be possible to execute Docker and Runner stages in [separate](https://cloud.google.com/compute/docs/instances/startup-scripts/windows) Google startup scripts to make the code simpler. I could not make it working, either Docker or Runner parts would break.
 
 ## Run the Demo
 
