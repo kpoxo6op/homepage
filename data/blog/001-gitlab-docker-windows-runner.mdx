@@ -191,7 +191,7 @@ variable "my_ip_address" {
 variable "project_name" {
   description = "Google Cloud project name"
   type        = string
-  # your project am
+  # your project name
   default     = "runner-demo-xxxx"
 }
 
@@ -215,10 +215,9 @@ variable "gcp_region" {
 
 ### Review gitlab.tf
 
-In this file we create GitLab project, add the pipeline file to the project, create the runner.
+In this file we create GitLab project, add the pipeline file to the project, and create the Runner on Gitlab side of things.
 
-We set long `build_timeout` for the project builds because we our build to fail
-while the Windows VM is being provisioned.
+We set long `build_timeout` for the project builds because we don't want our build to fail while the Windows VM is being provisioned.
 
 `gitlab_user_runner` will produce the authentication
 [token](https://registry.terraform.io/providers/gitlabhq/gitlab/latest/docs/resources/user_runner#token)
