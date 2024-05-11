@@ -286,13 +286,11 @@ resource "google_compute_firewall" "allow_ssh" {
 
 _Note_: this is not a full file, only the interesting parts.
 
-The most important and confusing part of the project to get right.
+The most important and confusing part of the project to get right because:
 
-We need to take into account that Docker installation script restarts the VM.
-
-We need to take care of Docker for Windows limitations.
-
-Can't utilize sysprep and startup script because Runner won't start.
+- We need to take into account that Docker installation script restarts the VM 
+- We need to take care of Docker for Windows limitations.
+- Can't utilize sysprep and startup script because Runner won't start.
 
 First, install docker for Windows with
 [install-docker-ce.ps1](https://github.com/microsoft/Windows-Containers/blob/Main/helpful_tools/Install-DockerCE/install-docker-ce.ps1)
