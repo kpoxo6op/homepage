@@ -6,7 +6,7 @@ draft: false
 summary: 'How to provision a GitLab runner with Executor on Docker for Windows with Terraform and PowerShell.'
 ---
 
-Recently I worked on a task to provision a new GitLab Runner with Docker for Windows Executor. The Windows VM which hosted the runner needed to be configured with Terraform and PowerShell.
+Recenltly I worked on a task to provision a new GitLab Runner with Docker for Windows Executor. The Windows VM which hosted the runner needed to be configured with Terraform and PowerShell.
 
 While working on the task, I discovered that GitLab documentation was a bit inaccurate, outdated, or not detailed enough.
 
@@ -43,11 +43,7 @@ We will start from the ground up without any infrastructure and finish with a wo
 
 ## Note on Security
 
-The guide is focussed on automation rather than security, trade off were made to keep it short:
-
-- Terraform state and access keys are stored locally
-- We use the single GCP project for everything
-- Service account permissions are too loose
+The guide is focussed on automation rather than security, so trade off were made to keep it short. Terraform state and access keys are stored locally, service account permissions are too loose.
 
 Let me know in the comments if you'd like to see the version of the guide with hardened security.
 
