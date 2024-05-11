@@ -44,11 +44,8 @@ the ground up without any infrastructure and finish with a working Runner.
 
 ## Note on Security
 
-The guide is focussed on automation rather than security, so trade off were made
-to keep it short.
+The guide is focussed on automation rather than security, so trade off were made to keep it short. Terraform state is stored locally, we use the single GCP project for everyhing The same GCP account manages terraform state and infrastructure
 
-- Terraform state is stored locally, not in an encrypted GCP bucket
-- The same GCP account manages terraform state and infrastructure
 - Access keys are used to access for Google Cloud instead of federation
 - Terraform service account and GitLab token privileges are too loose
 
