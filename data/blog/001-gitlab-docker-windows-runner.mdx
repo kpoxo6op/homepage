@@ -286,22 +286,16 @@ resource "google_compute_firewall" "allow_ssh" {
 
 _Note_: this is not a full file, only the interesting parts.
 
-The most important and confusing part of the project to get right
+The most important and confusing part of the project to get right.
 
-- We need to take care of Docker for Windows limitations.
-- Can't utilize sysprep and startup script because Runner won't start.
-
-First, install docker for Windows with
-[install-docker-ce.ps1](https://github.com/microsoft/Windows-Containers/blob/Main/helpful_tools/Install-DockerCE/install-docker-ce.ps1)
+First, we install docker for Windows with [install-docker-ce.ps1](https://github.com/microsoft/Windows-Containers/blob/Main/helpful_tools/Install-DockerCE/install-docker-ce.ps1)
 provided by Microsoft.
 
-The script will do some prep work, reboot the VM and start executing itself
-again when the VM starts.
+The script will do some prep work, reboot the VM and start executing itself again when the VM starts. 
 
 We wait until the second reboot when Docker service starts up.
 
-Second, register the runner with Docker for Windows executor. Terraform at
-[gcp_windows_vm.tf](#review-gcp_windows_vmtf) substitutes `${runner_roken}` with the
+Second, we register the runner with Docker for Windows executor. Terraform at [gcp_windows_vm.tf](#review-gcp_windows_vmtf) substitutes `${runner_roken}` with the
 token from [gitlab.tf](#review-gitlabtf). Images are set to nanoserver version because
 we don't want to download over 10GB of data with the default images. Docker user
 is set to Administrator to work around 'Access Denied'
