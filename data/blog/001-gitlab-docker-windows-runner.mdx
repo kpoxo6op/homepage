@@ -295,10 +295,10 @@ Second, we wait until the second reboot when Docker service starts up.
 
 Third, we register the runner with Docker for Windows executor. Let's look at the parameters:
 
-- Terraform at [gcp_windows_vm.tf](#review-gcp_windows_vmtf) will substitute `${runner_roken}` with the
+- `--token`: Terraform at [gcp_windows_vm.tf](#review-gcp_windows_vmtf) will substitute `${runner_roken}` with the
   token from [gitlab.tf](#review-gitlabtf)
-- `--docker-image`, `--docker-helper-image`, Images are set to nanoserver version because we don't want to download over 10GB of data with the default images.
-- `--docker-user`: Docker user is set to Administrator to work around 'Access Denied' [issue](https://gitlab.com/gitlab-org/gitlab-runner/-/issues/28768#note_1789970092).
+- `--docker-image`, `--docker-helper-image` are set to nanoserver version because we don't want to download over 10GB of data with the default images.
+- `--docker-user` is set to Administrator to work around 'Access Denied' [issue](https://gitlab.com/gitlab-org/gitlab-runner/-/issues/28768#note_1789970092).
 
 Finally, we install, start and verify the runner service.
 
