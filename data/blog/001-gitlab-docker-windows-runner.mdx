@@ -254,7 +254,7 @@ resource "gitlab_user_runner" "runner" {
 }
 ```
 
-### gcp_windows_vm.tf
+### Review gcp_windows_vm.tf
 
 _Note_: this is not a full file, only the interesting parts.
 
@@ -264,7 +264,6 @@ Windows startup script `startup.ps1`.
 Allow RDP and SSH access from IP defined in the [`.env`](#edit-env-file) file.
 
 ```sh
-cat gcp_windows_vm.tf
 data "template_file" "startup_script" {
   template = file("${path.module}/startup.ps1")
   vars = {
@@ -311,7 +310,7 @@ again when the VM starts.
 We wait until the second reboot when Docker service starts up.
 
 Second, register the runner with Docker for Windows executor. Terraform at
-[gcp_windows_vm.tf](#gcp_windows_vmtf) substitutes `${runner_roken}` with the
+[gcp_windows_vm.tf](#review-gcp_windows_vmtf) substitutes `${runner_roken}` with the
 token from [gitlab.tf](#review-gitlabtf). Images are set to nanoserver version because
 we don't want to download over 10GB of data with the default images. Docker user
 is set to Administrator to work around 'Access Denied'
