@@ -291,7 +291,7 @@ The most important and confusing part of the project to get right.
 First, we install docker for Windows with [install-docker-ce.ps1](https://github.com/microsoft/Windows-Containers/blob/Main/helpful_tools/Install-DockerCE/install-docker-ce.ps1)
 provided by Microsoft.
 
-The script will do some prep work, reboot the VM and start executing itself again when the VM starts. 
+The script will do some prep work, reboot the VM and start executing itself again when the VM starts.
 
 We wait until the second reboot when Docker service starts up.
 
@@ -352,7 +352,7 @@ if (Get-Service *docker* -ea SilentlyContinue) {
 }
 ```
 
-Maybe it's possible to excute Docker and Runner in separate scripts thus removing 
+Maybe it's possible to excute Docker and Runner in \[separate\] (https://cloud.google.com/compute/docs/instances/startup-scripts/windows) scripts to make the code simpler but I could not make it working.
 
 ## Run the Demo
 
