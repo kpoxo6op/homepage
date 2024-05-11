@@ -6,7 +6,7 @@ draft: false
 summary: 'How to provision a GitLab runner with Executor on Docker for Windows with Terraform and PowerShell.'
 ---
 
-Recently, I had the opportunity to provision a new GitLab Runner with Docker for Windows Executor. The Windows VM which hosted the runner needed to be configured with Terraform and PowerShell.
+RecentlyI have provisioned a new GitLab Runner with Docker for Windows Executor. The Windows VM which hosted the runner needed to be configured with Terraform and PowerShell.
 
 I discovered that the GitLab documentation was a bit inaccurate, outdated, or not detailed enough.
 
@@ -388,7 +388,8 @@ Inspect the runner config. Check the running services, check the runner logs.
 ```powershell
 gcloud compute ssh gitlab-runner-windows
 pwsh
-Get-Content C:\Logs\startup.txt -Wait #Ctrl+C to exit
+Get-Content C:\Logs\startup.txt -Wait
+#Ctrl+C to exit
 Get-Content C:\GitLab-Runner\config.toml
 Get-Service docker, gitlab-runner
 Get-Eventlog Application -Source gitlab-runner -Newest 20 |
