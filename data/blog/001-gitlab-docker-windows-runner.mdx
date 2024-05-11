@@ -254,7 +254,7 @@ _Note_: this is not a full file, only the interesting parts.
 We template the authentication token `gitlab_user_runner.runner.token` into the
 Windows startup script `startup.ps1`.
 
-We allow RDP and SSH access from IP defined in the `.env` file.
+We allow RDP and SSH access from the IP defined in the `.env` file.
 
 ```sh
 data "template_file" "startup_script" {
@@ -284,14 +284,14 @@ resource "google_compute_firewall" "allow_ssh" {
 
 _Note_: this is not a full file, only the interesting parts.
 
-The most important and confusing part of the project to get right.
+This is the most important and confusing part of the project to get right.
 
 First, we install docker for Windows with [install-docker-ce.ps1](https://github.com/microsoft/Windows-Containers/blob/Main/helpful_tools/Install-DockerCE/install-docker-ce.ps1)
 provided by Microsoft.
 
 The script will do some prep work, reboot the VM and start executing itself again when the VM starts.
 
-We wait until the second reboot when Docker service starts up.
+THen, We wait until the second reboot when Docker service starts up.
 
 Second, we register the runner with Docker for Windows executor. Terraform at [gcp_windows_vm.tf](#review-gcp_windows_vmtf) substitutes `${runner_roken}` with the
 token from [gitlab.tf](#review-gitlabtf). Images are set to nanoserver version because
