@@ -20,19 +20,26 @@ the ground up without any infrastructure and finish with a working Runner.
 ## Table of Contents
 
 - [Note on Security](#note-on-security)
+
 - [Before you begin](#before-you-begin)
+
   - [Google Cloud](#google-cloud)
   - [Grant Permissions](#grant-permissions)
   - [Gitlab](#gitlab)
+
 - [Working folder](#working-folder)
+
   - [Edit `.env` file](#edit-env-file)
   - [Review provider.tf](#review-provider-tf)
   - [Edit variables.tf](#edit-variables-tf)
   - [Review gitlab.tf](#review-gitlab-tf)
   - [Review gcp_windows_vm.tf](#review-gcp-windows-vm-tf)
   - [Review startup.ps1](#review-startup-ps1)
+
 - [Run the Demo](#run-the-demo)
+
 - [Clean Up](#clean-up)
+
 - [Links to Other Guides](#links-to-other-guides)
 
 ## Note on Security
@@ -58,7 +65,7 @@ Install [Terraform](https://developer.hashicorp.com/terraform/install).
 
 ### Google Cloud
 
-Some manual steps are required due to sensitivity of the billing details.
+Some manual steps are required due to sensitivity of the billing details we need to provide.
 
 Create a new project with a unique name. I'll be using `runner-demo-xxxx` in
 this article. Note that project names are globally unique, so your project name
