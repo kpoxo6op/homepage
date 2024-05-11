@@ -10,9 +10,9 @@ Recently, I had the opportunity to provision a new GitLab Runner with Docker for
 
 I discovered that the GitLab documentation was a bit inaccurate, outdated, or not detailed enough.
 
-I also did not find guides explaof unattended Runner provisiosing written by other pe.
+I also did not find guides how to provision a Runner in unattended mode.
 
-For these reasons, I decided to publish this article. May it make the journey easier for others than it was for me.
+For these reasons, I decided to publish this article. I hope makes other people's work easer.
 
 This guide is aimed to be a complete and practical example. We will start from
 the ground up without any infrastructure and finish with a working Runner.
@@ -20,26 +20,19 @@ the ground up without any infrastructure and finish with a working Runner.
 ## Table of Contents
 
 - [Note on Security](#note-on-security)
-
 - [Before you begin](#before-you-begin)
-
   - [Google Cloud](#google-cloud)
   - [Grant Permissions](#grant-permissions)
   - [Gitlab](#gitlab)
-
 - [Working folder](#working-folder)
-
   - [Edit `.env` file](#edit-env-file)
   - [Review provider.tf](#review-provider-tf)
   - [Edit variables.tf](#edit-variables-tf)
   - [Review gitlab.tf](#review-gitlab-tf)
   - [Review gcp_windows_vm.tf](#review-gcp-windows-vm-tf)
   - [Review startup.ps1](#review-startup-ps1)
-
 - [Run the Demo](#run-the-demo)
-
 - [Clean Up](#clean-up)
-
 - [Links to Other Guides](#links-to-other-guides)
 
 ## Note on Security
