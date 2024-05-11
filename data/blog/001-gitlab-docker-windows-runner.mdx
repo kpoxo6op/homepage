@@ -16,32 +16,12 @@ I discovered that the GitLab documentation was occasionally inaccurate, outdated
 
 Moreover, the machine hosting the runner needed to be created and configured automatically. I found no examples of automatic setup on the internet.
 
-По этим причинам я решил опубликовать эту статью. Пусть другим будет легче то, через что прошёл я.
-
-Recently I was tasked to provision a new GitLab Runner on a Windows machine in
-Google Cloud.
-
-The Runner Executor needed to be Docker for Windows because my customer required
-to build a specific Windows app.
-
-The runner also needed to be provisioned in uninterrupted mode with Terraform.
-
-I met some interesting challenges while working on the task.
-
-I found that GitLab documentation had a few mistakes or was outdated here and
-there.
-
-I read a few similar guides posted by other people. This tells me that quite a
-few people were struggling with the same task. Apparently, they decided to share
-their experience to help others.
-
-While other guides greatly explain the matter, they explain how to provision a
-runner manually step by step. My guide will provide a more automated way to
-complete the same goal. We will be using Google Cloud shell, Terraform and
-PowerShell to achieve that.
+For these reasons, I decided to publish this article. May it make the journey easier for others than it was for me.
 
 This guide is aimed to be a complete and practical example. We will start from
 the ground up without any infrastructure and finish with a working Runner.
+
+/
 
 ## Note on Security
 
