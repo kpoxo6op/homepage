@@ -120,7 +120,7 @@ scope. We will use it the next step.
 
 ## Working folder
 
-Edit/review files in `terraform` folder.
+Let's edit/review files in `terraform` folder.
 
 ### Edit `.env` file
 
@@ -210,7 +210,9 @@ variable "gcp_region" {
 
 ### Review gitlab.tf
 
-In this file we create GitLab project, add the pipeline file to the project, and create the Runner on Gitlab side of things.
+In this file we:
+
+- create GitLab project, add the pipeline file to the project, and create the Runner on Gitlab side of things.
 
 We set long `build_timeout` for the project builds because we don't want our build to fail while the Windows VM is being provisioned.
 
