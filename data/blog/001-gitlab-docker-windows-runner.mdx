@@ -368,18 +368,15 @@ configured.
 
 ![GitLab project](/static/images/001-gitlab-docker-windows-runner/project-pending.png)
 
-Go to CI/CD settings -&gt; Runners  -&gt; click `Expand`. Your should see "Runner has never contacted this instance" messa.
+Go to CI/CD settings -&gt; Runners  -&gt; click `Expand`. Your should see "Runner has never contacted this instance" message.
 
-I was too slow taking the perfect screenshot, my runner came online already.
+I was too slow taking the perfect screenshot, and my runner came online already.
 
 ![GitHub Runner Pending](/static/images/001-gitlab-docker-windows-runner/runner-not-pending-anymore.png)
 
-Check what VM is doing. _Note_: Connection errors may occur because VM will
-restart.
+Check what VM is doing. _Note_: Connection errors may occur because the VM will restart.
 
-You may see a new lines being written to a log file.
-
-Inspect the runner config. Check the running services, check the runner logs.
+Inspect the runner config. Check the running services, check the runner logs. 
 
 ```powershell
 gcloud compute ssh gitlab-runner-windows
