@@ -301,7 +301,7 @@ we don't want to download over 10GB of data with the default images. Docker user
 is set to Administrator to work around 'Access Denied'
 [issue](https://gitlab.com/gitlab-org/gitlab-runner/-/issues/28768#note_1789970092).
 
-Finally, install, start and verify the runner service.
+Finally, we install, start and verify the runner service.
 
 ```powershell
 .\install-docker-ce.ps1 -Force -DockerVersion '26.1.1'
@@ -351,6 +351,8 @@ if (Get-Service *docker* -ea SilentlyContinue) {
   Write-Output "Waiting for Docker before registering runner"
 }
 ```
+
+I tried to split script into two end execute parts via sysprep
 
 ## Run the Demo
 
