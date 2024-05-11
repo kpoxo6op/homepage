@@ -376,7 +376,7 @@ I was too slow taking the perfect screenshot, and my runner came online already.
 
 Check what VM is doing. _Note_: Connection errors may occur because the VM will restart.
 
-Inspect the runner config. Check the running services, check the runner logs. 
+Inspect the runner config. Check the running services, check the runner logs. You may see a new lines being written to a log file.
 
 ```powershell
 gcloud compute ssh gitlab-runner-windows
@@ -402,5 +402,7 @@ terraform destroy --auto-approve
 ```
 
 ## Links to Other Guides
+
+I will be adding links to other
 
 - Thomas'es guide at [codingwiththomas.com](https://www.codingwiththomas.com/blog/windows-docker-container-in-gitlab-with-conan-packages). Thomas creates his own Dockerfile for Windows container (`--docker-image` parameter for runner executable). Watch out for `--tag-list` parameter as it no longer works. Tags need to be at the server now. I set them in [gitlab.tf](#review-gitlabtf) im my guide.
