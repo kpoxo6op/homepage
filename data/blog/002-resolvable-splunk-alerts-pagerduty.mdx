@@ -29,20 +29,19 @@ Clone GitHub [repository]() with the demo code.
 
 Install terraform, docker and docker compose.
 
-## Start Splunk
+## Configure Splunk
 
-Start Splunk, wait for a startup
+Start Splunk, wait for healthy status.
 
 ```sh
 docker compose up -d
+watch docker compose ps
 ```
+
+[Install]([http://localhost:8000/en-US/manager/search/appsremote?offset=0&count=20&order=relevance&query=pagerduty#]\(http://localhost:8000/en-US/manager/search/appsremote?offset=0&count=20&order=relevance&query=pagerduty#\)) PagerDuty app.
 
 ## Edit `.env`
 
 todo
-
-## Start Splunk
-
-Start Splunk
 
 ## Diagram
