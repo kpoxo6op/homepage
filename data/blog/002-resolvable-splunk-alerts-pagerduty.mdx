@@ -31,14 +31,14 @@ Install terraform, docker and docker compose.
 
 ## Configure Splunk
 
-Start Splunk, wait for healthy status.
+Start Splunk, with docker compose, wait for healthy status.
 
 ```sh
 docker compose up -d
 watch docker compose ps
 ```
 
-[Install](http://localhost:8000/en-US/manager/search/appsremote?query=pagerduty) PagerDuty app.
+Login as `admin/abcd1234`, [Install](http://localhost:8000/en-US/manager/search/appsremote?query=pagerduty) PagerDuty app.
 
 ## Edit `.env`
 
