@@ -67,12 +67,12 @@ Install PagerDuty [App](http://localhost:8000/en-US/manager/search/appsremote?qu
 ## Diagram
 
 ```txt
-+----------------------+    +-------------------+    +------------------+
-| Splunk Alert Search | -> | Check KVStore for | -> | PagerDuty Incident|
-|  (Triggers/Resolves)|    |   State Change    |    |  (Trigger/Resolve)|
-|                     |    +-------------------+    +------------------+
-|                     |    | If State Changed  |    
-|                     |    | Update KVStore    |    
++----------------------+    +-------------------+    +-------------------+
+| Splunk Alert Search  | -> | Check KVStore for | -> | PagerDuty Incident|
+|  (Triggers/Resolves) |    |   State Change    |    |  (Trigger/Resolve)|
+|                      |    +-------------------+    +-------------------+
+|                      |    | If State Changed  |    
+|                      |    | Update KVStore    |    
 +----------------------+    +-------------------+    
 ```
 
