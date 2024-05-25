@@ -52,11 +52,9 @@ docker compose up -d
 watch docker compose ps
 ```
 
-## TODO validate Cloud Splunk
-
 ## Run terraform
 
-Run terraform to create resources in PagerDuty and Splunk.
+Run terraform to create required resources in PagerDuty and Splunk.
 
 _NOTE_: Splunk will require some manual actions. See the next step.
 
@@ -67,3 +65,15 @@ Login to local Splunk as `admin/abcd1234`.
 Install PagerDuty [App](http://localhost:8000/en-US/manager/search/appsremote?query=pagerduty).
 
 ## Diagram
+
+```txt
++----------------------+    +-------------------+    +------------------+
+| Splunk Alert Search | -> | Check KVStore for | -> | PagerDuty Incident|
+|  (Triggers/Resolves)|    |   State Change    |    |  (Trigger/Resolve)|
+|                     |    +-------------------+    +------------------+
+|                     |    | If State Changed  |    
+|                     |    | Update KVStore    |    
++----------------------+    +-------------------+    
+```
+
+## Mention Cloud Splunk
