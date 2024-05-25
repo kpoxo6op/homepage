@@ -43,7 +43,14 @@ Create [API Token](https://support.pagerduty.com/docs/api-access-keys#generate-a
 
 Set `PAGERDUTY_TOKEN` variable in `.env` file with the token.
 
-## Start local stac
+## Start Local Splunk
+
+Start local docker compose stack, wait for healthy Splunk status.
+
+```sh
+docker compose up -d
+watch docker compose ps
+```
 
 ## Run terraform
 
