@@ -54,9 +54,16 @@ watch docker compose ps
 
 ## Run terraform
 
-Run terraform to create required resources in PagerDuty and Splunk.
+Run terraform to create most of the required resources in PagerDuty and Splunk.
 
-_NOTE_: Splunk will require some manual actions. See the next step.
+```sh
+source .env
+terraform init
+terraform plan
+terraform apply
+```
+
+We'll need to install PagerDuty Splunk App and create an alert manually, I could not figure out how to create an alert with terraform. See the next step.
 
 ## Splunk Manual Steps
 
