@@ -99,14 +99,15 @@ Let's look at Splunk Alert Search tracking the alert state via Splunk KV Store.
     | rename event_action AS event_action_lookup
     | rename date_last_change AS date_last_change_lookup
     | fields _key, event_action_lookup, date_last_change_lookup]
+// Save the updated state back to the KV Store.
 | eval date_last_change=case(
     event_action!=event_action_lookup, now(),
     1=1, date_last_change_lookup
   )
 | outputlookup state_alert append=true key_field=_key
+// Return results only if the state has changed.  
 | where event_action!=event_action_lookup
 | table event_action
-EOT
 ```
 
 ## Conclusion
