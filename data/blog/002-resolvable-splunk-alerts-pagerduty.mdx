@@ -29,12 +29,14 @@ Clone GitHub [repository]() with the demo code.
 
 Install terraform, docker and docker compose.
 
-## Create PagerDuty Token
+## Set PagerDuty Token
 
 Create [API Token](https://support.pagerduty.com/docs/api-access-keys#generate-a-user-token-rest-api-key) and save it to `.env` file.
 
 ```sh
 cp .env.sample .env
+cat .env
+export TF_VAR_pagerduty_token='your_pagerduty_token'
 ```
 
 ## Configure Local Splunk
