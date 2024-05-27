@@ -75,4 +75,33 @@ terraform apply
 +----------------------+    +-------------------+    
 ```
 
+Let's look at Splunk Alert Search tracking the alert state via Splunk KV Store.
+
+```sql
+| makeresults count=1
+| eval random_number=random() % 2
+| appendpipe [| makeresults count=100 | where random_number == 1]
+| where random_number == 1
+| stats count as event_count
+| eval event_action=case(
+    event_count>0, "trigger",
+    1=1, "resolve"
+  )
+| eval _key="boris_as_code_error_rate"
+| eval date_last_run=now()
+| join type=left _key
+    [| inputlookup state_alert
+    | rename event_action AS event_action_lookup
+    | rename date_last_change AS date_last_change_lookup
+    | fields _key, event_action_lookup, date_last_change_lookup]
+| eval date_last_change=case(
+    event_action!=event_action_lookup, now(),
+    1=1, date_last_change_lookup
+  )
+| outputlookup state_alert append=true key_field=_key
+| where event_action!=event_action_lookup
+| table event_action
+EOT
+```
+
 ## Conclusion
