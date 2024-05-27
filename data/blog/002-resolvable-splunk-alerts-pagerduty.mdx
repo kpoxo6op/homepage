@@ -116,7 +116,7 @@ Resolve, or not return any results based on the current state.
 
 Trigger Action sends the alert event to PagerDuty with `event_action` in message details.
 
-Example  event received by PagerDuty:
+Example Trigger event received by PagerDuty:
 
 ```json
 {
@@ -128,9 +128,11 @@ Example  event received by PagerDuty:
 	"severity": "unknown",
 	"source": "unknown host",
 	"summary": "Resolvable Splunk Alert Demo",
-	"timestamp": "2024-05-27T20:58:01.113Z"
+	"timestamp": "2024-05-27T21:08:00.917Z"
 }
 ```
+
+Example Resolve Event:
 
 ```json
 {
