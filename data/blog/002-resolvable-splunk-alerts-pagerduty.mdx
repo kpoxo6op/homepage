@@ -116,6 +116,8 @@ Resolve, or not return any results based on the current state.
 
 Trigger Action PagerDuty is added to the Splunk Alert.
 
+The action writes the event_action returned by the search into the message custom_details
+
 ```json
 {"action": "$result.event_action$"}
 ```
