@@ -43,7 +43,7 @@ Create [API Token](https://support.pagerduty.com/docs/api-access-keys#generate-a
 
 Set `TF_VAR_PAGERDUTY_TOKEN` variable in `.env` file with the token.
 
-## Start Local Splunk
+## Configure Local Splunk
 
 Start local docker compose stack, wait for healthy Splunk status.
 
@@ -51,6 +51,10 @@ Start local docker compose stack, wait for healthy Splunk status.
 docker compose up -d
 watch docker compose ps
 ```
+
+Login to local Splunk as `admin/abcd1234`.
+
+Install PagerDuty [App](http://localhost:8000/en-US/manager/search/appsremote?query=pagerduty).
 
 ## Run terraform
 
@@ -64,14 +68,6 @@ terraform apply
 ```
 
 _NOTE_: Splunk will require some manual actions. See the next step.
-
-## Splunk Manual Steps
-
-Login to local Splunk as `admin/abcd1234`.
-
-Install PagerDuty [App](http://localhost:8000/en-US/manager/search/appsremote?query=pagerduty).
-
-Open the [search](http://localhost:8000/en-US/app/search/search?s=%2FservicesNS%2Fnobody%2Fsearch%2Fsaved%2Fsearches%2FBoris%2520As%2520Code%2520Errors) created by terraform, save it as Alert:
 
 ## Diagram
 
