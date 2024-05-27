@@ -67,8 +67,9 @@ terraform apply
 
 ```txt
 +----------------------+    +-------------------+    +-------------------+
-| Splunk Alert Search  | -> | Check KVStore for | -> | PagerDuty Ation|
-|  (Triggers/Resolves) |    |   State Change    |    |  (Trigger/Resolve)|
+| Splunk Alert Search  | -> | Check KVStore for | -> | PagerDuty Action  |
+| (Triggers/Resolves)  |    | State Change      |    | Custom Details    |
+|                      |    |                   |    |  (Trigger/Resolve)|
 |                      |    +-------------------+    +-------------------+
 |                      |    | If State Changed  |    
 |                      |    | Update KVStore    |    
