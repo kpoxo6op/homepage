@@ -152,6 +152,30 @@ PagerDuty creates an incident because the `event_action` is set to `trigger.`
 
 PagerDuty resolves an incident if `custom_details.event_action` matches `resolve`.
 
-See Event Orchestration rule
+See Event Orchestration rule:
+
+```text
+resource "pagerduty_event_orchestration_service" "resolve" {
+  service = data.pagerduty_service.default.id
+  set {
+    id = "start"
+    rule {
+      label = "Autotoresolve Splunk Alerts"
+      condition {
+        expression = "event.custom_details.event_action matches 'resolve'"
+      }
+      actions {
+        event_action = "resolve"
+      }
+    }
+  }
+
+  catch_all {
+    actions {
+
+    }
+  }
+}
+```
 
 ## Conclusion
