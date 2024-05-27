@@ -71,14 +71,15 @@ terraform apply
 |  (Triggers/Resolves) |    | State Change      |    | Custom Details    |    | Orchestration   |
 |                      |    |                   |    |                   |    |                 |
 |                      |    +-------------------+    +-------------------+    +-----------------+
-|                      |    | If State Changed  |             |
-|                      |    | Update KVStore    |             v
-+----------------------+    +-------------------+    +-----------------+
+|                      |    | If State Changed  |    
+|                      |    | Update KVStore    |    
++----------------------+    +-------------------+    
 ```
 
 Splunk Alert Search tracks alert states using the Splunk KV Store.
 
-It decides whether to return results with event_action set to Trigger, Resolve, or not return any results based on the current state.
+It decides whether to return results with event_action set to Trigger,
+Resolve, or not return any results based on the current state.
 
 ```sql
 // Randomly generate search results for testing
@@ -112,5 +113,7 @@ It decides whether to return results with event_action set to Trigger, Resolve, 
 | where event_action!=event_action_lookup
 | table event_action
 ```
+
+Splunk alert writes action
 
 ## Conclusion
