@@ -120,14 +120,15 @@ Example [CEF](https://support.pagerduty.com/docs/pd-cef) event received by Pager
 
 ```json
 {
-  "client": "Splunk",
-  "description": "Resolvable Splunk Alert Demo",
-  "event_type": "trigger",
-  "incident_key": "Resolvable Splunk Alert Demo",
-  "service_key": "d21f971d69904008c02294259c432f71",
-  "details": {
-    "event_action": "trigger"
-  }
+	"custom_details": {
+		"event_action": "trigger"
+	},
+	"dedup_key": "Resolvable Splunk Alert Demo",
+	"event_action": "trigger",
+	"severity": "unknown",
+	"source": "unknown host",
+	"summary": "Resolvable Splunk Alert Demo",
+	"timestamp": "2024-05-27T20:58:01.113Z"
 }
 ```
 
