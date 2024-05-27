@@ -76,9 +76,9 @@ terraform apply
 +----------------------+    +-------------------+    
 ```
 
-Splunk Alert Search tracks alert states using the Splunk KV Store.
+Splunk Alert Search tracks alert state using the Splunk KV Store.
 
-It decides whether to return results with event_action set to Trigger,
+It decides whether to return results with `event_action` set to Trigger,
 Resolve, or not return any results based on the current state.
 
 ```sql
@@ -114,10 +114,10 @@ Resolve, or not return any results based on the current state.
 | table event_action
 ```
 
-Splunk alert writes
+PagerDuty Action
 
 ```json
-{"action": $result.event_action$"}
+{"action": "$result.event_action$"}
 ```
 
 action
