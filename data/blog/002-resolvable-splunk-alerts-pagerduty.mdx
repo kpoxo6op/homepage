@@ -69,7 +69,7 @@ terraform apply
 +----------------------+    +-------------------+    +-------------------+    +---------------------------+
 | Splunk Alert Search  | -> | Check KVStore for | -> | PagerDuty Action  | -> | PagerDuty Event           |
 |  (Triggers/Resolves) |    | State Change      |    | Custom Details    |    | Orchestration             |
-|                      |    |                   |    | (Trigger/Resolve) |    | (Trigger/Resolve)         |
+|                      |    |                   |    |              |    | (Trigger/Resolve)         |
 |                      |    +-------------------+    +-------------------+    +---------------------------+
 |                      |    | If State Changed  |    
 |                      |    | Update KVStore    |    
