@@ -66,11 +66,11 @@ terraform apply
 ## How It Works
 
 ```txt
-+----------------------+    +-------------------+    +-------------------+
-| Splunk Alert Search  | -> | Check KVStore for | -> | PagerDuty Action  |
-| (Triggers/Resolves)  |    | State Change      |    | Custom Details    |
-|                      |    |                   |    |  (Trigger/Resolve)|
-|                      |    +-------------------+    +-------------------+
++----------------------+    +-------------------+    +-------------------+    +---------------------------+
+| Splunk Alert Search  | -> | Check KVStore for | -> | PagerDuty Action  | -> | PagerDuty Event           |
+|  (Triggers/Resolves) |    | State Change      |    | Custom Details    |    | Orchestration             |
+|                      |    |                   |    | (Trigger/Resolve) |    | (Trigger/Resolve)         |
+|                      |    +-------------------+    +-------------------+    +---------------------------+
 |                      |    | If State Changed  |    
 |                      |    | Update KVStore    |    
 +----------------------+    +-------------------+    
