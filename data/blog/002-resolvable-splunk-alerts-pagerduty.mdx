@@ -132,7 +132,7 @@ Example Trigger event received by PagerDuty:
 }
 ```
 
-Example Resolve Event (`custom_details.e`):
+Example Resolve Event with `custom_details.event_action` "resolve":
 
 ```json
 {
@@ -148,8 +148,6 @@ Example Resolve Event (`custom_details.e`):
 }
 ```
 
-_Note_: PagerDuty Splunk App does not support
-
-PagerDuty creates an incident
+PagerDuty creates an incident based on "event_action": "trigger"
 
 ## Conclusion
