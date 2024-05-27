@@ -67,7 +67,7 @@ terraform apply
 
 ```txt
 +----------------------+    +-------------------+    +-------------------+
-| Splunk Alert Search  | -> | Check KVStore for | -> | PagerDuty Incident|
+| Splunk Alert Search  | -> | Check KVStore for | -> | PagerDuty Ation|
 |  (Triggers/Resolves) |    |   State Change    |    |  (Trigger/Resolve)|
 |                      |    +-------------------+    +-------------------+
 |                      |    | If State Changed  |    
@@ -75,7 +75,9 @@ terraform apply
 +----------------------+    +-------------------+    
 ```
 
-Splunk Alert Search tracks alert states using the Splunk KV Store. It decides whether to return results with event_action set to Trigger, Resolve, or not return any results based on the current state.
+Splunk Alert Search tracks alert states using the Splunk KV Store.
+
+It decides whether to return results with event_action set to Trigger, Resolve, or not return any results based on the current state.
 
 ```sql
 // Randomly generate search results for testing
