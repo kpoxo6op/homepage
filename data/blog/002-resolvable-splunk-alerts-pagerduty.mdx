@@ -78,12 +78,13 @@ terraform apply
 Let's look at Splunk Alert Search tracking the alert state via Splunk KV Store.
 
 ```sql
-// Randomly generate search re
+// Randomly generate search results for testing.
 | makeresults count=1
 | eval random_number=random() % 2
 | appendpipe [| makeresults count=100 | where random_number == 1]
 | where random_number == 1
 | stats count as event_count
+// trigger alert when  
 | eval event_action=case(
     event_count>0, "trigger",
     1=1, "resolve"
