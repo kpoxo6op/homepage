@@ -78,25 +78,22 @@ terraform apply
 Let's look at Splunk Alert Search tracking the alert state via Splunk KV Store.
 
 ```sql
-// Randomly generate search results for testing.
+// Randomly generate search results for testing
 | makeresults count=1
 | eval random_number=random() % 2
 | appendpipe [| makeresults count=100 | where random_number == 1]
 | where random_number == 1
 | stats count as event_count
-// trigger or resolve alert based on result count.
+// trigger or resolve alert based on result count
 | eval event_action=case(
     event_count>0, "trigger",
     1=1, "resolve"
   )
 | eval _key="boris_as_code_error_rate"
 | eval date_last_run=now()
-// This search generates a random number to simulate alert conditions,
-// counts the events to determine if an alert should be triggered or resolved,
-// and then updates the KV Store to track the alert state.
-// The KV Store is used to maintain the state of alerts across search executions
-// to ensure that only changes in state (trigger to resolve or resolve to trigger)
-// are sent to PagerDuty, thereby avoiding duplicate alerts.  
+// Check KV Store for the previous state and update if needed.
+// KV Store maintains the alert state across searches to track state changes.
+// This prevents duplicate alerts and ensures only state changes are sent to PagerDuty.
 | join type=left _key
     [| inputlookup state_alert
     | rename event_action AS event_action_lookup
