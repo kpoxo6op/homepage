@@ -114,14 +114,22 @@ Resolve, or not return any results based on the current state.
 | table event_action
 ```
 
-Trigger Action sends the alert message to PagerDuty with `event_action` in message details.
+Trigger Action sends the alert event to PagerDuty with `event_action` in message details.
 
-Here is received event
+Here is received event example in PagerDuty
 
 ```json
-{"action": "$result.event_action$"}
-```
-
+{
+  "client": "Splunk",
+  "description": "Resolvable Splunk Alert Demo",
+  "event_type": "trigger",
+  "incident_key": "Resolvable Splunk Alert Demo",
+  "service_key": "d21f971d69904008c02294259c432f71",
+  "details": {
+    "event_action": "trigger"
+  }
+}```
 action
 
 ## Conclusion
+```
