@@ -75,7 +75,9 @@ terraform apply
 +----------------------+    +-------------------+    
 ```
 
-Let's look at Splunk Alert Search tracking the alert state via Splunk KV Store.
+Splunk Alert Search tracks the alert state via Splunk KV Store.
+
+It returns `event_action` Resolve or Trigger result
 
 ```sql
 // Randomly generate search results for testing
