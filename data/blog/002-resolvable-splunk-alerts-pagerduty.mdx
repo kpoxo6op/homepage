@@ -65,7 +65,7 @@ terraform apply
 
 ## How It Works
 
-```txt
+```text
 +----------------------+    +-------------------+    +-------------------+    +-----------------+
 | Splunk Alert Search  | -> | Check KVStore for | -> | PagerDuty Action  | -> | PagerDuty Event |
 |  (Triggers/Resolves) |    | State Change      |    | Custom Details    |    | Orchestration   |
@@ -150,7 +150,7 @@ Example Resolve Event with `custom_details.event_action` "resolve":
 
 PagerDuty creates an incident because the `event_action` is set to `trigger.`
 
-PagerDuty resolves an incident if `custom_details.event_action` matches `resolve`.
+PagerDuty Event Orchestration rule is set to resovle  an incident if `custom_details.event_action` matches `resolve`.
 
 See Event Orchestration rule:
 
