@@ -114,7 +114,9 @@ Resolve, or not return any results based on the current state.
 | table event_action
 ```
 
-Trigger Action sends the alert message to PagerDuty with `event_action` in Custom Details.
+Trigger Action sends the alert message to PagerDuty with `event_action` in message details.
+
+Received this event via the events API
 
 ```json
 {"action": "$result.event_action$"}
