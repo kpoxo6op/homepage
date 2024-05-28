@@ -158,7 +158,9 @@ The Splunk Alert Search sets `custom_details.event_action`. It can be `Resolve` 
 
 ### PagerDuty Orchestration
 
-PagerDuty [creates](https://developer.pagerduty.com/docs/ZG9jOjExMDI5NTgx-send-an-alert-event#event-action-behavior) an incident on the Default because the `event_action` is set to `trigger.`
+PagerDuty evaluates `event_action` and [creates](https://developer.pagerduty.com/docs/ZG9jOjExMDI5NTgx-send-an-alert-event#event-action-behavior) an incident on the Default Service.
+
+When the alert is no on
 
 PagerDuty Event Orchestration rule is set to resovle  an incident if `custom_details.event_action` matches `resolve`.
 
