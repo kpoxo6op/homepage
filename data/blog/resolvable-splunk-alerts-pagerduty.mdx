@@ -74,6 +74,8 @@ terraform apply
 +----------------------+    +-------------------+    
 ```
 
+### Splunk Alert Search
+
 Splunk Alert Search tracks alert state using the Splunk KV Store.
 
 It decides whether to return results with `event_action` set to Trigger,
@@ -114,7 +116,9 @@ Resolve, or not return any results based on the current state.
 
 Trigger Action sends the alert event to PagerDuty with `event_action` in message `custom_details`.
 
-Example Trigger event received by PagerDuty:
+### PagerDuty API
+
+Example Trigger event received by PagerDuty API:
 
 ```json
 {
@@ -150,7 +154,7 @@ Notice the difference between `event_action` and `custom_details.event_action`.
 
 PagerDuty Splunk App creates `event_action`. It is always `trigger` because the app [does not support](https://www.pagerduty.com/docs/guides/splunk-integration-guide/) resolving alerts which are no logner firing.
 
-`custom_details.event_action` can be `Resolve` or `Trigger` by the smart search
+The Splunk Alert Search `custom_details.event_action`. It can be `Resolve` or `Trigger`.
 
 PagerDuty creates an incident because the `event_action` is set to `trigger.`
 
