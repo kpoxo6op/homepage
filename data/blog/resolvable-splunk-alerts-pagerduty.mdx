@@ -126,6 +126,8 @@ Repeteadly run the main query and output `state_alert` on the side to see the al
 
 Alert Trigger Action `action.pagerduty` sends the alert event to PagerDuty with `event_action` in `custom_details`. The `event_action` value can be Trigger or Resolve whether we want to create or resolve an incident in PagerDuty.
 
+![PagerDuty Incidents](/static/images/002-resolvable-splunk-alerts-pagerduty/pd-incidents.png)
+
 Example event received by PagerDuty API to create an incident:
 
 ```json
@@ -199,3 +201,5 @@ resource "pagerduty_event_orchestration_service" "resolve" {
 ```
 
 ## Conclusion
+
+In conclusion, this guide shows you how to auto-resolve PagerDuty alerts from Splunk using Splunk KV Store and PagerDuty Service Orchestrations. This method fills the gap in official support and streamlines incident management. Follow the steps to reduce manual work and improve efficiency, whether you're setting this up for the first time or enhancing an existing setup.
