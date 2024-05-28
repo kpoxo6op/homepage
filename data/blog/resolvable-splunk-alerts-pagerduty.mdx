@@ -152,13 +152,13 @@ Example Event with `custom_details.event_action` set to Resolve:
 
 Notice the difference between `event_action` and `custom_details.event_action`.
 
-PagerDuty Splunk App creates `event_action`. It is always `trigger` because the app [does not support](https://www.pagerduty.com/docs/guides/splunk-integration-guide/) resolving alerts which are no logner firing.
+PagerDuty Splunk App sets `event_action`. It is always `trigger` because the app [does not support](https://www.pagerduty.com/docs/guides/splunk-integration-guide/) resolving alerts which are no logner firing.
 
-The Splunk Alert Search creates `custom_details.event_action`. It can be `Resolve` or `Trigger`.
+The Splunk Alert Search sets `custom_details.event_action`. It can be `Resolve` or `Trigger`.
 
-### PagerDuty Orchast
+### PagerDuty Orchestration
 
-PagerDuty creates an incident because the `event_action` is set to `trigger.`
+PagerDuty creates an incident because the `event_action` is always set to `trigger.`
 
 PagerDuty Event Orchestration rule is set to resovle  an incident if `custom_details.event_action` matches `resolve`.
 
