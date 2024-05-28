@@ -82,7 +82,7 @@ It decides whether to return results with `event_action` set to Trigger,
 Resolve, or not return any results based on the current state.
 
 ```sql
-// Randomly generate 0 or 100 search results to simulate itnermittent errors
+// Randomly generate 0 or 100 search results to simulate intermittent errors
 | makeresults count=1
 | eval random_number=random() % 2
 | appendpipe [| makeresults count=100 | where random_number == 1]
@@ -147,6 +147,8 @@ Example Resolve Event with `custom_details.event_action` "resolve":
 	"timestamp": "2024-05-27T21:09:00.972Z"
 }
 ```
+
+Notice the difference between `event`
 
 PagerDuty creates an incident because the `event_action` is set to `trigger.`
 
