@@ -116,11 +116,11 @@ Resolve, or not return any results based on the current state.
 
 Trigger Action sends the alert event to PagerDuty with `event_action` in message `custom_details`.
 
-event_action is Trigger when we want to create an incident
+`event_action` can be Trigger or Resolve whether we want to create or resolve an incident in PagerDuty.
 
 ### PagerDuty API
 
-Example event received by PagerDuty API:
+Example event received by PagerDuty API to create an incident:
 
 ```json
 {
@@ -136,7 +136,7 @@ Example event received by PagerDuty API:
 }
 ```
 
-Example Event with `custom_details.event_action` set to Resolve:
+Example event received by PagerDuty API to resolve an incident:
 
 ```json
 {
