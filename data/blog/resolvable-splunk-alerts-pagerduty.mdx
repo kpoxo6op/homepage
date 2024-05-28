@@ -122,7 +122,7 @@ Repeteadly run the main query and output `state_alert` on the side to see the al
 
 ![Runner Job Complete](/static/images/002-resolvable-splunk-alerts-pagerduty/splk-queries.png)
 
-Trigger Action sends the alert event to PagerDuty with `event_action` in message `custom_details`.
+Alert Trigger Action `action.pagerduty` sends the alert event to PagerDuty with `event_action` in `custom_details`.
 
 `event_action` can be Trigger or Resolve whether we want to create or resolve an incident in PagerDuty.
 
