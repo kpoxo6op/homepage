@@ -114,7 +114,9 @@ Resolve, or not return any results based on the current state.
 | table event_action
 ```
 
-Run the main query side by side with KV Store to see the tracking in action.
+Run the main query with the KV store output on the side and to see alert tracking in action.
+
+![Runner Job Complete](/static/images/001-gitlab-docker-windows-runner/job-complete.png)
 
 Trigger Action sends the alert event to PagerDuty with `event_action` in message `custom_details`.
 
