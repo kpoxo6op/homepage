@@ -170,6 +170,8 @@ PagerDuty evaluates `event_action` and [creates](https://developer.pagerduty.com
 
 The most interesting and important part happens in PagerDuty Event Orchestration rule called `Autotoresolve Splunk Alerts`. It makes PagerDuty resolve an incident if `resolve` is present in `custom_details`.
 
+![Autoresolve Splunk Alerts Rule](/static/images/002-resolvable-splunk-alerts-pagerduty/pd-autoresolve-rule.png)
+
 The rule is defined by `pagerduty_event_orchestration_service` terraform resource:
 
 ```text
