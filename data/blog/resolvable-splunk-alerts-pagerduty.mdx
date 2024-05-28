@@ -148,7 +148,7 @@ Example Resolve Event with `custom_details.event_action` "resolve":
 
 Notice the difference between `event_action` and `custom_details.event_action`.
 
-`event_action` is always `trigger` because PagerDuty Splank app does not support resolving alerts.
+PagerDuty Splunk App creates `event_action`. It is always `trigger` because the app [does not support](https://www.pagerduty.com/docs/guides/splunk-integration-guide/) resolving alerts which are no logner firing.
 
 PagerDuty creates an incident because the `event_action` is set to `trigger.`
 
