@@ -150,6 +150,8 @@ Notice the difference between `event_action` and `custom_details.event_action`.
 
 PagerDuty Splunk App creates `event_action`. It is always `trigger` because the app [does not support](https://www.pagerduty.com/docs/guides/splunk-integration-guide/) resolving alerts which are no logner firing.
 
+`custom_details.event_action` can be `Resolve` or `Trigger` by the smart search
+
 PagerDuty creates an incident because the `event_action` is set to `trigger.`
 
 PagerDuty Event Orchestration rule is set to resovle  an incident if `custom_details.event_action` matches `resolve`.
