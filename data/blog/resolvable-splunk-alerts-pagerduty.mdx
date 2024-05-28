@@ -116,6 +116,8 @@ Resolve, or not return any results based on the current state.
 
 Trigger Action sends the alert event to PagerDuty with `event_action` in message `custom_details`.
 
+event_action is Trigger when we want to create an incident
+
 ### PagerDuty API
 
 Example event received by PagerDuty API:
@@ -159,8 +161,6 @@ The Splunk Alert Search sets `custom_details.event_action`. It can be `Resolve` 
 ### PagerDuty Orchestration
 
 PagerDuty evaluates `event_action` and [creates](https://developer.pagerduty.com/docs/ZG9jOjExMDI5NTgx-send-an-alert-event#event-action-behavior) an incident on the Default Service.
-
-When the alert is no on
 
 PagerDuty Event Orchestration rule is set to resovle  an incident if `custom_details.event_action` matches `resolve`.
 
