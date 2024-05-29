@@ -24,11 +24,17 @@ along step by step or just read the contents.
 ## Table of Contents
 
 [Introduction](#introduction)
+
 [Before You Begin](#before-you-begin)
+
 [Set PagerDuty Token](#set-pagerduty-token)
+
 [Configure Local Splunk](#configure-local-splunk)
+
 [Run the Demo](#run-the-demo)
+
 [How It Works](#how-it-works)
+
 [Conclusion](#conclusion)
 
 ## Before you begin
@@ -187,7 +193,7 @@ Notice the difference between `event_action` and `custom_details.event_action`.
 PagerDuty Splunk App sets `event_action`. It is always `trigger` because the app
 [does not
 support](https://www.pagerduty.com/docs/guides/splunk-integration-guide/)
-resolving alerts which are no logner firing.
+resolving alerts which are no longer firing.
 
 The Splunk Alert Search sets `custom_details.event_action`. It can be `Resolve`
 or `Trigger`.
