@@ -23,6 +23,17 @@ along step by step or just read the contents.
 
 ## Table of Contents
 
+1. [Introduction](#introduction)
+2. [Before You Begin](#before-you-begin)
+3. [Set PagerDuty Token](#set-pagerduty-token)
+4. [Configure Local Splunk](#configure-local-splunk)
+5. [Run the Demo](#run-the-demo)
+6. [How It Works](#how-it-works)
+   - [Splunk Alert Search](#splunk-alert-search)
+   - [PagerDuty API](#pagerduty-api)
+   - [PagerDuty Service Orchestration](#pagerduty-service-orchestration)
+7. [Conclusion](#conclusion)
+
 ## Before you begin
 
 Sign up for [Splunk](https://www.splunk.com/en_us/sign-up.html) and
@@ -226,6 +237,6 @@ resource "pagerduty_event_orchestration_service" "resolve" {
 
 ## Conclusion
 
-In conclusion, this guide fills the gap in the PagerDuty Splunk app by showing
+This guide fills the gap in the PagerDuty Splunk app by showing
 how to auto-resolve alerts using Splunk KV Store and PagerDuty Service
-Orchestrations.
+Orchestration.
