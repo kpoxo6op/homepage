@@ -84,6 +84,11 @@ terraform plan
 terraform apply
 ```
 
+PagerDuty should start creating and resolving Incidents automatically.
+
+![PagerDuty
+Incidents](/static/images/002-resolvable-splunk-alerts-pagerduty/pd-incidents.png)
+
 ## How It Works
 
 ```text
@@ -152,9 +157,6 @@ Complete](/static/images/002-resolvable-splunk-alerts-pagerduty/splk-queries.png
 Alert Trigger Action `action.pagerduty` sends the alert event to PagerDuty with
 `event_action` in `custom_details`. The `event_action` value can be Trigger or
 Resolve whether we want to create or resolve an incident in PagerDuty.
-
-![PagerDuty
-Incidents](/static/images/002-resolvable-splunk-alerts-pagerduty/pd-incidents.png)
 
 Example event received by PagerDuty API to create an incident:
 
