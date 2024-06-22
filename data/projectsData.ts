@@ -7,24 +7,14 @@ interface Project {
 
 const projectsData: Project[] = [
   {
-    title: 'A Search Engine',
-    description: `What if you could look up any information in the world? Webpages, images, videos
-    and more. Google has many features to help you find exactly what you're looking
-    for.`,
-    imgSrc: '/static/images/google.png',
-    href: 'https://www.google.com',
-  },
-  {
-    title: 'The Time Machine',
-    description: `Imagine being able to travel back in time or to the future. Simple turn the knob
-    to the desired date and press "Go". No more worrying about lost keys or
-    forgotten headphones with this simple yet affordable solution.`,
-    imgSrc: '/static/images/time-machine.jpg',
-    href: '/blog/the-time-machine',
+    title: 'New Zealand Then and Now',
+    description: `Photographs with sliders that compare past and present views of locations across New Zealand, showing how places have changed over time`,
+    imgSrc: '/static/images/nz-thennow.jpg',
+    href: 'https://thennow.nz',
   },
   {
     title: 'Markdown to PDF CV builder',
-    description: `Creates PDF CV from Markdown file with Github actions`,
+    description: `Create CV in PDF format markdown`,
     imgSrc: '/static/images/time-machine.jpg',
     href: 'https://github.com/kpoxo6op/cv',
   },
