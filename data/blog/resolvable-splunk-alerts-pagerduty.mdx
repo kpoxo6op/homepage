@@ -86,14 +86,15 @@ terraform apply
 ## How It Works
 
 ```text
-+----------------------+    +-------------------+    +-------------------+    +-----------------+
-| Splunk Alert Search  | -> | Check KVStore for | -> | PagerDuty Action  | -> | PagerDuty Event |
-|  (Triggers/Resolves) |    | State Change      |    | Custom Details    |    | Orchestration   |
-|                      |    |                   |    |                   |    |                 |
-|                      |    +-------------------+    +-------------------+    +-----------------+
-|                      |    | If State Changed  |    
-|                      |    | Update KVStore    |    
-+----------------------+    +-------------------+    
++--------------+    +-------------------+    +----------------+    +---------------+
+| Splunk Alert | -> | Check KVStore for | -> | PagerDuty      | -> | PagerDuty     |
+| Search:      |    | State Change      |    | Action         |    | Event         |
+| Triggers or  |    |                   |    | Custom Details |    | Orchestration |
+| Resolves     |    |                   |    |                |    |               |
+|              |    +-------------------+    +----------------+    +---------------+
+|              |    | If State Changed  |
+|              |    | Update KVStore    |
++--------------+    +-------------------+
 ```
 
 ### Splunk Alert Search
