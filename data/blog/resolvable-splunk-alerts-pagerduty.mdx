@@ -1,0 +1,245 @@
+---
+title: 'Autoresolving Splunk Alerts in PagerDuty'
+date: '2024-05-23'
+tags: ['PagerDuty', 'guide', 'terraform', 'Splunk']
+draft: false
+summary: 'How to autoresolve PagerDuty alerts originated from Splunk using Splunk KV Store and PagerDuty Service Orchestrations.'
+---
+
+I was impressed by this
+[post](https://community.splunk.com/t5/Random/Auto-Resolving-Pagerduty-Alerts/m-p/504687)
+on the Splunk support forum explaining how to automatically resolve PagerDuty alerts
+received from Splunk.
+
+It took me some time to understand the post, so I decided to expand it into an
+easy-to-follow guide to help others.
+
+It's remarkable that it's been four years since the original post, but there is still no support for autoresolving Splunk alerts according to PagerDuty
+[docs](https://www.pagerduty.com/docs/guides/splunk-integration-guide/#:~:text=No.%20At%20this%20time%2C%20the%20PagerDuty%20incident%20must%20be%20resolved%20from%20PagerDuty.)
+
+This guide explains how to build the fully working demo. Feel free to follow
+along step by step or just read the contents.
+
+## Table of Contents
+
+[Introduction](#introduction)
+
+[Before You Begin](#before-you-begin)
+
+[Set PagerDuty Token](#set-pagerduty-token)
+
+[Configure Local Splunk](#configure-local-splunk)
+
+[Run the Demo](#run-the-demo)
+
+[How It Works](#how-it-works)
+
+[Conclusion](#conclusion)
+
+## Before you begin
+
+Sign up for [Splunk](https://www.splunk.com/en_us/sign-up.html) and
+[PagerDuty](https://www.pagerduty.com/sign-up/) accounts.
+
+Clone GitHub [repository](https://github.com/kpoxo6op/splunk-pagerduty-autoresolve) with the demo code.
+
+Install terraform, docker and docker compose.
+
+## Set PagerDuty Token
+
+Create [API
+Token](https://support.pagerduty.com/docs/api-access-keys#generate-a-user-token-rest-api-key)
+and save it to `.env` file.
+
+```sh
+cp .env.sample .env
+cat .env
+export TF_VAR_pagerduty_token='your_pagerduty_token'
+```
+
+## Configure Local Splunk
+
+Start local docker compose Splunk stack, wait for healthy Splunk status.
+
+```sh
+docker compose up -d
+watch docker compose ps
+```
+
+Login to local Splunk with credentials from `env` (default is `admin/abcd1234`).
+
+Install PagerDuty
+[App](http://localhost:8000/en-US/manager/search/appsremote?query=pagerduty). I
+could not preload it to Splunk so we have to install it manually.
+
+## Run the Demo
+
+Run terraform to create the required resources in PagerDuty and Splunk.
+
+```sh
+source .env
+terraform init
+terraform plan
+terraform apply
+```
+
+## How It Works
+
+```text
++--------------+    +-------------------+    +----------------+    +---------------+
+| Splunk Alert | -> | Check KVStore for | -> | PagerDuty      | -> | PagerDuty     |
+| Search:      |    | State Change      |    | Action         |    | Event         |
+| Triggers or  |    |                   |    | Custom Details |    | Orchestration |
+| Resolves     |    |                   |    |                |    |               |
+|              |    +-------------------+    +----------------+    +---------------+
+|              |    | If State Changed  |
+|              |    | Update KVStore    |
++--------------+    +-------------------+
+```
+
+### Splunk Alert Search
+
+Splunk Alert Search tracks alert state using the Splunk KV Store.
+
+It decides whether to return results with `event_action` set to Trigger,
+Resolve, or not return any results based on the current state.
+
+```sql
+// Randomly generate 0 or 100 search results to simulate intermittent errors
+| makeresults count=1
+| eval random_number=random() % 2
+| appendpipe [| makeresults count=100 | where random_number == 1]
+| where random_number == 1
+| stats count as event_count
+// trigger or resolve alert based on result count
+| eval event_action=case(
+    event_count>0, "trigger",
+    1=1, "resolve"
+  )
+| eval _key="boris_as_code_error_rate"
+| eval date_last_run=now()
+// Check KV Store for the previous state and update if needed.
+// KV Store maintains the alert state across searches to track state changes.
+// This prevents duplicate alerts and ensures only state changes are sent to PagerDuty.
+| join type=left _key
+    [| inputlookup state_alert
+    | rename event_action AS event_action_lookup
+    | rename date_last_change AS date_last_change_lookup
+    | fields _key, event_action_lookup, date_last_change_lookup]
+// Save the updated state back to the KV Store.
+| eval date_last_change=case(
+    event_action!=event_action_lookup, now(),
+    1=1, date_last_change_lookup
+  )
+| outputlookup state_alert append=true key_field=_key
+// Return results only if the state has changed.  
+| where event_action!=event_action_lookup
+| table event_action
+```
+
+Repeteadly run the main query and output `state_alert` on the side to see the
+alert state tracking in action.
+
+```sql
+| inputlookup state_alert
+```
+
+![Runner Job
+Complete](/static/images/002-resolvable-splunk-alerts-pagerduty/splk-queries.png)
+
+### PagerDuty API
+
+Alert Trigger Action `action.pagerduty` sends the alert event to PagerDuty with
+`event_action` in `custom_details`. The `event_action` value can be Trigger or
+Resolve whether we want to create or resolve an incident in PagerDuty.
+
+![PagerDuty
+Incidents](/static/images/002-resolvable-splunk-alerts-pagerduty/pd-incidents.png)
+
+Example event received by PagerDuty API to create an incident:
+
+```json
+{
+	"custom_details": {
+		"event_action": "trigger"
+	},
+	"dedup_key": "Resolvable Splunk Alert Demo",
+	"event_action": "trigger",
+	"severity": "unknown",
+	"source": "unknown host",
+	"summary": "Resolvable Splunk Alert Demo",
+	"timestamp": "2024-05-27T21:08:00.917Z"
+}
+```
+
+Example event received by PagerDuty API to resolve an incident:
+
+```json
+{
+	"custom_details": {
+		"event_action": "resolve"
+	},
+	"dedup_key": "Resolvable Splunk Alert Demo",
+	"event_action": "trigger",
+	"severity": "unknown",
+	"source": "unknown host",
+	"summary": "Resolvable Splunk Alert Demo",
+	"timestamp": "2024-05-27T21:09:00.972Z"
+}
+```
+
+Notice the difference between `event_action` and `custom_details.event_action`.
+
+PagerDuty Splunk App sets `event_action`. It is always `trigger` because the app
+[does not
+support](https://www.pagerduty.com/docs/guides/splunk-integration-guide/)
+resolving alerts which are no logner firing.
+
+The Splunk Alert Search sets `custom_details.event_action`. It can be `Resolve`
+or `Trigger`.
+
+### PagerDuty Service Orchestration
+
+PagerDuty evaluates `event_action` and
+[creates](https://developer.pagerduty.com/docs/ZG9jOjExMDI5NTgx-send-an-alert-event#event-action-behavior)
+an incident on the Default Service. This is a standard out-of-the box behavior.
+
+The most interesting and important part happens in PagerDuty Event Orchestration
+rule called `Autotoresolve Splunk Alerts`. It makes PagerDuty resolve an
+incident if `resolve` is present in `custom_details`.
+
+![Autoresolve Splunk Alerts
+Rule](/static/images/002-resolvable-splunk-alerts-pagerduty/pd-autoresolve-rule.png)
+
+The rule is defined by `pagerduty_event_orchestration_service` terraform
+resource:
+
+```text
+resource "pagerduty_event_orchestration_service" "resolve" {
+  service = data.pagerduty_service.default.id
+  set {
+    id = "start"
+    rule {
+      label = "Autoresolve Splunk Alerts"
+      condition {
+        expression = "event.custom_details.event_action matches 'resolve'"
+      }
+      actions {
+        event_action = "resolve"
+      }
+    }
+  }
+
+  catch_all {
+    actions {
+
+    }
+  }
+}
+```
+
+## Conclusion
+
+This guide fills the gap in the PagerDuty Splunk app by showing
+how to auto-resolve alerts using Splunk KV Store and PagerDuty Service
+Orchestration.
