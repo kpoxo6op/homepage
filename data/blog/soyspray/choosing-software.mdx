@@ -22,17 +22,12 @@ made, is not a good match for me.
 
 Then I looked at Kubespray. Kubespray seemed appealing because it's an official Kubernetes project, fully open source, has over 15,000 stars on GitHub, and has been around for many years. But the main thing that drew me to Kubespray was its simplicity and flexibility. It doesn't require anything special - just any popular Linux distribution with SSH access and a user that can sudo without a password. That's it. Whether you have one machine or a hundred, Kubespray will install Kubernetes for you using Ansible. Ansible itself was another significant advantage, as I knew I could reuse it to manage tasks beyond Kubernetes, such as installing helpful utilities on my nodes.
 
-So I was pretty sure I wanted to try Kubespray and I started looking at the
-documentation and YouTube and GitHub and so on. And then I realised something
-that became the main reason I want to write this blog. The documentation is a
-bit messy. It's not very modern. There is no proper quickstart. It's not very
-beginner friendly. It's not bad if you already know how it works, but it's
-really hard if you are new. That's why I decided to document everything. I just
-want to make it easier for someone else to go through what I'm doing.
+I initially thought Kubespray would be a good choice, so I started researching by reviewing the official documentation, GitHub repository, YouTube videos, and other resources. While doing this, I realized something important, which became the main reason for writing this blog post.
 
-Another reason why I chose Kubespray is because most videos on YouTube show only
-the first step. They show how to install it on three VMs and how to do kubectl
-get pods, and that's it. They don't show any workloads or interesting use cases.
-The only video that looked real was from one guy, Farhad. He installed Kubespray
-on VirtualBox, showed his terminal, fixed problems, and got it working. That was
-very helpful and made me more sure that I want to try Kubespray.
+The Kubespray documentation is a bit messy and outdated. It lacks a proper quickstart guide and isn't beginner-friendly. If you're already familiar with Kubespray, the documentation might be fine, but it’s difficult for newcomers.
+
+Another issue is that most YouTube videos only show basic setups. Typically, they install Kubespray on three virtual machines, run a simple command like `kubectl get pods`, and then stop there. They rarely demonstrate realistic workloads or interesting practical use cases.
+
+However, I found one genuinely helpful video from a creator named Farhad. He installed Kubespray on VirtualBox, clearly showed his terminal, addressed real issues openly, and eventually got everything working. That video significantly boosted my confidence in using Kubespray.
+
+Inspired by Farhad’s approach, I decided to clearly document my entire experience. My goal is to make the process easier and more accessible for anyone else who wants to follow these steps.
