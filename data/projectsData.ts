@@ -18,6 +18,12 @@ const projectsData: Project[] = [
     imgSrc: '/static/images/time-machine.jpg',
     href: 'https://github.com/kpoxo6op/cv',
   },
+  {
+    title: 'Soyspray',
+    description: `Kubernetes Cluster Powered by Kubespray`,
+    imgSrc: '/static/images/time-machine.jpg',
+    href: '/blog/soyspray-series.mdx',
+  },
 ]
 
 export default projectsData
