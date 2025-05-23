@@ -1,8 +1,8 @@
 ---
 title: Choosing Software
-date: '2025-05-16'
+date: '2025-05-23'
 tags: ['soyspray']
-draft: true
+draft: false
 layout: PostBanner
 images: ['/static/images/003-soyspray-series/kubespray-node0.jpg']
 summary: 'How I chose the software for my home cluster.'
@@ -18,6 +18,8 @@ Linux](https://www.talos.dev/) and
 [Kubespray](https://github.com/kubernetes-sigs/kubespray). In most cases, people
 will pick between these two if they are seriously setting up something.
 
+### Talos Linux
+
 I really liked Talos Linux. It's clean, elegant, secure, and has a beautifully
 designed architecture. But I quickly realized it wasn't a good match for my
 needs. The core philosophy of Talos Linux is that the only thing running on your
@@ -31,39 +33,12 @@ So I want to have a normal operating system that can run Kubernetes and also
 something else. That's why Talos OS, even if it's beautiful and secure and well
 made, is not a good match for me.
 
-Then I looked at Kubespray. Kubespray seemed appealing because it's an official
-Kubernetes project, fully open source, has over 15,000 stars on GitHub, and has
-been around for many years. But the main thing that drew me to Kubespray was its
-simplicity and flexibility. It doesn't require anything special - just any
-popular Linux distribution with SSH access and a user that can sudo without a
-password. That's it. Whether you have one machine or a hundred, Kubespray will
-install Kubernetes for you using Ansible. Ansible itself was another significant
-advantage, as I knew I could reuse it to manage tasks beyond Kubernetes, such as
-installing helpful utilities on my nodes.
+### Kubespray
 
-Initially, Kubespray seemed like a very good choice, so I began checking the
-official documentation, GitHub repository, YouTube videos, and other online
-resources. While doing this research, I realized a few important issues.
-
-First of all, the official Kubespray documentation is somewhat messy and
-outdated. It doesn’t have a clear quickstart guide and isn't friendly for
-beginners. If you're already familiar with Kubespray, it might be fine, but for
-someone new, it's not very helpful.
-
-The second issue I found is that most YouTube videos about Kubespray show only
-very basic setups. They usually install Kubespray on a few virtual machines, run
-one simple command like `kubectl get pods`, and then they stop there. They don't
-show realistic examples or interesting practical use cases.
-
-But I did find one really useful [video from
-Farhad](https://www.youtube.com/watch?v=zJoK8MMI23Q). He installed Kubespray on
-VirtualBox, clearly showed the terminal output, handled real issues openly, and
-eventually got everything working. Seeing this video really boosted my
-confidence to use Kubespray.
-
-Inspired by Farhad’s approach, I decided to clearly document my own Kubespray
-experience. My plan is to show more realistic use cases and easy-to-follow
-examples. I will integrate Kubespray as a git submodule, use my own additional
-Ansible playbooks, show how to do upgrades, and demonstrate other day-two
-operations. My goal is to make installing and managing Kubernetes clusters at
-home easier and clearer for everyone.
+Kubespray appealed to me because it's an official Kubernetes project, has over
+15,000 stars on GitHub, and has been around for many years. The killer feature,
+though, is its simplicity and flexibility: give it any popular Linux
+distribution with SSH access and a sudo-without-password user, and it will
+bootstrap Kubernetes for one node or a hundred using Ansible. Because Kubespray
+itself uses Ansible, I can reuse the same approach to automate other node tasks
+if I decide to.
