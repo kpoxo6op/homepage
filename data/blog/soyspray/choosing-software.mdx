@@ -12,7 +12,7 @@ Before I even seriously started thinking how to install Kubernetes at home, I
 already knew that I wanted to use Kubespray. This short post is just to explain
 how I made that decision and why I think Kubespray is a good start.
 
-When I searched internet how to set up Kubernetes cluster at home, three products caught my attention: [https://github.com/onedr0p/cluster-template](https://github.com/onedr0p/cluster-template) [Talos Linux](https://www.talos.dev/) and [Kubespray](https://github.com/kubernetes-sigs/kubespray). In most cases, people will pick between these two if they are seriously setting up something.
+When I searched internet how to set up Kubernetes cluster at home, three products caught my attention: [Talos Linux](https://www.talos.dev/), [cluster-template](https://github.com/onedr0p/cluster-template), and [Kubespray](https://github.com/kubernetes-sigs/kubespray).
 
 I really liked Talos Linux. It's clean, elegant, secure, and the architecture is very beautiful. But pretty quickly I realised that it's not a good match for what I want. The main philosophy of Talos Linux is that the only thing running on your machines should be Kubernetes. You can't even SSH into it. You can't install anything else or run anything else. This is fine if you just want to run Kubernetes and Kubernetes-native applications. But in my case, I want to run also other things like WireGuard or Tailscale relay node maybe, some other tools that are not part of Kubernetes.
 
