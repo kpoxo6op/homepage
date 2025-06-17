@@ -8,8 +8,29 @@ images: ['/static/images/003-soyspray-series/soyspray-installing-the-os-1.jpg']
 summary: 'work in progress'
 ---
 
-text
+I need to install in unattended way because I had 3 nodes, manual install was
+not the option. Also I knew I will mess something up later which I have no idea
+about and I will need to reinstall the OS time to time until I understand what I
+am doing.
+
+## Autoinstall
+
+I picked Ubuntu Server due to its popularity (easy troubleshooting online) and
+human friendly YAML file for automatic installation.
+
+It took me some time to understand Canonical customizations on top of Cloud
+Init. I have found these notes
+https://medium.com/@Phoenixforge/diving-deeper-with-ubuntu-autoinstall-b15e5bdffbb5
+invaluable for understanding the Ubuntu autoinstall flavor.
 
 ## header
 
-more text
+### Get networking sorted
+
+networking driver compilation required
+
+selecting the packages from the same distro is critical
+
+kernel freeze is required
+
+disabling suspend on VGA disconnect is required
