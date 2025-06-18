@@ -38,14 +38,16 @@ user I expected.
 The next issue was Ubuntu Server did not see my networking adapter.
 
 I figured out online the driver support is not added to the Linux Kernel, I have
-found the thread where people advised to compile the driver from source.
+found the thread where people advised to download or compile the driver from
+source.
 
 After some more digging I found the driver source on GitHub. I figured out how
 to add the driver compilation commands to Autoinstall.
 
-The next issues was gcc and some other developer tools were not installed by
-default on Ubuntu Server. Of course I could not download the required tools from
-the Internet to compile th driver because I did not have any network on the OS.
+The next issues was `gcc` (or some other tools I don't remember) and some other
+developer tools were not installed by default on Ubuntu Server. Of course I
+could not download the required tools from the Internet to compile th driver
+because I did not have any network on the OS.
 
 THe way forward was to add the packages required for the compilation in the
 installer USB filesystem so Ubuntu can install itself, compile the driver,
