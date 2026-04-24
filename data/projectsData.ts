@@ -7,6 +7,12 @@ interface Project {
 
 const projectsData: Project[] = [
   {
+    title: 'YEETer',
+    description: `Photo-first AI listing drafts for sellers, turning one item photo into a reviewed listing draft before anything is posted`,
+    imgSrc: '/static/images/yeeter-icon.png',
+    href: 'https://yeeter-bqw.pages.dev',
+  },
+  {
     title: 'New Zealand Then and Now',
     description: `Photographs with sliders that compare past and present views of locations across New Zealand, showing how places have changed over time`,
     imgSrc: '/static/images/nz-thennow.jpg',
