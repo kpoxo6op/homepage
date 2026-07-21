@@ -1,16 +1,16 @@
 interface Project {
-  title: string,
-  description: string,
-  href?: string,
-  imgSrc?: string,
+  title: string
+  description: string
+  href?: string
+  imgSrc?: string
 }
 
 const projectsData: Project[] = [
   {
     title: 'YEETer',
-    description: `Photo-first AI listing drafts for sellers, turning one item photo into a reviewed listing draft before anything is posted`,
+    description: `Dead project — a working photo-first AI listing tool that did not receive Trade Me production API approval`,
     imgSrc: '/static/images/yeeter-icon.png',
-    href: 'https://yeeter-bqw.pages.dev',
+    href: '/blog/yeeter',
   },
   {
     title: 'New Zealand Then and Now',

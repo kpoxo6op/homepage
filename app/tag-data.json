@@ -10,5 +10,8 @@
   "ansible": 1,
   "kubernetes": 1,
   "ubuntu": 2,
+  "projects": 1,
+  "ai": 1,
+  "trade-me": 1,
   "autoinstall": 1
 }

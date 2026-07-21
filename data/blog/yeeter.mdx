@@ -1,0 +1,120 @@
+---
+title: YEETer
+date: '2026-04-24'
+lastmod: '2026-07-21'
+tags: ['projects', 'ai', 'trade-me']
+draft: false
+layout: PostBanner
+images: ['/static/images/yeeter-icon.png']
+summary: 'A working photo-first Trade Me listing tool that stopped at production API approval.'
+---
+
+**Status: Dead**
+
+YEETer was an experiment from April 2026. A seller took one photo of an item and the app generated a Trade Me listing draft: title, category, description, price, shipping, and category attributes. The seller could review and edit everything before explicitly confirming the listing.
+
+The app used Trade Me OAuth. It did not collect Trade Me passwords, and its tokens and API secrets stayed on the server.
+
+The complete flow worked. YEETer created a real Trade Me test listing, which was then withdrawn.
+
+## Screen recordings
+
+These are four tests recorded on my phone on 26 April 2026.
+
+<video
+  controls
+  playsInline
+  preload="metadata"
+  className="mx-auto max-h-[760px] w-auto"
+  src="/static/videos/yeeter/screen-20260426-105534-1777157708744.mp4"
+/>
+
+YEETer photographed a discarded glass table, identified it, chose Furniture, described its condition and materials, and suggested a price range.
+
+What I find funny is how quickly a piece of rubbish in long grass becomes a clean, plausible listing. The \$89 and \$109 prices were hardcoded placeholders, but everything around them makes the result look oddly official.
+
+<video
+  controls
+  playsInline
+  preload="metadata"
+  className="mx-auto max-h-[760px] w-auto"
+  src="/static/videos/yeeter/screen-20260426-105957-1777157964139.mp4"
+/>
+
+Another furniture test ended at the unfinished posting button: “Live Trade Me posting is not wired yet.”
+
+The accidental detail in this recording is the app launcher. In the middle of demonstrating YEETer, the screen briefly reveals that I have two Clash Royale icons installed. It makes the recording look less like a prepared product demo and more like evidence from the phone of a Clash Royale addict.
+
+<video
+  controls
+  playsInline
+  preload="metadata"
+  className="mx-auto max-h-[760px] w-auto"
+  src="/static/videos/yeeter/screen-20260426-112008-1777159181978.mp4"
+/>
+
+It classified a towel left beside the road as Home decor, with 96% category confidence.
+
+This is my favourite result. The object is quite obviously a dirty towel lying in the gutter, but YEETer promotes it to “Home decor” and reports 96% category confidence. The serious listing interface makes the classification look even more absurd. The displayed prices were only hardcoded placeholders.
+
+<video
+  controls
+  playsInline
+  preload="metadata"
+  className="mx-auto max-h-[760px] w-auto"
+  src="/static/videos/yeeter/screen-20260426-131448-1777166062285.mp4"
+/>
+
+It also recognised a discarded chair and described the visible wear.
+
+The chair result is surprisingly reasonable. Compared with the towel, the title, category, material and condition all make sense. It is a good demonstration that the vision analysis was real even though the prices were still hardcoded.
+
+## Using OpenAI twice
+
+OpenAI was involved in two different parts of YEETer.
+
+The obvious one was inside the application. YEETer sent the photograph to an OpenAI vision model and requested structured data containing a proposed title, object type, category candidates, condition, material, visible text, a search phrase, and a confidence score. If the smaller model returned less than 72% confidence or said that the seller needed to choose, the backend tried a larger model. A low-confidence result was supposed to ask the seller for help instead of inventing details.
+
+The more entertaining use was during development. I took screenshots from the real Android application and gave them to ChatGPT. It returned complete annotated design boards showing what was wrong with the interface and how to restructure it.
+
+![ChatGPT reviewing the complete YEETer listing flow](/static/images/yeeter/openai-ui-review-1.webp)
+
+![ChatGPT proposing reversible photo capture](/static/images/yeeter/openai-ui-review-2.webp)
+
+![ChatGPT restructuring the review screen and fixing the footer overlap](/static/images/yeeter/openai-ui-review-3.webp)
+
+![ChatGPT proposing navigation that allowed the seller to redo any stage](/static/images/yeeter/openai-ui-review-4.webp)
+
+These boards are more useful here than screenshots of source code. A code screenshot would only prove that the application contained an OpenAI API call. Each board shows the real phone interface, the problem ChatGPT found, and its proposed solution in one image. They document the development loop itself: screenshot the current build, ask the model to inspect it visually, receive a redesigned version with annotations, implement it, and test the next build on the phone.
+
+They are also artifacts produced by the same AI-assisted process the project is about. OpenAI was not only generating data inside YEETer. It was looking at YEETer from the outside and helping redesign the application around that data.
+
+This was the first time image generation felt like a practical software-development tool to me. Instead of receiving another page of design advice, I received an image of my own application covered in proposed corrections. I could compare it with the phone in my hand, change the app, take another screenshot, and continue.
+
+## Completely vibecoded
+
+The application was completely vibecoded. I told Codex CLI to use `scrcpy` to operate the Android phone from my laptop and keep iterating on the real application.
+
+Codex navigated the screens, captured screenshots, inspected the Android UI, changed the code, installed another build, and repeated the flow. Its vision caught many stupid visual and navigation bugs directly from the phone. I did not need to notice each bug, describe it in words, or explain where on the screen it appeared.
+
+The repository contains a large collection of screenshots from these passes: camera states, loading screens, review layouts, keyboard problems, back-navigation behaviour, header spacing, footer overlap, the app icon, and the final standalone build. Most of this work happened over a few days.
+
+## How far the prototype got
+
+The repository began on 22 April 2026. By 24 April, the phone could capture a real image and send it to a Cloudflare backend. OpenAI produced the draft, and the app grounded the proposed category against Trade Me sandbox data.
+
+The integration covered Trade Me OAuth, account verification, category search and details, photo upload, listing validation, and fee calculation. OpenAI and Trade Me secrets stayed on the backend rather than inside the Android application.
+
+The app was also built and installed as a standalone Android APK. It did not require Expo Go, a development server, or a laptop to launch.
+
+One sandbox problem had nothing to do with AI. The test seller account had Ping enabled, while some General Items categories reported Cash as their allowed payment method. Trade Me rejected the validation even when YEETer explicitly sent Cash. The repository records this as a sandbox account or category conflict.
+
+The final guarded version deliberately kept automatic listing creation disabled. It could upload the photo, validate the proposed listing, calculate fees, and show everything for review, but the final create action stayed behind the unfinished **YEET!** button.
+
+I applied for production API access on 24 April 2026. The Trade Me developer portal later showed that the production API application was marked as declined, without an explanation.
+
+On 30 April I asked Trade Me what had caused the decision and whether a restricted version would be acceptable. I offered to limit it to invited New Zealand sellers and General Items, and explained the safeguards: no automatic posting, no scraping, no market-data aggregation, no price comparison, no retained expired listings, and no Trade Me branding.
+
+The reply only said that the address I had contacted handled the Property API and redirected Marketplace questions to another address. I found no later answer or reason for the decline.
+
+The app worked, but it could not become a real product without production API approval, so the project ended there.
