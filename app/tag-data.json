@@ -6,8 +6,9 @@
   "pagerduty": 1,
   "splunk": 1,
   "kubespray": 1,
-  "soyspray": 4,
+  "soyspray": 5,
   "ansible": 1,
   "kubernetes": 1,
-  "ubuntu": 1
+  "ubuntu": 2,
+  "autoinstall": 1
 }
