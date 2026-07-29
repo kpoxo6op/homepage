@@ -1,25 +1,96 @@
 ---
-title: YEETer
-date: '2026-04-24'
-lastmod: '2026-07-21'
+title: 'My Least Failed Product'
+date: '2026-07-29'
+lastmod: '2026-07-29'
 tags: ['projects', 'ai', 'trade-me']
-draft: false
+draft: true
 layout: PostBanner
 images: ['/static/images/yeeter-icon.png']
-summary: 'A working photo-first Trade Me listing tool that stopped at production API approval.'
+summary: 'My least failed attempt at making a useful hobby app.'
 ---
 
-**Status: Dead**
+## Table of Contents
 
-YEETer was an experiment from April 2026. A seller took one photo of an item and the app generated a Trade Me listing draft: title, category, description, price, shipping, and category attributes. The seller could review and edit everything before explicitly confirming the listing.
+- [Making YEETer](#making-yeeter)
+- [Taking YEETer outside](#taking-yeeter-outside)
+- [The end](#the-end)
 
-The app used Trade Me OAuth. It did not collect Trade Me passwords, and its tokens and API secrets stayed on the server.
+At work we have a chat for people who are enthusiastic about artificial intelligence. My colleagues sometimes share phone apps and other products they have vibe-coded in their spare time.
 
-The complete flow worked. YEETer created a real Trade Me test listing, which was then withdrawn.
+Some of the ideas are quite good. One colleague built a Shopify integration. Another made an app that asks people how happy they are, then marks the happiest cities on a map. Someone else made an iPhone app that copies text straight from the camera, and also made pets for the Apple Watch.
 
-## Screen recordings
+Seeing people around me build things like this brought me back to a thought of my own: I want to make a useful hobby app that at least one person will pay \$1 a month for.
 
-These are four tests recorded on my phone on 26 April 2026.
+I am not very good at product thinking. Most of my ideas are some kind of madness that nobody would ever use, and I usually work this out after thinking about them for three hours or three days.
+
+So here is my least failed attempt at making a product.
+
+“Least failed” is a strange term. Of course the attempt failed. It just travelled farther through my pipeline of failures than the others.
+
+## Making YEETer
+
+I decided to make an app that would help people sell ordinary household items on Trade Me (a New Zealand online marketplace), using artificial intelligence.
+
+I was pretty excited about OpenAI's new [GPT Image 2](https://developers.openai.com/cookbook/examples/multimodal/image-gen-models-prompting-guide#model-summary), released on 21 April 2026, and wanted to give it a real task instead of another demo.
+
+The user would photograph an object and receive a draft listing: everything from the title to a suggested price. I wanted to automate as much as possible.
+
+First I created several Trade Me listings entirely by hand to count how many actions the process required. The Trade Me app already handled some of them, but AI image processing and each person's saved preferences could automate plenty of the remaining actions.
+
+I took screenshots of every action in the Trade Me app and asked ChatGPT Images to draw mockups for my app. I told it that the app would have access to an image model, which would fill in item details from the photo, and to saved user preferences such as “always pickup” and “always auction.”
+
+After the first prompt, I had an almost usable set of screens.
+
+![The first complete YEETer listing flow generated from my Trade Me screenshots](/static/images/yeeter/intended-listing-flow.webp)
+
+Long story short, I saved the images to my computer and told Codex to make the app.
+
+I connected the phone to the computer with a cable so Codex could see its screen through screenshots and correct itself. Codex installed an Android development environment and quickly made the first version.
+
+Codex in April 2026 was not as good as it is now. Looking back from July, I can say exactly what it did worse. Instead of copying the mockups as I had asked, it made a vaguely similar version according to its own preferences. It wrecked the design and added extra UI elements I had never requested.
+
+That pissed me off a little, but I took a breath and went back to ChatGPT Images. I showed it screenshots of the actual app and asked for very precise correction instructions so that Codex could fix its own work.
+
+![ChatGPT Images correction board, iteration 1](/static/images/yeeter/openai-ui-review-1.webp)
+
+![ChatGPT Images correction board, iteration 2](/static/images/yeeter/openai-ui-review-2.webp)
+
+![ChatGPT Images correction board, iteration 3](/static/images/yeeter/openai-ui-review-3.webp)
+
+![ChatGPT Images correction board, iteration 4](/static/images/yeeter/openai-ui-review-4.webp)
+
+After several iterations like this, ChatGPT finally hammered into Codex how the app was supposed to look, which screens it should make, and which rubbish steps and menus it must never add.
+
+Codex was already very strong at backend development in April 2026, so adding image processing through ChatGPT Images was not a problem at all. The model confidently recognised the junk on my desk that I was “putting up for sale” and filled in the categories remarkably well.
+
+<div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+  <img
+    src="/static/images/yeeter/desk-headphones-listing.webp"
+    alt="YEETer draft listing for white headphones from my desk"
+    className="m-0 w-full rounded-lg"
+  />
+  <img
+    src="/static/images/yeeter/desk-travel-cup-listing.webp"
+    alt="YEETer draft listing for a yellow travel cup from my desk"
+    className="m-0 w-full rounded-lg"
+  />
+</div>
+
+After a couple of evenings, the app was ready. I could have made it much faster, but I made myself rest and let the app sit overnight. Then I could return the next day with a fresh head and see what else needed to be thrown away.
+
+I forgot to explain where the name YEETer came from. A teammate suggested it. On Fridays we stop working at 3 p.m. and start talking about anything at all. Everyone knows about my AI psychosis, so for me “anything at all” means artificial intelligence.
+
+I showed them the rough version of the app, and someone gave it a name.
+
+## Taking YEETer outside
+
+That weekend I took the half-finished version outside to test it. I no longer remember exactly what happened, but I think I had forgotten to configure the price prompt, so everything I photographed received the same price.
+
+I live in a sketchy area where people leave random shit outside. For once, that was a blessing: YEETer had plenty of test inventory.
+
+Watch the screen recordings and enjoy the things I “listed.” I certainly enjoyed the test run.
+
+_Outdoor test recording 1 of 4._
 
 <video
   controls
@@ -29,9 +100,7 @@ These are four tests recorded on my phone on 26 April 2026.
   src="/static/videos/yeeter/screen-20260426-105534-1777157708744.mp4"
 />
 
-YEETer photographed a discarded glass table, identified it, chose Furniture, described its condition and materials, and suggested a price range.
-
-What I find funny is how quickly a piece of rubbish in long grass becomes a clean, plausible listing. The \$89 and \$109 prices were hardcoded placeholders, but everything around them makes the result look oddly official.
+_Outdoor test recording 2 of 4._
 
 <video
   controls
@@ -41,9 +110,7 @@ What I find funny is how quickly a piece of rubbish in long grass becomes a clea
   src="/static/videos/yeeter/screen-20260426-105957-1777157964139.mp4"
 />
 
-Another furniture test ended at the unfinished posting button: “Live Trade Me posting is not wired yet.”
-
-The accidental detail in this recording is the app launcher. In the middle of demonstrating YEETer, the screen briefly reveals that I have two Clash Royale icons installed. It makes the recording look less like a prepared product demo and more like evidence from the phone of a Clash Royale addict.
+_My favourite: putting an old towel that had already been run over a few times up for sale._
 
 <video
   controls
@@ -53,9 +120,7 @@ The accidental detail in this recording is the app launcher. In the middle of de
   src="/static/videos/yeeter/screen-20260426-112008-1777159181978.mp4"
 />
 
-It classified a towel left beside the road as Home decor, with 96% category confidence.
-
-This is my favourite result. The object is quite obviously a dirty towel lying in the gutter, but YEETer promotes it to “Home decor” and reports 96% category confidence. The serious listing interface makes the classification look even more absurd. The displayed prices were only hardcoded placeholders.
+_Outdoor test recording 4 of 4._
 
 <video
   controls
@@ -65,56 +130,12 @@ This is my favourite result. The object is quite obviously a dirty towel lying i
   src="/static/videos/yeeter/screen-20260426-131448-1777166062285.mp4"
 />
 
-It also recognised a discarded chair and described the visible wear.
+## The end
 
-The chair result is surprisingly reasonable. Compared with the towel, the title, category, material and condition all make sense. It is a good demonstration that the vision analysis was real even though the prices were still hardcoded.
+Before I started any development, I submitted an application to Trade Me to register the app. I read their developer terms and other documents and stayed strictly within what they allowed an app to do.
 
-## Using OpenAI twice
+A couple of weeks later, the application was declined without any explanation.
 
-OpenAI was involved in two different parts of YEETer.
+I cried over the verdict for about half an hour, because by then I had already prepared myself for Trade Me to reject the proposal. Something told me they would want to implement the same functionality themselves without my participation.
 
-The obvious one was inside the application. YEETer sent the photograph to an OpenAI vision model and requested structured data containing a proposed title, object type, category candidates, condition, material, visible text, a search phrase, and a confidence score. If the smaller model returned less than 72% confidence or said that the seller needed to choose, the backend tried a larger model. A low-confidence result was supposed to ask the seller for help instead of inventing details.
-
-The more entertaining use was during development. I took screenshots from the real Android application and gave them to ChatGPT. It returned complete annotated design boards showing what was wrong with the interface and how to restructure it.
-
-![ChatGPT reviewing the complete YEETer listing flow](/static/images/yeeter/openai-ui-review-1.webp)
-
-![ChatGPT proposing reversible photo capture](/static/images/yeeter/openai-ui-review-2.webp)
-
-![ChatGPT restructuring the review screen and fixing the footer overlap](/static/images/yeeter/openai-ui-review-3.webp)
-
-![ChatGPT proposing navigation that allowed the seller to redo any stage](/static/images/yeeter/openai-ui-review-4.webp)
-
-These boards are more useful here than screenshots of source code. A code screenshot would only prove that the application contained an OpenAI API call. Each board shows the real phone interface, the problem ChatGPT found, and its proposed solution in one image. They document the development loop itself: screenshot the current build, ask the model to inspect it visually, receive a redesigned version with annotations, implement it, and test the next build on the phone.
-
-They are also artifacts produced by the same AI-assisted process the project is about. OpenAI was not only generating data inside YEETer. It was looking at YEETer from the outside and helping redesign the application around that data.
-
-This was the first time image generation felt like a practical software-development tool to me. Instead of receiving another page of design advice, I received an image of my own application covered in proposed corrections. I could compare it with the phone in my hand, change the app, take another screenshot, and continue.
-
-## Completely vibecoded
-
-The application was completely vibecoded. I told Codex CLI to use `scrcpy` to operate the Android phone from my laptop and keep iterating on the real application.
-
-Codex navigated the screens, captured screenshots, inspected the Android UI, changed the code, installed another build, and repeated the flow. Its vision caught many stupid visual and navigation bugs directly from the phone. I did not need to notice each bug, describe it in words, or explain where on the screen it appeared.
-
-The repository contains a large collection of screenshots from these passes: camera states, loading screens, review layouts, keyboard problems, back-navigation behaviour, header spacing, footer overlap, the app icon, and the final standalone build. Most of this work happened over a few days.
-
-## How far the prototype got
-
-The repository began on 22 April 2026. By 24 April, the phone could capture a real image and send it to a Cloudflare backend. OpenAI produced the draft, and the app grounded the proposed category against Trade Me sandbox data.
-
-The integration covered Trade Me OAuth, account verification, category search and details, photo upload, listing validation, and fee calculation. OpenAI and Trade Me secrets stayed on the backend rather than inside the Android application.
-
-The app was also built and installed as a standalone Android APK. It did not require Expo Go, a development server, or a laptop to launch.
-
-One sandbox problem had nothing to do with AI. The test seller account had Ping enabled, while some General Items categories reported Cash as their allowed payment method. Trade Me rejected the validation even when YEETer explicitly sent Cash. The repository records this as a sandbox account or category conflict.
-
-The final guarded version deliberately kept automatic listing creation disabled. It could upload the photo, validate the proposed listing, calculate fees, and show everything for review, but the final create action stayed behind the unfinished **YEET!** button.
-
-I applied for production API access on 24 April 2026. The Trade Me developer portal later showed that the production API application was marked as declined, without an explanation.
-
-On 30 April I asked Trade Me what had caused the decision and whether a restricted version would be acceptable. I offered to limit it to invited New Zealand sellers and General Items, and explained the safeguards: no automatic posting, no scraping, no market-data aggregation, no price comparison, no retained expired listings, and no Trade Me branding.
-
-The reply only said that the address I had contacted handled the Property API and redirected Marketplace questions to another address. I found no later answer or reason for the decline.
-
-The app worked, but it could not become a real product without production API approval, so the project ended there.
+Maybe Trade Me will build it themselves one day. At the time of writing, though, they still have nothing like YEETer for ordinary items. As far as I know, their similar system only works for cars. Everything else is still listed the old way.
