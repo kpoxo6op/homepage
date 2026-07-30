@@ -65,8 +65,9 @@ assert.match(
 assert.match(articleSource, /Maybe Trade Me will build it themselves one day/)
 assert.match(articleSource, /their similar system only works for cars/)
 assert.match(articleSource, /Everything else is still listed the old way/)
+assert.match(articleSource, /Clash Royale addict/)
 assert.doesNotMatch(articleSource, /And that is what happened\. Or perhaps what will happen later/)
-assert.doesNotMatch(articleSource, /Clash Royale addict|96% confidence|prices were placeholders/)
+assert.doesNotMatch(articleSource, /96% confidence|prices were placeholders/)
 assert.doesNotMatch(articleSource, /reversible photo capture|overlapping footer|redo any stage/)
 
 const videoNames = [
@@ -74,6 +75,7 @@ const videoNames = [
   'screen-20260426-105957-1777157964139.mp4',
   'screen-20260426-112008-1777159181978.mp4',
   'screen-20260426-131448-1777166062285.mp4',
+  'trademe-headset-obs-trimmed.mp4',
 ]
 
 for (const videoName of videoNames) {

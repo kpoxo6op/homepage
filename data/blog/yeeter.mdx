@@ -2,7 +2,7 @@
 title: 'My Least Failed Product'
 date: '2026-07-29'
 lastmod: '2026-07-29'
-tags: ['projects', 'ai', 'trade-me']
+tags: ['projects', 'ai']
 draft: true
 layout: PostBanner
 images: ['/static/images/yeeter-icon.png']
@@ -14,10 +14,11 @@ summary: 'My least failed attempt at making a useful hobby app.'
 - [Making YEETer](#making-yeeter)
 - [Taking YEETer outside](#taking-yeeter-outside)
 - [The end](#the-end)
+- [Three months later](#three-months-later)
 
 At work we have a chat for people who are enthusiastic about artificial intelligence. My colleagues sometimes share phone apps and other products they have vibe-coded in their spare time.
 
-Some of the ideas are quite good. One colleague built a Shopify integration. Another made an app that asks people how happy they are, then marks the happiest cities on a map. Someone else made an iPhone app that copies text straight from the camera, and also made pets for the Apple Watch.
+Some of the ideas are quite good. One colleague built a Shopify integration that created some sort of declarations or tax documents. I do not remember exactly. Another made an app that asks people how happy they are, then marks the happiest cities on a map. Someone else made an iPhone app that copies text straight from the camera, and also made pets for the Apple Watch.
 
 Seeing people around me build things like this brought me back to a thought of my own: I want to make a useful hobby app that at least one person will pay \$1 a month for.
 
@@ -34,6 +35,10 @@ I decided to make an app that would help people sell ordinary household items on
 I was pretty excited about OpenAI's new [GPT Image 2](https://developers.openai.com/cookbook/examples/multimodal/image-gen-models-prompting-guide#model-summary), released on 21 April 2026, and wanted to give it a real task instead of another demo.
 
 The user would photograph an object and receive a draft listing: everything from the title to a suggested price. I wanted to automate as much as possible.
+
+Before I started building, I asked both ChatGPT Pro and ChatGPT Deep Research whether the product could be viable, what analogues existed around the world, and whether somebody had already made the same thing in New Zealand.
+
+It found apps doing versions of this for eBay, Etsy, Amazon, and other marketplaces, in all sorts of flavours. But it found nothing like it for Trade Me. That gave me enough confidence to start building.
 
 First I created several Trade Me listings entirely by hand to count how many actions the process required. The Trade Me app already handled some of them, but AI image processing and each person's saved preferences could automate plenty of the remaining actions.
 
@@ -120,7 +125,7 @@ _My favourite: putting an old towel that had already been run over a few times u
   src="/static/videos/yeeter/screen-20260426-112008-1777159181978.mp4"
 />
 
-_Outdoor test recording 4 of 4._
+_Outdoor test recording 4 of 4. (If you got this far through my recordings, you probably noticed that I am a Clash Royale addict too.)_
 
 <video
   controls
@@ -139,3 +144,27 @@ A couple of weeks later, the application was declined without any explanation.
 I cried over the verdict for about half an hour, because by then I had already prepared myself for Trade Me to reject the proposal. Something told me they would want to implement the same functionality themselves without my participation.
 
 Maybe Trade Me will build it themselves one day. At the time of writing, though, they still have nothing like YEETer for ordinary items. As far as I know, their similar system only works for cars. Everything else is still listed the old way.
+
+## Three months later
+
+I asked Codex to use my computer to list an item on Trade Me and record the screen while it worked. It got almost everything right on the first attempt, but recorded the wrong screen and did not notice.
+
+It is also hilarious how much damage Codex caused along the way. It overwrote one of the photos in my camera upload folder, then apologised for it (something something AI safety, guardrails, sandboxing, and using AI with care and professionalism).
+
+It also put my home address into the Trade Me listing (something something we must take responsibility for how we use AI or pay the price).
+
+I asked it to edit any private photos and my address out of the recording. It “worked on it” for about ten minutes, then showed me the resulting video: a recording of another screen where nothing at all was happening.
+
+Since the first recording was useless, I asked Codex to do the task again for the video below. This second pass was staged: it recorded the correct screen, started listing the same item again, and stopped at the final step without submitting it because this was only a demo.
+
+<video
+  controls
+  playsInline
+  preload="metadata"
+  className="mx-auto max-h-[760px] w-full"
+  src="/static/videos/yeeter/trademe-headset-obs-trimmed.mp4"
+/>
+
+This is also a glimpse of what I want to write about next: my experience with AI and what I think about it in general.
+
+But that is a story for another post. See you.
