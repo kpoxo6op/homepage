@@ -34,7 +34,7 @@ assert.match(graveyardHtml, /href="#taking-yeeter-outside"/)
 assert.match(graveyardHtml, /href="#the-end"/)
 
 const articleSource = await readFile('data/blog/yeeter.mdx', 'utf8')
-assert.match(articleSource, /^draft: true$/m)
+assert.match(articleSource, /^draft: false$/m)
 assert.match(articleSource, /^## Table of Contents$/m)
 assert.ok(articleSource.indexOf('## Table of Contents') < articleSource.indexOf('At work we have'))
 assert.doesNotMatch(articleSource, /FUTURE VIDEO|Frame from the future/)
@@ -103,4 +103,4 @@ for (const imageName of imageNames) {
   assert.match(response.headers.get('content-type') ?? '', /image\/webp/)
 }
 
-console.log('The translated YEETer draft renders with every video and design image.')
+console.log('The published YEETer post renders with every video and design image.')
