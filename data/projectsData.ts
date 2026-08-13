@@ -7,6 +7,12 @@ interface Project {
 
 const projectsData: Project[] = [
   {
+    title: 'Autistic Traits',
+    description: `A detailed questionnaire for noticing autistic traits across daily life`,
+    imgSrc: '/static/images/autism-traits.svg',
+    href: '/projects/autistic-traits',
+  },
+  {
     title: 'YEETer',
     description: `Dead project — a working photo-first AI listing tool that did not receive Trade Me production API approval`,
     imgSrc: '/static/images/yeeter-icon.png',
