@@ -1,0 +1,30 @@
+<svg width="1200" height="675" viewBox="0 0 1200 675" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="675" fill="#17372D"/>
+  <circle cx="670" cy="338" r="250" fill="#DCEBE3"/>
+  <circle cx="670" cy="338" r="197" stroke="#17372D" stroke-width="2" stroke-dasharray="3 11" opacity="0.45"/>
+  <path d="M392 287C465 164 574 124 694 155C813 185 902 285 927 398C947 487 918 557 841 588" stroke="#E4A77F" stroke-width="44" stroke-linecap="round"/>
+  <path d="M376 359C437 246 526 204 638 221C755 239 848 324 874 426C895 505 867 564 810 603" stroke="#F4D9B9" stroke-width="31" stroke-linecap="round"/>
+  <path d="M401 431C455 335 530 291 622 304C711 316 780 376 802 450C824 521 803 574 760 611" stroke="#9CCDB8" stroke-width="24" stroke-linecap="round"/>
+  <path d="M455 486C497 412 551 382 613 390C675 398 722 439 739 492C755 542 742 580 715 610" stroke="#17372D" stroke-width="17" stroke-linecap="round"/>
+  <circle cx="391" cy="288" r="16" fill="#F8F3EA"/>
+  <circle cx="376" cy="359" r="12" fill="#F8F3EA"/>
+  <circle cx="401" cy="431" r="9" fill="#F8F3EA"/>
+  <circle cx="455" cy="486" r="7" fill="#F8F3EA"/>
+  <path d="M102 145H288" stroke="#DCEBE3" stroke-width="2" opacity="0.35"/>
+  <path d="M102 529H288" stroke="#DCEBE3" stroke-width="2" opacity="0.35"/>
+  <circle cx="120" cy="116" r="5" fill="#E4A77F"/>
+  <circle cx="152" cy="116" r="5" fill="#F4D9B9"/>
+  <circle cx="184" cy="116" r="5" fill="#9CCDB8"/>
+  <g fill="#DCEBE3">
+    <rect x="110" y="194" width="15" height="61" rx="7.5" opacity="0.48"/>
+    <rect x="143" y="175" width="15" height="99" rx="7.5" opacity="0.7"/>
+    <rect x="176" y="213" width="15" height="44" rx="7.5" opacity="0.55"/>
+    <rect x="209" y="158" width="15" height="126" rx="7.5" opacity="0.82"/>
+    <rect x="242" y="190" width="15" height="74" rx="7.5" opacity="0.62"/>
+    <rect x="110" y="403" width="15" height="78" rx="7.5" opacity="0.68"/>
+    <rect x="143" y="429" width="15" height="44" rx="7.5" opacity="0.5"/>
+    <rect x="176" y="378" width="15" height="112" rx="7.5" opacity="0.9"/>
+    <rect x="209" y="414" width="15" height="67" rx="7.5" opacity="0.58"/>
+    <rect x="242" y="389" width="15" height="94" rx="7.5" opacity="0.75"/>
+  </g>
+</svg>
