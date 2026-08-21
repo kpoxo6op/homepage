@@ -3,6 +3,9 @@
   "guide": 3,
   "terraform": 2,
   "gcp": 1,
+  "ai": 2,
+  "home-assistant": 1,
+  "voice": 1,
   "pagerduty": 1,
   "splunk": 1,
   "kubespray": 1,
@@ -11,6 +14,5 @@
   "kubernetes": 1,
   "ubuntu": 2,
   "projects": 1,
-  "ai": 1,
   "autoinstall": 1
 }
