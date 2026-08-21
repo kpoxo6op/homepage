@@ -23,13 +23,13 @@ images: ['/static/images/hey-gi/voice-preview-red-ring.jpg']
 
 I promised in my [last post](/blog/yeeter/) that I would write about my experience with artificial intelligence, because I think I am already a little obsessed with it. This will be the first of what will probably be many posts like this.
 
-First, a meta-detail. I am dictating this text in Russian into a microphone while sitting in a chair. Codex CLI, the Codex app on Linux, and Codex on my phone through Remote had spent several days working together in one chat on another task. They have just finished it, and now I am telling the story of what they were actually doing.
+First, a meta-detail. I am dictating this text in Russian into a microphone while sitting in a chair. <Definition id="definition-codex" text="Codex is OpenAI’s coding agent. Codex CLI runs it from a terminal.">Codex CLI</Definition>, the Codex app on Linux, and Codex on my phone through Remote had spent several days working together in one chat on another task. They have just finished it, and now I am telling the story of what they were actually doing.
 
 I am not trying very hard, and I am not filtering my speech. Sometimes I do not even pronounce words very clearly, but the ChatGPT app recognizes my Russian fine anyway. Then I will ask it to translate the text into English, and I will edit it by hand until it sounds like my English: no AI slop, no obvious model patterns, and normal human wording where it matters.
 
-Then I can send this draft back to the chat where Codex did the work. It can add details that it knows itself. After that we can talk about the text by voice again, add more details, and repeat this cycle as many times as needed.
+Then I send the draft back to the Codex chat where the work happened. Codex can fill in technical details from the session that I do not remember. I can then discuss the revised text with ChatGPT by voice, add more details, and repeat the process as many times as needed. At the end, I use the keyboard for the final human touches and deslopification.
 
-I also asked <Definition id="definition-gpt-5-6-luna" text="GPT-5.6-Luna is a cheap model for simple tasks.">GPT-5.6-Luna</Definition> to put the post on my personal website and run the site locally on my laptop. This let me edit the article while seeing exactly how it would look on the real site. Luna searched my pCloud drive for suitable photos and videos and added them to the post. It also cut the inactive parts from the training video and made subtitles for it.
+I also asked <Definition id="definition-gpt-5-6-luna" text="GPT-5.6-Luna is a cheap model for simple tasks.">GPT-5.6-Luna</Definition> to put the post on my personal website and run the site locally on my laptop. This let me edit the article while seeing exactly how it would look on the real site. Luna searched my <Definition id="definition-pcloud-drive" text="pCloud is a cloud storage service. pCloud Drive makes its files available on a computer as a virtual drive.">pCloud drive</Definition> for suitable photos and videos and added them to the post. It also cut the inactive parts from the training video and made subtitles for it.
 
 And I am still amazed by the simple fact that it is August 2026 and all of this is so easy and cheap. Work that would once have taken a huge amount of time can now take one evening. You can just talk into a microphone without carefully choosing every word, and the technology recognizes the speech, puts it in order, and helps turn it into an edited blog post. This turns a tedious writing and editing task into entertainment, and I learn something from it at the same time. Every day, AI does something I did not expect, or something weird and interesting happens while I use it.
 
@@ -43,7 +43,7 @@ But now to the actual story.
 
 ## Setting up the Voice Preview Edition
 
-I bought a [Home Assistant Voice Preview Edition](https://www.home-assistant.io/voice-pe/). It is a small voice device for Home Assistant. What immediately annoyed me was its selection of wake words.
+I bought a [Home Assistant Voice Preview Edition](https://www.home-assistant.io/voice-pe/). It is a small voice device for <Definition id="definition-home-assistant" text="Home Assistant is open-source software for controlling smart-home devices locally.">Home Assistant</Definition>. What immediately annoyed me was its selection of wake words.
 
 The first one was “Hey Nabu.” Nabu sounds like something from _Avatar_, as if you are sitting there talking to a large blue alien.
 
@@ -126,13 +126,13 @@ I asked Codex to explain wtf it had actually done between versions one and five.
 
 The simpler version was this: versions one to four needed Google Colab because Codex was creating and processing a large amount of synthetic speech, which was faster with a GPU. By version five, that heavy preparation was finished. Codex could train a much smaller model on node-2 in my home Kubernetes cluster, using my recordings without sending them outside my home network. It could not do this from the beginning because it first had to prepare the reusable training data and scripts in Google Colab.
 
-After I tested version five, Codex made version six and gave me that to try too. We repeated the process once more and reached version seven. I can see V7 on the other screen next to me. We have just tested it.
+After I tried version five, Codex made version six. I tested that one too, and after one more round we reached version seven. As I dictate this, I can see V7 on the other screen next to me. We have just finished testing it.
 
 ## Testing version seven
 
 I put the Voice Preview Edition next to me. When I was ready to speak, I wrote to Codex in the chat. It asked me to say “GI” from different places and different distances: facing the device, standing sideways, and turning my back to it. After every “GI,” we checked whether activation worked.
 
-This is the training video from today.
+This is the training video from the day I started dictating this post.
 
 <video
   controls
@@ -162,3 +162,5 @@ Right now I am holding the Home Assistant Voice Preview Edition in my hands, and
 It mostly works now, which means it is actually usable. Yesterday I was unironically turning off the lights with my voice.
 
 There are still occasional false activations. Nobody says “GI,” but the assistant wakes up anyway. Perhaps something got into the model that should not have been there. It is not a serious problem. Version eight or nine will probably fix it.
+
+Maybe I will put <Definition id="definition-gpt-6-astra" text="GPT-6-Astra is a hypothetical future OpenAI model. It does not exist yet.">GPT-6-Astra</Definition> to work on it and see whether it finds some groundbreaking improvement. Coming soon, perhaps. Who knows?
