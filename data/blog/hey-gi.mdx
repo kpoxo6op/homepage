@@ -28,9 +28,9 @@ I am not trying very hard, and I am not filtering my speech. Sometimes I do not 
 
 Then I can send this draft back to the chat where Codex did the work. It can add details that it knows itself. After that we can talk about the text by voice again, add more details, and repeat this cycle as many times as needed.
 
-I also asked GPT-5.6-Luna (a cheap model for simple tasks) to add this post to the source files for my personal website and run the site locally on my laptop. I could then edit and inspect the post in the real website layout. It also found and added suitable images from my pCloud drive.
+I also asked <Definition id="definition-gpt-5-6-luna" text="GPT-5.6-Luna is a cheap model for simple tasks.">GPT-5.6-Luna</Definition> to add this post to the source files for my personal website and run the site locally on my laptop. I could then edit and inspect the post in the real website layout. It also found and added suitable images from my pCloud drive.
 
-And I am still amazed by the simple fact that it is August 2026 and all of this is so easy and cheap. Work that would once have taken a huge amount of time can now take one evening. You can just talk into a microphone without carefully choosing every word, and the technology recognizes the speech, puts it in order, and helps turn it into an edited blog post. This turns a tedious writing and editing task into entertainment, and I learn something from it at the same time. Every day, AI does something I did not expect, or something weird and interesting happens while I use it. I am still amazed by how much the world has changed.
+And I am still amazed by the simple fact that it is August 2026 and all of this is so easy and cheap. Work that would once have taken a huge amount of time can now take one evening. You can just talk into a microphone without carefully choosing every word, and the technology recognizes the speech, puts it in order, and helps turn it into an edited blog post. This turns a tedious writing and editing task into entertainment, and I learn something from it at the same time. Every day, AI does something I did not expect, or something weird and interesting happens while I use it.
 
 Another meta detail. I can now look back to 2024, when I first got my hands on ChatGPT 3.5. None of this was possible to do at home then.
 
@@ -87,53 +87,47 @@ The first chapter of this story began when, mostly for the joke of it, I turned 
 
 I started the first session and really did go for a walk.
 
-While I was out, I occasionally checked what was happening, mostly to make sure Codex was not disappearing into completely unknown territory. But the chat quickly filled with <Definition text="Google Colab is a hosted service for running code in a web browser. Here, it provided access to a GPU for training the model.">Google Colab</Definition> and Python code that I still have not read, so I was not really in a position to “control” it.
+While I was out, I occasionally checked what was happening, mostly to make sure Codex was not disappearing into completely unknown territory. But the chat quickly filled with <Definition id="definition-google-colab" text="Google Colab is a hosted service for running code in a web browser. Here, it provided access to a GPU for training the model.">Google Colab</Definition> and Python code that I still have not read, so I was not really in a position to “control” it.
 
-Yes, I am now living through the period when I understand less and less of what the fuck AI is doing. I have spent most of my life working with computers, including 20 years in IT. I feel no anxiety about this at all. I am enjoying the ride.
+Yes, I am now living through the period when I understand less and less of wtf AI is doing. I have spent most of my life working with computers, including 20 years in IT. I feel no anxiety about this at all. I am enjoying the ride.
 
-Most of the computationally intensive work happened in Google Colab. The public openWakeWord training notebook was out of date and no longer worked as published, so Codex had to repair it. It found compatible versions of the software, updated broken code, and replaced datasets that were no longer available. Then it generated the speech samples, trained the wake-word model, and converted it into a format that the device could run locally.
+Most of the computationally intensive work happened in Google Colab. The public <Definition id="definition-openwakeword" text="openWakeWord is open-source software for detecting wake words locally. Its training notebook contains the code and steps used to create a custom wake-word model.">openWakeWord training notebook</Definition> was out of date and no longer worked as published, so Codex had to repair it. It found compatible versions of the software, updated broken code, and replaced datasets that were no longer available. Then it generated the speech samples, trained the wake-word model, and converted it into a format that the device could run locally.
 
 At some point I recorded several Telegram voice messages saying “GI, GI, GI, GI” in different intonations. I told Codex: here are examples of how I say it. Train the device to listen for GI the way I say it.
 
-And I probably went for another walk, just to stay out of the way.
+The session continued through the day in chunks of a few hours. Codex would work until it needed something from me, ask a question, and then continue after I answered.
 
-The first four models were not yet personalized to my voice. They were trained mostly on synthetic speech, with background noise and room echoes added to make the tests more realistic. My recordings stayed private and were used mainly for testing. Version five was the first model trained on ten recordings of my voice.
-
-I asked Codex to explain what the fuck it had actually done between versions one and five. It gave me an explanation full of feature datasets, classifiers, GPUs, and Kubernetes nodes. This still sounded like gibberish to me, so I asked it to mansplain the whole thing again for us mortals.
-
-The simpler version was this: versions one to four needed Google Colab because Codex was creating and processing a large amount of synthetic speech, which was faster with a GPU. By version five, that heavy preparation was finished. Codex could train a much smaller model on node-2 in my home Kubernetes cluster, using my recordings without sending them outside my home network. It could not do this from the beginning because it first had to prepare the reusable training data and scripts in Google Colab.
+By the evening, it was still working. Eventually the session had to continue overnight.
 
 ## Testing overnight
 
-During that first night, I also wrote from my phone that Codex could use speech synthesis through my laptop speakers to say “GI” and test real microphone input on the device. The Voice Preview Edition was sitting directly on top of the laptop.
+Earlier that evening, I had told Codex that the Voice Preview Edition was sitting directly on top of my laptop.
 
 At about ten in the evening, I gave it the task and went to bed.
 
-At 3:30 in the morning, I was woken up by the voice of some robot woman. She was saying, “GI, turn on the light. GI, turn off the light.” First quietly, then louder and louder. At the end, the laptop was basically shouting these commands.
-
-I cannot now verify the exact words, the exact time, or whether the volume really increased step by step. But this is how I remember being woken up.
+At 3:30 in the morning, I was woken up by the voice of some robot woman. I had completely forgotten that I had allowed Codex to speak through my laptop using synthetic speech and test the device’s real microphone input, so this took me entirely by surprise. She was saying, “GI, turn on the light. GI, turn off the light.” First quietly, then louder and louder. At the end, the laptop was basically shouting these commands.
 
 The first model was not handling the synthetic voice very well. It was not my voice, after all. Codex apparently decided that turning up the laptop volume might help. And it did: the device heard “GI” and turned on the light.
 
-It also woke me up at 3:30 in the morning. After that I could not really sleep properly. I wrote to Codex and told it to pause for three hours, then went back to sleep.
+It also woke me up. After that I could not really sleep properly. I wrote to Codex and told it to pause for three hours, then went back to sleep.
 
-The strongest mode seemed to work all night. In the morning I saw that it had rejected the first version of the model. There was a real technical reason for that: version one had its input axes swapped during conversion, and the Kubernetes startup check rejected it before it became active.
+In the morning, we tested the wake-word model by having me say “GI” several times, but the results were poor. I told Codex to keep training.
 
-Then it made version two. That one fixed the conversion error and became the stable fallback.
-
-After that we tested it a little. I said “GI” several times, but it was still not very good. My memory was that it worked about one time in five, but the saved test result says something slightly different: the laptop-to-speaker test detected two of six attempts. Version three later detected none of six private voice samples and was rejected, even though its file conversion was numerically correct.
-
-I told Codex that this was bad and asked it to keep training.
-
-And then there was a problem. This super-ultra-whatever mode ate my whole usage limit. I had to stop and ask Codex to write handover notes for the next session, when my usage reset.
-
-That is what we did. Codex wrote the handover, and I decided that the next iteration would use a less powerful mode, with less exaggerated intelligence. I wanted to see whether it could continue the training based on the work that already existed.
+And then there was a problem. This super-ultra-whatever mode ate my whole usage limit. I had to stop and ask Codex to write handover notes for the next session, when my usage reset. I decided that the next iteration would use a less powerful mode, with less exaggerated intelligence. I wanted to see whether it could continue the training based on the work that already existed.
 
 ## Continuing after the usage reset
 
-A few days later, after the usage reset, I came back to the task. I am dictating this on August 20. I continued the session with Codex High. It is not some ultra-super mode. It is a fairly moderate level of effort, a little above the middle.
+A few days later, after the usage reset, I came back to the task. I dictated this on August 20, then made the final edits with a keyboard on August 21 and 22. I continued the session with Codex High. It is not some ultra-super mode. It is a fairly moderate level of effort, a little above the middle.
 
-And this less powerful mode, together with me, has now reached version seven of the model. I can see V7 on the other screen next to me. We have just tested it.
+And I probably went for another walk, just to stay out of the way.
+
+When I came back, Codex presented me with version five of the GI wake-word model to try. It was the first version trained on ten recordings of my voice.
+
+I asked Codex to explain wtf it had actually done between versions one and five. It gave me an explanation full of feature datasets, classifiers, GPUs, and Kubernetes nodes. This still sounded like gibberish to me, so I asked it to mansplain the whole thing again for us mortals.
+
+The simpler version was this: versions one to four needed Google Colab because Codex was creating and processing a large amount of synthetic speech, which was faster with a GPU. By version five, that heavy preparation was finished. Codex could train a much smaller model on node-2 in my home Kubernetes cluster, using my recordings without sending them outside my home network. It could not do this from the beginning because it first had to prepare the reusable training data and scripts in Google Colab.
+
+After I tested version five, Codex made version six and gave me that to try too. We repeated the process once more and reached version seven. I can see V7 on the other screen next to me. We have just tested it.
 
 ## Testing version seven
 
@@ -147,15 +141,25 @@ This is the training video from today.
   preload="metadata"
   poster="/static/images/hey-gi/voice-preview-red-ring.jpg"
   className="mx-auto max-h-[760px] w-auto"
-  src="/static/videos/hey-gi/training-2026-08-20.mp4"
-/>
+  src="/static/videos/hey-gi/training-2026-08-20-edited.mp4"
+>
+  <track
+    default
+    kind="captions"
+    src="/static/videos/hey-gi/training-2026-08-20-edited.vtt"
+    srcLang="en"
+    label="English"
+  />
+</video>
 
-In the final test, version seven got eight successful activations out of ten, not seven. It also passed twelve minutes of silence and two minutes of normal Russian speech without a false activation.
+In the final test, version seven activated eight times out of ten. It also passed twelve minutes of silence and two minutes of normal Russian speech without a false activation.
 
-The two misses happened at about three metres while I was turned sideways. With my back to the device, it worked at two metres. At the same three-metre distance, facing the device and saying “GI” calmly worked.
+Both misses happened from about three metres away while I was turned sideways. It worked from two metres with my back to the device, and from three metres when I faced it and calmly said “GI.”
 
 So we found a practical limit. From around three metres away, if I look at the device, I can say “GI” in a normal calm voice and it works. For version seven, this is more than enough for me. If I need to, I can train it more later.
 
 Right now I am holding the Home Assistant Voice Preview Edition in my hands, and I have turned off its microphone so it does not react to “GI” while I dictate this text.
 
-Because yes, it already works.
+It mostly works now, which means it is actually usable. Yesterday I was unironically turning off the lights with my voice.
+
+There are still occasional false activations. Nobody says “GI,” but the assistant wakes up anyway. Perhaps something got into the model that should not have been there. It is not a serious problem. Version eight or nine will probably fix it.
