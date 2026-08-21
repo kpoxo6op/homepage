@@ -1,21 +1,25 @@
 'use client'
 
-import { Popover, PopoverButton, PopoverPanel } from '@headlessui/react'
-import type { ReactNode } from 'react'
+import { useState, type ReactNode } from 'react'
 
 export default function Definition({ children, text }: { children: ReactNode; text: string }) {
+  const [open, setOpen] = useState(false)
+
   return (
-    <Popover as="span" className="relative inline">
-      <PopoverButton className="focus-visible:ring-primary-500 cursor-help border-b-[0.5px] border-dotted border-gray-500 bg-transparent p-0 font-[inherit] text-inherit focus:outline-none focus-visible:ring-2">
-        {children}
-      </PopoverButton>
-      <PopoverPanel
-        as="span"
-        anchor="top"
-        className="z-50 max-w-xs rounded border border-dotted border-gray-500 bg-white px-2 py-1.5 text-xs leading-normal text-gray-800 shadow-sm [--anchor-gap:6px] dark:bg-gray-900 dark:text-gray-100"
+    <span className="relative inline">
+      <button
+        type="button"
+        aria-expanded={open}
+        onClick={() => setOpen(!open)}
+        className="cursor-help border-b border-dotted border-gray-600 bg-transparent p-0 font-[inherit] text-inherit focus:outline-none focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-gray-500 dark:border-gray-300"
       >
-        {text}
-      </PopoverPanel>
-    </Popover>
+        {children}
+      </button>
+      {open && (
+        <span className="absolute right-0 bottom-[calc(100%+6px)] z-50 w-80 max-w-[calc(100vw-2rem)] rounded border border-dotted border-gray-500 bg-white px-2 py-1.5 text-xs leading-normal text-gray-800 shadow-sm sm:right-auto sm:left-1/2 sm:-translate-x-1/2 dark:bg-gray-900 dark:text-gray-100">
+          {text}
+        </span>
+      )}
+    </span>
   )
 }
