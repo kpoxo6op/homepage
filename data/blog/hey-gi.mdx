@@ -1,0 +1,165 @@
+---
+title: 'My Experience With Artificial Intelligence'
+date: '2026-08-20'
+lastmod: '2026-08-20'
+tags: ['ai', 'home-assistant', 'voice']
+draft: false
+layout: PostLayout
+summary: 'My experience training a custom wake word for Home Assistant.'
+---
+
+## Table of Contents
+
+- [Writing this post with AI](#writing-this-post-with-ai)
+- [Setting up the Voice Preview Edition](#setting-up-the-voice-preview-edition)
+- [Requesting the GI wake word](#requesting-the-gi-wake-word)
+- [Training the first models](#training-the-first-models)
+- [Testing overnight](#testing-overnight)
+- [Continuing after the usage reset](#continuing-after-the-usage-reset)
+- [Testing version seven](#testing-version-seven)
+
+## Writing this post with AI
+
+I promised in my [last post](/blog/yeeter/) that I would write about my experience with artificial intelligence, because I think I am already a little obsessed with it. This will be the first of what will probably be many posts like this.
+
+First, a meta-detail. I am dictating this text in Russian into a microphone while sitting in a chair. Codex CLI, the Codex app on Linux, and Codex on my phone through Remote had spent several days working together in one chat on another task. They have just finished it, and now I am telling the story of what they were actually doing.
+
+I am not trying very hard, and I am not filtering my speech. Sometimes I do not even pronounce words very clearly, but the ChatGPT app recognizes my Russian fine anyway. We will translate the text into English, and I will edit it by hand until it sounds like my English: no AI slop, no obvious model patterns, and normal human wording where it matters.
+
+Then I can send this draft back to the chat where Codex did the work. It can add details that it knows itself. After that we can talk about the text by voice again, add more details, and repeat this cycle as many times as needed.
+
+I also asked GPT-5.6-Luna (a cheap model for simple tasks) to add this post to the source files for my personal website and run the site locally on my laptop. I could then edit and inspect the post in the real website layout. It also found and added suitable images from my pCloud drive.
+
+And I am still amazed by the simple fact that it is August 2026 and all of this is so easy and cheap. Work that would once have taken a huge amount of time can now take one evening. You can just talk into a microphone without carefully choosing every word, and the technology recognizes the speech, puts it in order, and helps turn it into an edited blog post. This turns a tedious writing and editing task into entertainment, and I learn something from it at the same time. Every day, AI does something I did not expect, or something weird and interesting happens while I use it. I am still amazed by how much the world has changed.
+
+Another meta detail. I can now look back to 2024, when I first got my hands on ChatGPT 3.5. None of this was possible to do at home then.
+
+Just two years later, we have all of this wrapped up as a product. I did not have to become a crazy scientist to set all this up. It took only some time and dedication.
+
+I cannot imagine what will happen in 2028. Probably what we do now will not look impressive at all. No one will raise an eyebrow while reading this post in 2028, for sure. But I am sure that in 2024, this would have been mind-blowing.
+
+But now to the actual story.
+
+## Setting up the Voice Preview Edition
+
+I bought a [Home Assistant Voice Preview Edition](https://www.home-assistant.io/voice-pe/). It is a small voice device for Home Assistant. What immediately annoyed me was its selection of wake words.
+
+![Home Assistant Voice Preview Edition with its red microphone ring illuminated](/static/images/hey-gi/voice-preview-red-ring.jpg)
+
+The first one was “Hey Nabu.” Nabu sounds like something from _Avatar_, as if you are sitting there talking to a large blue alien.
+
+The second one was “Hey Jarvis.” Jarvis is, as far as I remember, from _Iron Man_. So that is some kind of 2000s science-fiction fantasy. Also extreme cringe. An incredibly cringe wake phrase.
+
+Yes, my type of autism is the pop-culture-averse type.
+
+When the device arrived, I collected it from the post office, brought it home, and plugged it in immediately. I threw away the instructions. Instead, I took photos of the device in daylight and of the QR code on the setup card, and told Codex to configure it how I wanted.
+
+<div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+  <img
+    src="/static/images/hey-gi/voice-preview-daylight.jpg"
+    alt="Home Assistant Voice Preview Edition in daylight"
+    className="m-0 w-full rounded-lg"
+  />
+  <img
+    src="/static/images/hey-gi/voice-preview-setup-qr.jpg"
+    alt="Home Assistant Voice Preview Edition setup card with its QR code"
+    className="m-0 w-full rounded-lg"
+  />
+</div>
+
+Codex thought for a bit, then connected it to all my devices that were already in Home Assistant. Everything worked normally.
+
+## Requesting the GI wake word
+
+When we got to voice activation, I immediately said that I wanted my own command, because I could not stand “Hey Nabu” and “Hey Jarvis.” I chose the word “GI.”
+
+But at first it did not go quite right. I asked it to call the voice assistant GI and wake up on “GI.” Maybe it was an unusual request, or maybe it required a lot of technical work. But Codex, surprisingly, ignored part of it. It told me that the device was now called GI and everything was configured correctly, but the wake phrase would still be “Hey Nabu.”
+
+This was a unique case where Codex considered the job finished while leaving a direct part of my request undone. It had made mistakes before, of course, but this was the first time it had simply not done something I explicitly asked for. I say this as a fan of Codex and OpenAI.
+
+I told it: what is this? I asked for activation only by GI. No Nabu and no Jarvis. Then it turned out that this needed a custom wake-word model. It was possible, but it was a separate engineering project. I guess this is why Codex chose not to pursue it. It focused on what it could deliver with a reasonable amount of effort: just naming it GI.
+
+Now, three days later, I think this explains what happened. Codex did not tell me that the task would be large. It configured everything else and did not go into a huge piece of work by itself.
+
+## Training the first models
+
+The first chapter of this story began when, mostly for the joke of it, I turned on the strongest intelligence mode in Codex. Something like ultra-pro-max-plus-advanced. I told it: do whatever you want, but there must be no more Nabu and Jarvis here. Only GI. And when I come back from my walk, everything should work perfectly.
+
+I started the first session and really did go for a walk.
+
+While I was out, I occasionally checked what was happening, mostly to make sure Codex was not disappearing into completely unknown territory. But the chat quickly filled with Google Colab and Python code that I still have not read, so I was not really in a position to “control” it.
+
+Yes, I am now living through the period when I understand less and less of what the fuck AI is doing. I have spent most of my life working with computers, including 20 years in IT. I feel no anxiety about this at all. I am enjoying the ride.
+
+Most of the computationally intensive work happened in <Definition text="Google Colab is a hosted service for running code in a web browser. Here, it provided access to a GPU for training the model.">Google Colab</Definition>. The public openWakeWord training notebook was out of date and no longer worked as published, so Codex had to repair it. It found compatible versions of the software, updated broken code, and replaced datasets that were no longer available. Then it generated the speech samples, trained the wake-word model, and converted it into a format that the device could run locally.
+
+At some point I recorded several Telegram voice messages saying “GI, GI, GI, GI” in different intonations. I told Codex: here are examples of how I say it. Train the device to listen for GI the way I say it.
+
+But the first models were not actually trained from those four samples. Versions one to four mostly used synthetic speech generated by Piper, mixed with public background sounds, room echoes, and negative examples. My recordings stayed private and were mainly used to check the models at first. The first clearly personalized model was version five, trained from ten recorded examples.
+
+CODEX CLI BEGIN
+
+I changed the training method during the project. Versions one to four needed Google Colab because I was generating and augmenting large synthetic speech datasets. That work benefited from a GPU.
+
+By version five, the expensive preparation was already complete. I could reuse the feature datasets and train only a small classifier personalized to Boris’s voice. Node-2 in his home Kubernetes cluster was powerful enough for that. It also kept his voice recordings inside his home network.
+
+I could not use node-2 this way from the beginning because the reusable feature base and personalized training script did not exist yet. I created them during the earlier Colab work.
+
+CODEX CLI END
+
+## Testing overnight
+
+During that first night, I also wrote from my phone that Codex could use speech synthesis through my laptop speakers to say “GI” and test real microphone input on the device. The Voice Preview Edition was sitting directly on top of the laptop.
+
+At about ten in the evening, I gave it the task and went to bed.
+
+At 3:30 in the morning, I was woken up by the voice of some robot woman. She was saying, “GI, turn on the light. GI, turn off the light.” First quietly, then louder and louder. At the end, the laptop was basically shouting these commands.
+
+I cannot now verify the exact words, the exact time, or whether the volume really increased step by step. But this is how I remember being woken up.
+
+The first model was not handling the synthetic voice very well. It was not my voice, after all. Codex apparently decided that turning up the laptop volume might help. And it did: the device heard “GI” and turned on the light.
+
+It also woke me up at 3:30 in the morning. After that I could not really sleep properly. I wrote to Codex and told it to pause for three hours, then went back to sleep.
+
+The strongest mode seemed to work all night. In the morning I saw that it had rejected the first version of the model. There was a real technical reason for that: version one had its input axes swapped during conversion, and the Kubernetes startup check rejected it before it became active.
+
+Then it made version two. That one fixed the conversion error and became the stable fallback.
+
+After that we tested it a little. I said “GI” several times, but it was still not very good. My memory was that it worked about one time in five, but the saved test result says something slightly different: the laptop-to-speaker test detected two of six attempts. Version three later detected none of six private voice samples and was rejected, even though its file conversion was numerically correct.
+
+I told Codex that this was bad and asked it to keep training.
+
+And then there was a problem. This super-ultra-whatever mode ate my whole usage limit. I had to stop and ask Codex to write handover notes for the next session, when my usage reset.
+
+That is what we did. Codex wrote the handover, and I decided that the next iteration would use a less powerful mode, with less exaggerated intelligence. I wanted to see whether it could continue the training based on the work that already existed.
+
+## Continuing after the usage reset
+
+A few days later, after the usage reset, I came back to the task. I am dictating this on August 20. I continued the session with Codex High. It is not some ultra-super mode. It is a fairly moderate level of effort, a little above the middle.
+
+And this less powerful mode, together with me, has now reached version seven of the model. I can see V7 on the other screen next to me. We have just tested it.
+
+## Testing version seven
+
+I put the Voice Preview Edition next to me. When I was ready to speak, I wrote to Codex in the chat. It asked me to say “GI” from different places and different distances: facing the device, standing sideways, and turning my back to it. After every “GI,” we checked whether activation worked.
+
+This is the training video from today.
+
+<video
+  controls
+  playsInline
+  preload="metadata"
+  poster="/static/images/hey-gi/voice-preview-red-ring.jpg"
+  className="mx-auto max-h-[760px] w-auto"
+  src="/static/videos/hey-gi/training-2026-08-20.mp4"
+/>
+
+In the final test, version seven got eight successful activations out of ten, not seven. It also passed twelve minutes of silence and two minutes of normal Russian speech without a false activation.
+
+The two misses happened at about three metres while I was turned sideways. With my back to the device, it worked at two metres. At the same three-metre distance, facing the device and saying “GI” calmly worked.
+
+So we found a practical limit. From around three metres away, if I look at the device, I can say “GI” in a normal calm voice and it works. For version seven, this is more than enough for me. If I need to, I can train it more later.
+
+Right now I am holding the Home Assistant Voice Preview Edition in my hands, and I have turned off its microphone so it does not react to “GI” while I dictate this text.
+
+Because yes, it already works.
