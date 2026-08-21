@@ -1,12 +1,24 @@
 'use client'
 
-import { useState, type ReactNode } from 'react'
+import { useEffect, useRef, useState, type ReactNode } from 'react'
 
 export default function Definition({ children, text }: { children: ReactNode; text: string }) {
   const [open, setOpen] = useState(false)
+  const containerRef = useRef<HTMLSpanElement>(null)
+
+  useEffect(() => {
+    if (!open) return
+
+    const close = (event: PointerEvent) => {
+      if (!containerRef.current?.contains(event.target as Node)) setOpen(false)
+    }
+
+    document.addEventListener('pointerdown', close)
+    return () => document.removeEventListener('pointerdown', close)
+  }, [open])
 
   return (
-    <span className="relative inline">
+    <span ref={containerRef} className="relative inline">
       <button
         type="button"
         aria-expanded={open}
