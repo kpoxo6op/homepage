@@ -102,9 +102,15 @@ The same documentation says Medium is a balanced default. High is suitable for r
 
 OpenAI's [Astra guidance](https://developers.openai.com/api/docs/guides/latest-model) also says Astra tends to produce detailed responses and can run broader tests than small tasks require.
 
-So my first reaction was not quite correct. I wanted OpenAI to fix its shit, but my logs did not show an unusual Astra token leak.
+At the same time, other people were reporting the same practical issue in OpenAI's Codex repository. One user said a fresh 100% Astra limit disappeared in [20 minutes](https://github.com/openai/codex/issues/43201). Another said a usage reset lasted [less than one hour](https://github.com/openai/codex/issues/43141). A third published a [same-day Astra-to-Sol comparison](https://github.com/openai/codex/issues/43222) after the allowance fell fast enough to force a switch.
 
-They showed a costly model doing too much ordinary executor work inside a very long session.
+These reports do not prove that everyone hit the same accounting bug. My own logs cannot prove a server-side bug either.
+
+But excessive Astra usage is clearly an issue. People got burned by it. The practical response I saw on X was the same one my comparison supported: Sol executes, Astra advises.
+
+My logs showed one cause I could control: a costly model was doing too much ordinary executor work inside a very long session. They did not rule out other bugs in billing, quota accounting, or the client.
+
+I still want OpenAI to fix its shit. I just cannot say which part it needs to fix.
 
 Also, the Astra-only session I measured was running at Medium. I cannot even blame all of it on Ultra.
 
