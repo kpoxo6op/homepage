@@ -1,130 +1,84 @@
 ---
-title: 'I Put GPT-6 Astra in Charge of My Home Cluster'
+title: 'Sol Executes, Astra Advises'
 date: '2026-09-08'
 lastmod: '2026-09-08'
 tags: ['ai', 'codex', 'soyspray']
 draft: false
-layout: PostSimple
-summary: 'How I burned through my usage, inspected the Codex logs, and made Sol do the manual work.'
+layout: PostBanner
+summary: 'Why I stopped using Astra for long execution runs and kept it as an advisor.'
 images: ['/static/images/astra-token-incident/phone-walk.jpg']
 ---
 
-In my [last post](/blog/hey-gi/), I joked that perhaps I would put GPT-6 Astra to work on the next version of my wake-word model.
+## Table of contents
 
-The definition tooltip still describes Astra as a hypothetical future OpenAI model. Three weeks later, it exists, I got access, and I managed to burn through my usage hard enough to investigate what happened.
+- [How I used the first two limits](#how-i-used-the-first-two-limits)
+- [The post on X that made sense](#the-post-on-x-that-made-sense)
+- [Trying Sol as the executor](#trying-sol-as-the-executor)
+- [What I found in the logs](#what-i-found-in-the-logs)
+- [The instructions I use now](#the-instructions-i-use-now)
 
-Good timing.
+In my [last post](/blog/hey-gi/), I wrote that perhaps I would put GPT-6 Astra to work on the next version of my wake-word model. Three weeks later I am using Astra, although not in the way I expected. Sol now executes and Astra advises.
 
-## Giving Astra the cluster
+I came to this arrangement after burning through two usage limits on my home cluster, reading what other people were reporting, and then asking Codex to inspect its own session logs.
 
-People who got early access to Astra were posting impressive results. OpenAI describes it as its most intelligent model yet, especially good at long tasks involving code, browsers, and other software.
+## How I used the first two limits
 
-I was impressed too. So I gave it something appropriately ambitious.
+The first Astra results shared by people with access were impressive. I wanted to see what it could do with a real project, so I gave it an ambitious cleanup job in Soyspray, my home Kubernetes cluster.
 
-I have a home Kubernetes cluster called Soyspray. I started building it several years ago while learning Kubernetes, Ansible, Argo CD, and most of the other technology around it.
+I started this cluster several years ago while I was learning Kubernetes, Ansible, Argo CD, and everything around them. It works, but I built it by adding whatever I needed next. There was not much refactoring. The repository now contains new parts, legacy parts, half-replaced parts, and debris that I always intended to remove later.
 
-The repository works, but it grew rather than being designed. It contains new systems, old systems, repaired systems, half-replaced systems, and various pieces of debris that I planned to clean up later.
+I gave Astra a long handover and asked it to continue that work. I also tried Extra High and Ultra reasoning. If I had the strongest model, I thought I might as well turn up the brain setting and give it room to work.
 
-Later had finally arrived.
+Then I went for a walk with a friend. Astra did real work while I was away: it inspected the cluster, changed code, ran tests, and checked the result. It also used my whole limit. I had a saved usage reset and the task was large, so I did not worry about it. I used the reset, started another iteration, and went out again.
 
-I pointed Astra at a long handover and told it to continue the cluster cleanup. At different times, I also tried Extra High and Ultra reasoning because the strongest model obviously needed the biggest possible brain setting.
+After the second limit was gone, I came back to the computer. The work was useful, but I had expected more from two full limits, and this time I wanted to know where they went.
 
-Then I went for a walk with a friend.
+## The post on X that made sense
 
-When I checked the computer later, Astra had done real work. It had inspected the cluster, changed code, run tests, checked the result, and written explanations about everything.
+As usual, I checked X. Most posts were deserved praise for Astra, but one person said he was moving back to GPT-5.6 Sol as his main executor. He was not a billionaire or a privileged reviewer and could not keep buying more access every day, so Astra would advise while Sol did the routine work.
 
-It had also eaten my usage limit.
+I did not save that post, so this is a paraphrase. I do remember why it caught my attention: the author had also been burned by Astra's usage and had arrived at a practical advisor-and-executor split.
 
-I did not think much about it. This was a large task, and I had a saved usage reset. I used the reset, started another iteration, and probably went for another walk.
+I have a guess about the spectacular early examples. Perhaps those people gave Astra tighter tasks, or perhaps some reviewers did not need to care about their personal limits. I cannot prove either explanation. What I could do was check my own sessions and try the suggested split on a comparable cluster task.
 
-Eventually that limit disappeared too.
+## Trying Sol as the executor
 
-The amount of work was useful, but it did not feel like two usage limits of magic. So I returned to the computer and tried to understand what I had actually bought with all those tokens.
+I opened a fresh Codex CLI session with GPT-5.6 Sol at Medium reasoning. The task was [Soyspray issue #309](https://github.com/kpoxo6op/soyspray/issues/309): move the existing Prometheus monitoring stack under native Argo CD ownership without losing metrics, storage, credentials, or access.
 
-## One useful post on X
+Sol handled the investigation, implementation, tests, Git history, and pull request. Astra was a read-only advisor for the architecture and safety decisions. This was still an ambitious job. The cluster did not have enough backup and restore evidence to make the live ownership change safely, so stopping in the correct place mattered as much as changing the files.
 
-I opened X and searched through the deserved praise for Astra.
+The session produced [draft PR #310](https://github.com/kpoxo6op/soyspray/pull/310) with ten organized commits. The local and GitHub checks passed. Nothing was deployed, and the pull request records the backup, restore, and storage evidence required before deployment. That was the result I wanted.
 
-Among it, one person said he was switching back to GPT-5.6 Sol as his main executor. He would use Astra only as an advisor because he was not a billionaire or a privileged reviewer who could run it constantly.
+## What I found in the logs
 
-I did not save the post, so this is my paraphrase. But the idea was clear:
-
-Sol does the work. Astra makes the difficult decisions.
-
-My guess is that some spectacular early Astra examples also used much tighter tasks than mine. Perhaps some reviewers did not need to care about their personal limits. I cannot prove either explanation.
-
-What I could do was test the workflow on my own cluster.
-
-## Sol executes, Astra advises
-
-I opened a fresh Codex CLI session with GPT-5.6 Sol at Medium reasoning.
-
-The task was [Soyspray issue #309](https://github.com/kpoxo6op/soyspray/issues/309). It involved moving the existing Prometheus monitoring stack under native Argo CD ownership without losing metrics, storage, credentials, or access.
-
-This was not only a file-moving exercise. The cluster did not have enough backup and restore evidence to make the live ownership change safely.
-
-Sol owned the investigation, implementation, tests, Git history, and pull request. I configured Astra as a read-only advisor for the difficult architecture and safety decisions.
-
-The result was [draft PR #310](https://github.com/kpoxo6op/soyspray/pull/310), with ten organized commits. All local checks and GitHub checks passed.
-
-The agent also stopped at the correct safety boundary. It did not deploy anything. The pull request clearly says which backup, restore, and storage checks must exist before deployment.
-
-That was almost exactly what I wanted.
-
-## What the logs showed
-
-I asked Astra itself to help analyze the earlier runs. I then compared the local Codex session logs with OpenAI's current credit rates.
-
-These numbers are credit-equivalent estimates. They are useful for comparing runs, but they are not an invoice from my account.
+First I asked Astra to analyze the earlier runs. Then I used Sol to trace the recent Astra sessions and the issue #309 session in which Astra acted as advisor. I compared the local Codex rollout logs with OpenAI's current credit rates. The figures below are credit-equivalent estimates, not an invoice from my account.
 
 | Run                                      |    Raw tokens | Credit equivalent |
 | ---------------------------------------- | ------------: | ----------------: |
 | Earlier Astra-only cluster session       | 18.50 million |             558.8 |
 | Issue #309 with Sol and an Astra advisor | 16.61 million |             295.2 |
 
-The mixed run used only 10.2% fewer raw tokens, but approximately 47.2% fewer credits.
+The mixed run used 10.2% fewer raw tokens and approximately 47.2% fewer credits. Astra handled 10.5% of its raw tokens but represented 31.5% of the estimated credits. That agrees with [OpenAI's current pricing](https://learn.chatgpt.com/docs/pricing): Astra costs 2.5 times as many credits as Sol for uncached input, cached input, and output tokens.
 
-Astra handled 10.5% of the mixed run's raw tokens. That small part still represented 31.5% of the estimated credits.
+The raw token totals look ridiculous until the cache is included. About 96.8% of the mixed run's input was cached. The agents did not write sixteen million tokens of new text. They carried a large project context through many model responses, and cached input was cheaper but still counted.
 
-This matches [OpenAI's current pricing](https://learn.chatgpt.com/docs/pricing). Astra costs 2.5 times as many credits as Sol for uncached input, cached input, and output tokens.
+Sol produced about one hundred model responses during the issue #309 run. The Astra advisor added six logical turns and twenty-two model responses. Some of those turns only confirmed that nothing else needed to change. I was paying a more expensive model to confirm its own advice after the decision was already made.
 
-There was another interesting number. Approximately 96.8% of the mixed run's input was cached.
+OpenAI's [subagent documentation](https://learn.chatgpt.com/docs/agent-configuration/subagents) says that each subagent does its own model and tool work, which adds tokens. It calls Medium a balanced default and recommends High for reviewers that must trace complex logic. [OpenAI's Astra guidance](https://developers.openai.com/api/docs/guides/latest-model) also says that Astra tends to answer in detail and can run broader tests than a small task needs.
 
-The agents were not writing sixteen million tokens of new prose. They were repeatedly carrying a large project context through many model responses. Caching made that much cheaper, but not free.
+Other users were reporting the same usage issue in OpenAI's Codex repository. One said a fresh Astra limit went from 100% to zero in [20 minutes](https://github.com/openai/codex/issues/43201). Another reported that a reset lasted [less than one hour](https://github.com/openai/codex/issues/43141). A third posted a [same-day Astra-to-Sol comparison](https://github.com/openai/codex/issues/43222) after the allowance fell fast enough to force a switch.
 
-The Sol executor produced about one hundred model responses. The Astra advisor thread added six logical turns and twenty-two model responses. Some advisor turns only confirmed that no further change was needed.
+These reports do not prove that everybody hit one accounting bug, and my logs cannot prove what happened on OpenAI's servers. They do show a real usage issue. People got burned by it and talked about the advisor-and-executor approach on X. In my own sessions, I found one part that I could fix: I had an expensive model doing ordinary executor work in a long context.
 
-Even the advisor had become an agent that advised about its own advice.
+The Astra-only session in this comparison was running at Medium, so Ultra was not the whole explanation. There could still be a billing, quota, or client bug. I want OpenAI to fix its shit, but I cannot honestly say which part is broken.
 
-OpenAI's [subagent documentation](https://learn.chatgpt.com/docs/agent-configuration/subagents) says this directly: every subagent performs its own model and tool work, so a subagent workflow uses more tokens.
+## The instructions I use now
 
-The same documentation says Medium is a balanced default. High is suitable for reviewers that must trace complex logic. Higher reasoning levels increase token use.
+Sol is my default executor at Medium reasoning. It investigates, changes files, runs tests, and delivers the work. Astra stays at High reasoning as a read-only advisor for decisions where a second opinion is worth the price.
 
-OpenAI's [Astra guidance](https://developers.openai.com/api/docs/guides/latest-model) also says Astra tends to produce detailed responses and can run broader tests than small tasks require.
+Before a consequential change, Sol sends Astra one compact packet with the objective, constraints, proposed solution, remaining questions, and relevant evidence. Before delivery, it sends the actual diff, test results, and important wording for one final review. If Astra approves, the review ends. Sol does not ask it to confirm the confirmation.
 
-At the same time, other people were reporting the same practical issue in OpenAI's Codex repository. One user said a fresh 100% Astra limit disappeared in [20 minutes](https://github.com/openai/codex/issues/43201). Another said a usage reset lasted [less than one hour](https://github.com/openai/codex/issues/43141). A third published a [same-day Astra-to-Sol comparison](https://github.com/openai/codex/issues/43222) after the allowance fell fast enough to force a switch.
-
-These reports do not prove that everyone hit the same accounting bug. My own logs cannot prove a server-side bug either.
-
-But excessive Astra usage is clearly an issue. People got burned by it. The practical response I saw on X was the same one my comparison supported: Sol executes, Astra advises.
-
-My logs showed one cause I could control: a costly model was doing too much ordinary executor work inside a very long session. They did not rule out other bugs in billing, quota accounting, or the client.
-
-I still want OpenAI to fix its shit. I just cannot say which part it needs to fix.
-
-Also, the Astra-only session I measured was running at Medium. I cannot even blame all of it on Ultra.
-
-## What I changed
-
-Sol is now my default executor at Medium reasoning.
-
-Astra remains available at High reasoning as a read-only advisor. Sol must give it one compact design packet before a consequential change and one combined review packet before delivery.
-
-Astra does not repeat investigation or tests unless the supplied evidence is missing or inconsistent. A clear approval ends the review. Sol does not ask Astra to confirm its own confirmation.
-
-The important part is not only selecting a cheaper model. The instructions must stop both agents from talking to each other forever.
-
-If you want Codex to analyze your own runs, you can give it this:
+This keeps Astra involved where its judgement helps me, without paying Astra rates for every search, command, test, and explanation. If you want Codex to inspect your own runs, this is the prompt I would use:
 
 ```text
 Compare my latest Astra-heavy Codex session with the closest similar Sol
@@ -139,20 +93,6 @@ the executor and Astra as a read-only advisor. Do not edit anything until I
 approve.
 ```
 
-Times are changing very fast.
+Times are changing very fast. I asked my home computer to analyze the sessions and went for a walk. While it worked at home, I continued the same conversation through Codex Remote on my phone and dictated this draft outside. Later I finished the edit in that conversation and asked GPT to publish it on this website.
 
-I asked my home computer to analyze the AI sessions it had run. Then I went for a walk and continued the same conversation from my phone through Codex Remote while the computer at home did the work.
-
-<img
-  src="/static/images/astra-token-incident/phone-walk.jpg"
-  alt="Boris's shadow on the ground while he holds a phone and continues a Codex task from a walk"
-  className="mx-auto max-h-[760px] w-auto rounded-lg"
-/>
-
-_Me holding my phone while GPT works on my home computer. The photo is mostly my shadow because it was already dark._
-
-I created this whole post in the same conversation. I dictated it, continued editing from my phone, and finally asked GPT to put the finished post on this website.
-
-I am not getting rid of Astra. It is excellent at the difficult decisions.
-
-I have only stopped asking the architect to carry every box.
+I am keeping Astra. I like its advice on difficult decisions. I just stopped asking it to do all the manual work.
