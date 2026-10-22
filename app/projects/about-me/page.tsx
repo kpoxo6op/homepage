@@ -5,6 +5,7 @@ import Link from '@/components/Link'
 import { genPageMetadata } from 'app/seo'
 import Stage, { ChapterLink, Theme } from './stage'
 import Loop from './loop'
+import VostokMap from './map'
 import s from './about.module.css'
 
 const display = Instrument_Serif({
@@ -297,6 +298,8 @@ export default function AboutMe() {
               winters, and tigers.
             </p>
           </div>
+
+          <VostokMap />
         </div>
 
         <figure className={s.unfold}>

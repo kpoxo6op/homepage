@@ -547,6 +547,156 @@
   color: var(--soft);
 }
 
+/* Origin: how far Vostok-2 is from everything */
+
+.map {
+  margin: clamp(48px, 7vw, 100px) 0 0;
+}
+
+.mapCanvas {
+  position: relative;
+  max-width: calc((100svh - 160px) * 1620 / 1220);
+  margin-inline: auto;
+  aspect-ratio: 1620 / 1220;
+}
+
+.mapCanvas svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.mapLand {
+  fill: none;
+  stroke: color-mix(in oklab, var(--ink) 22%, transparent);
+  stroke-width: 7;
+  stroke-linecap: round;
+}
+
+.mapRoute {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 3.5;
+  stroke-linecap: round;
+}
+
+@media (max-width: 700px) {
+  .mapLand {
+    stroke-width: 8;
+  }
+
+  .mapRoute {
+    stroke-width: 7;
+  }
+}
+
+.mapPoint {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+.mapPoint::before {
+  content: '';
+  position: absolute;
+  left: -4px;
+  top: -4px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ink);
+}
+
+.mapPoint[data-home]::before {
+  left: -6px;
+  top: -6px;
+  width: 12px;
+  height: 12px;
+  background: var(--accent);
+}
+
+.mapPoint[data-home]::after {
+  content: '';
+  position: absolute;
+  left: -6px;
+  top: -6px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid var(--accent);
+  animation: ping 2.4s var(--ease) infinite;
+}
+
+@keyframes ping {
+  from {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+.mapLabel {
+  position: absolute;
+  display: grid;
+  gap: 2px;
+  white-space: nowrap;
+}
+
+.mapLabel span {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--soft);
+}
+
+.mapLabel b {
+  font-family: var(--font-display), serif;
+  font-size: clamp(1.15rem, 2.3vw, 2.1rem);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--ink);
+}
+
+.mapPoint[data-home] .mapLabel span,
+.mapPoint[data-home] .mapLabel b {
+  color: var(--accent);
+}
+
+.aboveRight {
+  left: 12px;
+  bottom: 10px;
+}
+
+.belowLeft {
+  right: 12px;
+  top: 8px;
+  text-align: right;
+}
+
+.belowRight {
+  left: 10px;
+  top: 10px;
+}
+
+.left {
+  right: 14px;
+  top: -6px;
+  text-align: right;
+}
+
+@media (max-width: 700px) {
+  .mapLabel span {
+    font-size: 9px;
+  }
+}
+
 .unfold {
   position: relative;
   height: min(88svh, 62vw);
@@ -1336,6 +1486,27 @@
 .stage[data-ready] .reveal[data-shown] {
   opacity: 1;
   translate: none;
+}
+
+/* The map draws its routes, then names the places */
+
+.stage[data-ready] .mapRoute {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 2.2s var(--ease) calc(var(--i) * 0.3s + 0.4s);
+}
+
+.stage[data-ready] .map[data-shown] .mapRoute {
+  stroke-dashoffset: 0;
+}
+
+.stage[data-ready] .mapLabel {
+  opacity: 0;
+  transition: opacity 0.8s var(--ease) calc(var(--i) * 0.25s + 1.2s);
+}
+
+.stage[data-ready] .map[data-shown] .mapLabel {
+  opacity: 1;
 }
 
 @supports (animation-timeline: view()) {
