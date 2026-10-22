@@ -354,7 +354,7 @@ export default function AboutMe() {
               At 16 I moved to Vladivostok, a port city on the Pacific, and stayed until 25.
             </p>
             <p className={cx(s.body, s.reveal)}>
-              University, hills, the sea, construction sites everywhere, and one trip to China.
+              University, hills, the sea, a lot of rubble, and one trip to China.
             </p>
           </div>
 
@@ -613,8 +613,8 @@ export default function AboutMe() {
               more={{ href: '/blog/soyspray-series', label: 'The Soyspray series' }}
             >
               <p>
-                My home Kubernetes cluster. It started with three fanless $120 mini PCs from
-                AliExpress, because tutorials always stopped at hello world.
+                My home Kubernetes cluster, because every tutorial stopped at hello world. It
+                started on three fanless $120 mini PCs from AliExpress.
               </p>
             </Card>
             <Card
@@ -817,7 +817,7 @@ export default function AboutMe() {
                   In person first, then in writing. Writing doesn’t replace a conversation, and a
                   conversation doesn’t replace a written record, because text loses everything
                   non-verbal. I love talking with people, but at work I want precision and facts, so
-                  everything we say should be captured by AI.
+                  everything we say should be written down by AI.
                 </dd>
               </div>
               <div className={s.reveal}>
