@@ -117,11 +117,21 @@ interface PhotoProps {
   sizes?: string
   position?: string
   delay?: number
+  className?: string
 }
 
-function Photo({ name, alt, caption, ar = '4 / 3', sizes, position, delay = 0 }: PhotoProps) {
+function Photo({
+  name,
+  alt,
+  caption,
+  ar = '4 / 3',
+  sizes,
+  position,
+  delay = 0,
+  className,
+}: PhotoProps) {
   return (
-    <figure className={cx(s.photo, s.reveal)} style={vars({ '--d': `${delay}ms` })}>
+    <figure className={cx(s.photo, s.reveal, className)} style={vars({ '--d': `${delay}ms` })}>
       <div className={s.frame} style={vars({ '--ar': ar })}>
         <Image
           src={img(name)}
@@ -739,6 +749,53 @@ export default function AboutMe() {
               </p>
               <p>First win: a 65-inch Sony TV for $690.</p>
             </Card>
+          </div>
+
+          <div className={s.latest}>
+            <Kicker n="06">The latest</Kicker>
+            <h3 className={cx(s.display, s.outsideTitle, s.reveal)}>
+              The latest thing AI did <em>for me</em>.
+            </h3>
+            <p className={cx(s.lead, s.narrow, s.reveal)}>
+              Errands found a 65-inch Sony TV on Trade Me and bought it for $690. AI also put the TV
+              on my Home Assistant dashboard, with a remote.
+            </p>
+
+            <div className={s.story}>
+              <Photo
+                name="tv-in-car"
+                alt="A 65-inch TV lying flat in the back of a Prius"
+                caption="It fits in a Prius."
+                ar="3 / 4"
+                sizes="(min-width: 900px) 25vw, 50vw"
+              />
+              <Photo
+                name="prius-ditch"
+                alt="A light blue Prius with its front wheel down a storm drain at a street corner"
+                caption="The Prius, stuck in a ditch."
+                ar="3 / 4"
+                sizes="(min-width: 900px) 25vw, 50vw"
+                delay={120}
+              />
+              <Photo
+                name="ha-home"
+                alt="Home Assistant home screen with the lights, the living room TV and a kettle"
+                caption="The TV on my Home Assistant home screen."
+                ar="560 / 1128"
+                sizes="(min-width: 900px) 17vw, 50vw"
+                delay={240}
+                className={s.phone}
+              />
+              <Photo
+                name="ha-remote"
+                alt="Home Assistant TV remote with buttons for Jellyfin, SmartTube, AI TV and Twitch"
+                caption="Its remote, with my apps on it."
+                ar="560 / 1128"
+                sizes="(min-width: 900px) 17vw, 50vw"
+                delay={360}
+                className={s.phone}
+              />
+            </div>
           </div>
         </div>
       </section>
