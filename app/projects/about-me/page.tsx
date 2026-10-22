@@ -99,14 +99,6 @@ const interests = [
   'voice notes',
 ]
 
-const career = [
-  ['2degrees, applications engineer', '2012–2017'],
-  ['HealthLink, applications engineer', '2017–2019'],
-  ['Fraedom, now Visa, platform engineer', '2019–2021'],
-  ['Westpac, platform engineer', '2021–2026'],
-  ['ASB, SRE', '2026–'],
-]
-
 function Kicker({ n, children }: { n: string; children: ReactNode }) {
   return (
     <p className={cx(s.kicker, s.reveal)}>
@@ -339,6 +331,23 @@ export default function AboutMe() {
               Nothing has changed. <em>Tigers</em>, here and there.
             </p>
           </div>
+
+          <div className={s.pair}>
+            <Photo
+              name="amur-tiger"
+              alt="An Amur tiger lying in the snow, showing its teeth"
+              caption="An Amur tiger. Photo: Dave Pape, public domain."
+              ar="6 / 5"
+              sizes="(min-width: 800px) 50vw, 100vw"
+            />
+            <Photo
+              name="tiger-news"
+              alt="A tiger lying in the snow next to people’s boots"
+              caption="From the news."
+              sizes="(min-width: 800px) 50vw, 100vw"
+              delay={120}
+            />
+          </div>
         </div>
       </section>
 
@@ -354,7 +363,7 @@ export default function AboutMe() {
               At 16 I moved to Vladivostok, a port city on the Pacific, and stayed until 25.
             </p>
             <p className={cx(s.body, s.reveal)}>
-              University, hills, the sea, a lot of rubble, and one trip to China.
+              University, hills, the sea, a lot of rubble, and many trips to China.
             </p>
           </div>
 
@@ -387,7 +396,7 @@ export default function AboutMe() {
             <Print
               name="china"
               alt="Boris and a friend cooking hot pot at a table"
-              caption="The trip to China. Hot pot."
+              caption="One of many trips to China. Hot pot."
               turn="-1deg"
             />
           </div>
@@ -574,7 +583,6 @@ export default function AboutMe() {
             </div>
             <div className={cx(s.breathWrap, s.reveal)}>
               <div className={s.breath} aria-hidden="true" />
-              <p>I also meditate. Twenty minutes of watching thoughts come and go.</p>
             </div>
           </div>
         </div>
@@ -794,87 +802,60 @@ export default function AboutMe() {
             How to work with <em>me</em>.
           </h2>
 
-          <div className={s.readme}>
-            <div className={cx(s.readmeSide, s.reveal)}>
-              <p className={s.lead}>
-                14 years in New Zealand IT, from 24/7 support to platform engineering. Now an SRE on
-                ASB’s API platform.
-              </p>
-              <ol className={s.career}>
-                {career.map(([role, years]) => (
-                  <li key={role}>
-                    <span>{role}</span>
-                    <span>{years}</span>
-                  </li>
-                ))}
-              </ol>
+          <dl className={s.faq}>
+            <div className={s.reveal}>
+              <dt>Talk to me</dt>
+              <dd>
+                In person first, then in writing. Text loses the non-verbal part, and talk without
+                notes gets lost, so everything should be written down by AI.
+              </dd>
             </div>
-
-            <dl className={s.faq}>
-              <div className={s.reveal}>
-                <dt>Talk to me</dt>
-                <dd>
-                  In person first, then in writing. Writing doesn’t replace a conversation, and a
-                  conversation doesn’t replace a written record, because text loses everything
-                  non-verbal. I love talking with people, but at work I want precision and facts, so
-                  everything we say should be written down by AI.
-                </dd>
-              </div>
-              <div className={s.reveal}>
-                <dt>Convince me</dt>
-                <dd>
-                  With objective information, experiments and success metrics agreed in advance. I’m
-                  autistic, and authority means very little to me. A job title is not an argument.
-                  Show me <strong>fewer failures, faster delivery or less manual work</strong>, and
-                  I’ll happily take your idea over mine.
-                </dd>
-              </div>
-              <div className={s.reveal}>
-                <dt>Motivation</dt>
-                <dd>
-                  Modernisation and automation. Getting rid of boring, repetitive work. I want to
-                  use AI as much as possible to take the routine off engineers, so they can do the
-                  interesting work they actually enjoy.
-                </dd>
-              </div>
-              <div className={s.reveal}>
-                <dt>Annoys me</dt>
-                <dd>
-                  For the last five years or so, nothing at work. Except Teams on my phone: endless
-                  sign-in requests and warnings about USB debugging, which I need to build the AI
-                  assistant on my own phone. So I deleted it.
-                </dd>
-              </div>
-              <div className={s.reveal}>
-                <dt>Hours</dt>
-                <dd>
-                  Standard hours, as in the contract. Sometimes I nap for about 40 minutes at lunch.
-                  Quite often I open the laptop in the evening for an hour or two, so you may see me
-                  online at night. Teams is not on my phone.
-                </dd>
-              </div>
-              <div className={s.reveal}>
-                <dt>Stress</dt>
-                <dd>
-                  I’m 40, and I don’t take work or life seriously enough to get stressed about them.
-                </dd>
-              </div>
-              <div className={s.reveal}>
-                <dt>Feedback</dt>
-                <dd>
-                  Same as talking: in person, then a short written follow-up. Facts work best.
-                </dd>
-              </div>
-              <div className={s.reveal}>
-                <dt>Also useful</dt>
-                <dd>
-                  I was diagnosed autistic at 39. I built a{' '}
-                  <Link href="/projects/autistic-traits">questionnaire about autistic traits</Link>{' '}
-                  if you want to try it on yourself.
-                </dd>
-              </div>
-            </dl>
-          </div>
+            <div className={s.reveal}>
+              <dt>Convince me</dt>
+              <dd>
+                With data: experiments and success metrics agreed in advance. I’m autistic, so job
+                titles mean little to me. Show me{' '}
+                <strong>fewer failures, faster delivery or less manual work</strong> and I’ll take
+                your idea over mine.
+              </dd>
+            </div>
+            <div className={s.reveal}>
+              <dt>Motivation</dt>
+              <dd>
+                Automating away boring, repetitive work, and using AI so engineers spend their time
+                on work they enjoy.
+              </dd>
+            </div>
+            <div className={s.reveal}>
+              <dt>Annoys me</dt>
+              <dd>
+                Nothing at work for about five years. I did delete Teams from my phone: too many
+                sign-in prompts.
+              </dd>
+            </div>
+            <div className={s.reveal}>
+              <dt>Hours</dt>
+              <dd>
+                Standard hours. Sometimes a 40-minute nap at lunch, often an hour or two online in
+                the evening.
+              </dd>
+            </div>
+            <div className={s.reveal}>
+              <dt>Stress</dt>
+              <dd>I’m 40. I don’t take work or life seriously enough to get stressed.</dd>
+            </div>
+            <div className={s.reveal}>
+              <dt>Feedback</dt>
+              <dd>In person, then a short written follow-up. Facts work best.</dd>
+            </div>
+            <div className={s.reveal}>
+              <dt>Also useful</dt>
+              <dd>
+                Diagnosed autistic at 39. Try my{' '}
+                <Link href="/projects/autistic-traits">autistic traits questionnaire</Link>.
+              </dd>
+            </div>
+          </dl>
         </div>
       </section>
 

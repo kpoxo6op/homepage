@@ -1141,54 +1141,10 @@
 
 /* Work */
 
-.readme {
-  display: grid;
-  gap: clamp(40px, 6vw, 90px);
-  margin-top: clamp(40px, 6vw, 80px);
-}
-
-@media (min-width: 1000px) {
-  .readme {
-    grid-template-columns: 0.8fr 1.2fr;
-    align-items: start;
-  }
-
-  .readmeSide {
-    position: sticky;
-    top: 110px;
-  }
-}
-
-.career {
-  display: grid;
-  gap: 0;
-  margin-top: 28px;
-  border-top: 1px solid var(--line);
-}
-
-.career li {
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 12px 0;
-  list-style: none;
-  border-bottom: 1px solid var(--line);
-  font-size: 15px;
-}
-
-.career li span:last-child {
-  font-family: var(--font-mono), ui-monospace, monospace;
-  font-size: 12px;
-  color: var(--soft);
-  white-space: nowrap;
-}
-
-.career li:last-child {
-  color: var(--accent);
-}
-
 .faq {
   display: grid;
+  max-width: 1080px;
+  margin-top: clamp(40px, 6vw, 80px);
 }
 
 .faq > div {
