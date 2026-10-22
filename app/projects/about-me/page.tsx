@@ -757,8 +757,8 @@ export default function AboutMe() {
               The latest thing AI did <em>for me</em>.
             </h3>
             <p className={cx(s.lead, s.narrow, s.reveal)}>
-              Errands found a 65-inch Sony TV on Trade Me and bought it for $690. AI also put the TV
-              on my Home Assistant dashboard, with a remote.
+              Errands found a 65-inch Sony TV on Trade Me and bought it for $690. Then AI wrote the
+              TV’s home screen and put the TV on my Home Assistant dashboard, with a remote.
             </p>
 
             <div className={s.story}>
@@ -796,6 +796,15 @@ export default function AboutMe() {
                 className={s.phone}
               />
             </div>
+
+            <Photo
+              name="tv-home"
+              alt="The TV home screen: a live channel behind tiles for Watch live, Guide, Jellyfin, YouTube, Twitch and AI TV"
+              caption="The TV’s home screen, written by AI. ОТВ Прим, the TV channel from Primorye, plays live behind my apps."
+              ar="16 / 9"
+              sizes="100vw"
+              className={s.tvShot}
+            />
           </div>
         </div>
       </section>
