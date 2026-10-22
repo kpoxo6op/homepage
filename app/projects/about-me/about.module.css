@@ -1225,6 +1225,38 @@
   letter-spacing: 0.04em;
 }
 
+/* AI: the latest thing it did */
+
+.latest {
+  margin-top: clamp(90px, 13vw, 180px);
+}
+
+.story {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  align-items: start;
+  margin-top: clamp(36px, 5vw, 64px);
+}
+
+@media (min-width: 900px) {
+  .story {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  /* Phone screenshots shrink so they stand as tall as the photos next to them */
+  .phone {
+    width: 66%;
+    margin-inline: auto;
+  }
+}
+
+.phone .frame {
+  --radius: 22px;
+  border: 1px solid var(--line);
+}
+
 /* Marquee */
 
 .band {
