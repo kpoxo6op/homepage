@@ -10,7 +10,7 @@ images: ['/static/images/thennow-theo/before-after-phone-poster.jpg']
 ---
 
 {/* DRAFT v2. Short facts only; each "Boris to dictate" block is where the story goes.
-Every video is the same scripted session on an emulated Pixel 7: drag the homepage photo,
+Every video is the same fast scripted session on an emulated Pixel 7, with idle frames cut: drag the homepage photo,
 scroll, open Mill House, drag again, scroll. Detailed scores, commits and briefs live in
 the handoff.txt files under ~/Documents/Codex/2026-11-06 on the laptop. */}
 
@@ -49,10 +49,12 @@ Theo from t3.gg pinned a post saying agents can be good at UI “if you burn eno
 [thennow.nz](https://thennow.nz) pairs old photographs of New Zealand places with modern retakes, with a slider between them. It has been around since 2023.
 
 <video
-  controls
-  playsInline
+  autoPlay
+  loop
   muted
-  preload="metadata"
+  playsInline
+  controls
+  preload="auto"
   poster="/static/images/thennow-theo/phone-prod-poster.jpg"
   className="mx-auto max-h-[760px] w-auto"
   src="/static/videos/thennow-theo/phone-prod.mp4"
@@ -68,19 +70,23 @@ Earlier the same day, two Claude sessions redesigned the site: one plain, one wi
 
 <div className="grid grid-cols-2 gap-4">
   <video
-    controls
-    playsInline
+    autoPlay
+    loop
     muted
-    preload="metadata"
+    playsInline
+    controls
+    preload="auto"
     poster="/static/images/thennow-theo/phone-v2-poster.jpg"
     className="m-0 w-full rounded-lg"
     src="/static/videos/thennow-theo/phone-v2.mp4"
   />
   <video
-    controls
-    playsInline
+    autoPlay
+    loop
     muted
-    preload="metadata"
+    playsInline
+    controls
+    preload="auto"
     poster="/static/images/thennow-theo/phone-dennison-poster.jpg"
     className="m-0 w-full rounded-lg"
     src="/static/videos/thennow-theo/phone-dennison.mp4"
@@ -113,10 +119,12 @@ _Lightly cleaned up from the original message._
 Three rounds of build and judge, about an hour and a quarter. The homepage went dark and photo-first, under the line “The same corner, ninety-three years apart.”
 
 <video
-  controls
-  playsInline
+  autoPlay
+  loop
   muted
-  preload="metadata"
+  playsInline
+  controls
+  preload="auto"
   poster="/static/images/thennow-theo/phone-run1-poster.jpg"
   className="mx-auto max-h-[760px] w-auto"
   src="/static/videos/thennow-theo/phone-run1.mp4"
@@ -131,10 +139,12 @@ _After round one: new homepage, old story pages._
 Four rounds, about an hour and a half. The story pages now match the homepage, show both full photos, and read like a photo essay on a phone.
 
 <video
-  controls
-  playsInline
+  autoPlay
+  loop
   muted
-  preload="metadata"
+  playsInline
+  controls
+  preload="auto"
   poster="/static/images/thennow-theo/phone-theo-poster.jpg"
   className="mx-auto max-h-[760px] w-auto"
   src="/static/videos/thennow-theo/phone-theo.mp4"
@@ -155,11 +165,13 @@ On a Pixel, the new slider could get so close to the screen edge that Android’
 ## Before and after
 
 <video
-  controls
-  playsInline
-  muted
   loop
-  preload="metadata"
+  autoPlay
+  loop
+  muted
+  playsInline
+  controls
+  preload="auto"
   poster="/static/images/thennow-theo/before-after-phone-poster.jpg"
   className="mx-auto max-h-[760px] w-auto"
   src="/static/videos/thennow-theo/before-after-phone.mp4"
