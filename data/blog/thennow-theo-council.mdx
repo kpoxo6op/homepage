@@ -1,0 +1,271 @@
+---
+title: 'Burning Tokens on UI (working title)'
+date: '2026-11-06'
+lastmod: '2026-11-06'
+tags: ['ai', 'claude', 'codex', 'thennow']
+draft: true
+layout: PostBanner
+summary: 'TODO: one-line summary in Boris’s words.'
+images: ['/static/images/thennow-theo/home-theo-desktop.webp']
+---
+
+{/* DRAFT SKELETON. Facts below come from the Codex thread 01a1a966-3778-75a3-a5de-8c70b26a04f6,
+the T3 handoff files in ~/Documents/Codex/2026-11-06/then-now-theo-*, the thennow Git history and the
+Vercel previews. Every "Boris to dictate" block is a placeholder for the story. Times are NZDT. */}
+
+## Table of contents
+
+- [Theo’s post](#theos-post)
+  - [How much Theo spends](#how-much-theo-spends)
+- [What thennow.nz looked like before](#what-thennownz-looked-like-before)
+- [The gimmicks that did not help](#the-gimmicks-that-did-not-help)
+- [What I told GPT to do](#what-i-told-gpt-to-do)
+- [Run 1: the homepage](#run-1-the-homepage)
+- [Run 2: the story pages](#run-2-the-story-pages)
+- [The edge-drag fix](#the-edge-drag-fix)
+- [Before and after](#before-and-after)
+- [What the scores said](#what-the-scores-said)
+- [Chronology](#chronology)
+- [Sources](#sources)
+
+## Theo’s post
+
+Theo (t3.gg) pinned a post saying agents can be good at UI “if you burn enough tokens”, with a video explaining the method. The method is a screenshot review loop: one model builds, independent models score real screenshots, the builder fixes what they found, and the loop repeats.
+
+### How much Theo spends
+
+- In the video, Theo puts the UI experiment at about 17.6 hours of parallel agent time and “roughly 400 or so dollars” at list prices, with $152 for one of the runs.
+- He says it came out of his subscriptions rather than paid API usage, and that a $200 subscription “can do $12,000 of usage in a month”.
+- A screenshot of Theo’s cost dashboard shows about $75.6K in total: Standard $64,104.48, Fast $445.88, Ultrafast $11,074.59, with Premium $9,380.98 shown separately.
+- By model: claude-opus-5-5 $49,576.41 (65.6%, 147B tokens), muse-proxy-wonder-full $11,093.21 (14.7%, 14.1B), gpt-6-astra $8,880.22 (11.7%, 1.10B), gpt-6.1-sol $3,950.24 (5.2%, 6.15B), gemini-4-argon $821.33 (1.1%, 2.71B).
+- TODO: link to the post with this screenshot, and the period it covers. Neither is visible in the screenshot.
+
+<img
+  src="/static/images/thennow-theo/theo-token-spend.webp"
+  alt="Theo's cost dashboard broken down by speed and by model"
+  className="mx-auto w-full rounded-lg"
+/>
+
+_Theo’s cost dashboard. TODO: source link and period._
+
+> **Boris to dictate:** how you came across the post, and your first reaction.
+
+## What thennow.nz looked like before
+
+[thennow.nz](https://thennow.nz) pairs old photographs of New Zealand places with modern retakes, with a slider to compare them. The repository dates back to May 2023. The live site has six real stories, and the experiment branches add 300 sample entries for testing at scale.
+
+<div className="grid grid-cols-2 gap-6">
+  <img
+    src="/static/images/thennow-theo/home-prod-phone.webp"
+    alt="The live thennow.nz homepage on a phone"
+    className="m-0 w-full rounded-lg"
+  />
+  <img
+    src="/static/images/thennow-theo/post-prod-phone.webp"
+    alt="The live Mill House story on a phone"
+    className="m-0 w-full rounded-lg"
+  />
+</div>
+
+_The live site, thennow.nz, on a phone (Pixel 7 emulation)._
+
+> **Boris to dictate:** what you thought of the site before this.
+
+## The gimmicks that did not help
+
+Earlier the same day, two Claude sessions redesigned the site in parallel. One used plain Claude; the other used Dennison Bertram’s [developer skill pack](https://github.com/dennisonbertram/developer-skill-pack). After the first versions, both sessions were asked for a V2.
+
+<div className="grid grid-cols-2 gap-6">
+  <img
+    src="/static/images/thennow-theo/home-v2-phone.webp"
+    alt="Vanilla Claude V2 homepage on a phone"
+    className="m-0 w-full rounded-lg"
+  />
+  <img
+    src="/static/images/thennow-theo/home-dennison-phone.webp"
+    alt="Claude with Dennison skills V2 homepage on a phone"
+    className="m-0 w-full rounded-lg"
+  />
+</div>
+
+_Left: vanilla Claude V2. Right: Claude with the Dennison skill pack, V2._
+
+- Message to Codex about V1, about 15:30: “Both look like complete shit.”
+- The two V2s came out almost identical. Codex traced the cause: the sessions were separate, but its own shared brief had pushed both towards the same design, and it had cut down the skill pack’s workflow.
+
+> **Boris to dictate:** your take on skill packs and similar tricks, and why they made no difference.
+
+## What I told GPT to do
+
+Everything ran from one Codex (GPT) thread. Codex did not design anything itself. It set up [T3 Code](https://github.com/pingdotgg/t3code), wrote the briefs, started the runs, checked the results and sent the previews to Telegram through the Soyclaw bot.
+
+Instruction to Codex, 18:24:
+
+> Forget Dennison, probably it is not for me. Next experiment for you is to apply Theo’s approach. I have Claude and GPT subs. Claude has more usage so lean on it more. Watch what Theo explains and do a few rounds of his approach on a new home screen mock, make it target to become much better than what it is now. Use Theo’s T3 to set it up and run as he describes. Share results with me on Telegram in Soyclaw. Don’t delete old previews.
+
+_Lightly cleaned up from the original typed message._
+
+Setup used in all runs:
+
+- **Builder:** Claude Opus 5.5 in T3 Code.
+- **Reviewers:** a fresh Claude Opus 5.5 and a fresh GPT-6.1 Sol for every round, both on high effort, started with T3’s `delegate_task`.
+- **Skill:** Theo’s original [council skill](https://github.com/t3dotgg/tstack/blob/1085050f3baed1ac724caa4a8166145fb2ac88af/skills/council/SKILL.md) from `t3dotgg/tstack`.
+- **Subscriptions only:** Claude and ChatGPT plans, the two-provider setup Theo mentions in the video (22:20–22:56). No API keys or paid credits.
+- **Blind scoring:** reviewers never saw earlier scores, the round number, the target or each other’s opinions.
+- **Fixed references:** every round compared the candidate with the same frozen screenshots of the two old V2 previews.
+- **Guard rails:** all 306 entries had to stay byte-identical, old previews stayed up, and lint, typecheck, build and the browser test suite had to pass.
+
+> **Boris to dictate:** why you let it run on its own, and how you were following along.
+
+## Run 1: the homepage
+
+- Branch `experiment/theo-home-20261106`, started from vanilla V2 (`6a419ed`).
+- Three full council rounds plus one focused final review, from 18:43 to 19:27.
+- Result: a dark, photo-first homepage. The headline “The same corner, ninety-three years apart.” comes from the photo’s own dates.
+- 74 browser tests passed. Preview: [thennow-qua4yr3l0](https://thennow-qua4yr3l0-kpoxo6ops-projects.vercel.app).
+- Reaction in the Codex thread, 19:48: “Holy shit brother even the first preview looks Fiiiiire.”
+
+<div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+  <img
+    src="/static/images/thennow-theo/home-v2-desktop.webp"
+    alt="Vanilla Claude V2 homepage on desktop"
+    className="m-0 w-full rounded-lg"
+  />
+  <img
+    src="/static/images/thennow-theo/home-theo-desktop.webp"
+    alt="Homepage after the T3 council run on desktop"
+    className="m-0 w-full rounded-lg"
+  />
+</div>
+
+_Homepage on desktop. Left: before (vanilla V2). Right: after run 1._
+
+> **Boris to dictate:** what you saw when the first preview arrived.
+
+## Run 2: the story pages
+
+Instruction to Codex, 20:08: “Ok home page is absolutely much better now, much much better. Run the same experiment on improving individual post please. Lets put more effort into individual post…”
+
+- Same T3 thread and branch, with four full rounds plus one focused review, from 20:19 to 21:33.
+- Changes: story pages share the homepage’s dark look; each story shows both full photos with their years; the then/now labels became buttons that show either whole photo; the phone layout reads like a photo essay; the sample entries are clearly labelled.
+- 79 browser tests passed, and the homepage stayed pixel-identical. Preview: [Mill House on thennow-8mgqsuls3](https://thennow-8mgqsuls3-kpoxo6ops-projects.vercel.app/mill-house).
+- Reaction in the Codex thread, 21:58: “FML this is sooo fire.”
+
+<div className="grid grid-cols-2 gap-6">
+  <img
+    src="/static/images/thennow-theo/post-before-phone.webp"
+    alt="Mill House story page before run 2, on a phone"
+    className="m-0 w-full rounded-lg"
+  />
+  <img
+    src="/static/images/thennow-theo/post-theo-phone.webp"
+    alt="Mill House story page after run 2, on a phone"
+    className="m-0 w-full rounded-lg"
+  />
+</div>
+
+_Mill House on a phone. Left: before run 2. Right: after._
+
+> **Boris to dictate:** the story page experience, and what blew your mind.
+
+## The edge-drag fix
+
+On a Pixel, the new comparison line could go so close to the screen edge that Android’s back gesture took over. Earlier versions of the site kept the line away from the edges on purpose. The request at 21:58 was “Do another short t3 on this, same rules”.
+
+- A short third run on the same branch: one fix and one focused council review.
+- Local commits `dc82fd0` and `be0f86f` (22:04–22:06, not pushed yet) keep the line and its handle clear of both screen edges on touch.
+- **Status when this draft was written:** still running; T3 had paused on a cleanup command that Codex declined.
+
+> **Boris to dictate:** whether the fix works on the Pixel. TODO: update the status above.
+
+## Before and after
+
+The same scripted phone session on both versions: drag the homepage slider, scroll, open Mill House, drag the story slider, scroll. The finger is a simulated touch on an emulated Pixel 7, not a real hand.
+
+<video
+  controls
+  playsInline
+  muted
+  loop
+  preload="metadata"
+  poster="/static/images/thennow-theo/before-after-phone-poster.jpg"
+  className="mx-auto max-h-[760px] w-auto"
+  src="/static/videos/thennow-theo/before-after-phone.mp4"
+/>
+
+_Left: vanilla Claude V2 (before). Right: after both T3 council runs._
+
+{/* Separate clips of each version, in case one side-by-side is not enough:
+/static/videos/thennow-theo/phone-prod.mp4      live thennow.nz
+/static/videos/thennow-theo/phone-v2.mp4        vanilla Claude V2
+/static/videos/thennow-theo/phone-dennison.mp4  Claude + Dennison skills V2
+/static/videos/thennow-theo/phone-theo.mp4      after T3 council runs 1 and 2 */}
+
+> **Boris to dictate:** optional caption or comment on the video.
+
+## What the scores said
+
+Overall scores out of 10. Each cell shows the candidate first, then the reference.
+
+**Run 1, homepage** (candidate / vanilla V2 / Dennison V2)
+
+| Round   | Commit    | Claude Opus 5.5 | GPT-6.1 Sol   |
+| ------- | --------- | --------------- | ------------- |
+| 1       | `6e6d1a2` | 7.5 / 7 / 6.5   | 7.5 / 7.2 / 7 |
+| 2       | `d9e6505` | 7 / 7 / 6       | 7 / 8 / 7     |
+| 3       | `093df45` | 7.5 / 7 / 6.5   | 7 / 8 / 7     |
+| Focused | `a3d2cb7` | 7.5 / 7 / 7     | 7 / 8 / 7     |
+
+**Run 2, story pages** (candidate / before)
+
+| Round   | Commit    | Claude Opus 5.5 | GPT-6.1 Sol |
+| ------- | --------- | --------------- | ----------- |
+| 1       | `adb579b` | 7 / 6           | 7 / 6       |
+| 2       | `025b64e` | 7.5 / 6.5       | 7 / 6       |
+| 3       | `569b309` | 7.5 / 6         | 7.5 / 6     |
+| 4       | `877646e` | 7.5 / 6.5       | 7 / 6       |
+| Focused | `48f278d` | 7.5 / 6         | 7 / 6       |
+
+- Run 1: GPT preferred vanilla V2 over the new homepage in rounds 2 to 4, and neither reviewer would ship it. The overall score never went above 7.5.
+- Run 2: both reviewers preferred the new story pages in every round. In the final review, Opus said “ship it” and Sol said no.
+- Scores for the unchanged reference screenshots drifted between rounds, as Theo warns in the video.
+
+> **Boris to dictate:** model scores against your own reaction.
+
+## Chronology
+
+| Time (NZDT)          | Event                                                                                                  |
+| -------------------- | ------------------------------------------------------------------------------------------------------ |
+| May 2023             | thennow repository created                                                                             |
+| 6 Nov, ~15:00        | First redesigns by vanilla Claude and Claude with the Dennison skill pack                              |
+| 6 Nov, ~15:30        | “Both look like complete shit.” Both sessions asked for a V2                                           |
+| 6 Nov, ~16:50        | Both V2 previews delivered                                                                             |
+| 6 Nov, 18:18         | Question: why do the two V2s look almost identical? Codex traced it                                    |
+| 6 Nov, 18:24         | “Apply Theo’s approach”                                                                                |
+| 6 Nov, 18:32         | Run 1 (homepage) started in T3 Code                                                                    |
+| 6 Nov, 18:43–19:27   | Run 1: 3 rounds + 1 focused review                                                                     |
+| 6 Nov, 19:48         | “Holy shit brother even the first preview looks Fiiiiire”                                              |
+| 6 Nov, 19:50         | Homepage preview live; before/after sent to Telegram                                                   |
+| 6 Nov, 20:08         | Run 2 requested for story pages                                                                        |
+| 6 Nov, 20:19–21:33   | Run 2: 4 rounds + 1 focused review                                                                     |
+| 6 Nov, 21:53         | Story page preview live                                                                                |
+| 6 Nov, 21:58         | “FML this is sooo fire”; Pixel edge-drag problem reported                                              |
+| 6 Nov, 22:00         | Short run 3 (edge-drag fix) started                                                                    |
+| 6 Nov, 22:04–22:06   | Edge-drag fix commits `dc82fd0`, `be0f86f`                                                             |
+| TODO                 | Run 3 result and preview                                                                               |
+
+## Sources
+
+- Theo’s pinned post on X: TODO (exact status link), on [@theo](https://x.com/theo)
+- Theo’s cost dashboard screenshot: TODO (source post and period)
+- Theo’s video: [Agents Sucked At UI (Until Today)](https://www.youtube.com/watch?v=xq0eB8vxeqk)
+- Theo’s council skill: [t3dotgg/tstack, skills/council](https://github.com/t3dotgg/tstack/blob/1085050f3baed1ac724caa4a8166145fb2ac88af/skills/council/SKILL.md)
+- T3 Code: [pingdotgg/t3code](https://github.com/pingdotgg/t3code)
+- Dennison skill pack: [dennisonbertram/developer-skill-pack](https://github.com/dennisonbertram/developer-skill-pack)
+- The site: [thennow.nz](https://thennow.nz)
+- Experiment branch: [kpoxo6op/thennow, experiment/theo-home-20261106](https://github.com/kpoxo6op/thennow/tree/experiment/theo-home-20261106)
+- Start point, vanilla V2: [`6a419ed`](https://github.com/kpoxo6op/thennow/commit/6a419ed1c1a3d4bf960dfa350346ba502875469f), [preview](https://thennow-pnyww9crm-kpoxo6ops-projects.vercel.app)
+- Dennison V2: [`b38d2d7`](https://github.com/kpoxo6op/thennow/commit/b38d2d7a0811ecceed69b88e9ac39231af374e2d), [preview](https://thennow-21ua2z8yn-kpoxo6ops-projects.vercel.app)
+- Run 1 final: [`8d10b75`](https://github.com/kpoxo6op/thennow/commit/8d10b75932589ebfa52d363ec8fef577a819b3d9), [preview](https://thennow-qua4yr3l0-kpoxo6ops-projects.vercel.app)
+- Run 2 final: [`5300b3b`](https://github.com/kpoxo6op/thennow/commit/5300b3b01b450e90d73ea57a6233047e93cd2076), [preview](https://thennow-8mgqsuls3-kpoxo6ops-projects.vercel.app/mill-house)
+- Edge-drag fix: TODO (commit and preview once run 3 is pushed)
