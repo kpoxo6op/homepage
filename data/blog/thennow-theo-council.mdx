@@ -9,44 +9,32 @@ summary: 'TODO: one-line summary in Boris’s words.'
 images: ['/static/images/thennow-theo/before-after-phone-poster.jpg']
 ---
 
-{/* DRAFT v2. Short facts only; each "Boris to dictate" block is where the story goes.
-Every video is the same fast scripted session on an emulated Pixel 7, with idle frames cut: drag the homepage photo,
-scroll, open Mill House, drag again, scroll. Detailed scores, commits and briefs live in
+{/* DRAFT v4. Boris's dictation (6 Nov 2026), translated from Russian; only dictation slips fixed.
+Every video is the same fast scripted session on an emulated Pixel 7, with idle frames cut: drag the
+homepage photo, scroll, open Mill House, drag again, scroll. Detailed scores, commits and briefs live in
 the handoff.txt files under ~/Documents/Codex/2026-11-06 on the laptop. */}
 
 ## Table of contents
 
-- [Theo’s tip](#theos-tip)
-- [The site before](#the-site-before)
+- [How the site started](#how-the-site-started)
 - [Tricks that did not help](#tricks-that-did-not-help)
+- [Theo’s tip](#theos-tip)
 - [What I asked GPT to do](#what-i-asked-gpt-to-do)
 - [Round one: the homepage](#round-one-the-homepage)
 - [Round two: the story pages](#round-two-the-story-pages)
 - [Round three: the edge fix](#round-three-the-edge-fix)
 - [Before and after](#before-and-after)
-- [What the AI judges said](#what-the-ai-judges-said)
+- [Why I am writing this](#why-i-am-writing-this)
 - [Timeline](#timeline)
 - [Sources](#sources)
 
-## Theo’s tip
+## How the site started
 
-Theo from t3.gg pinned a post saying agents can be good at UI “if you burn enough tokens”. His method: one model builds, other models judge screenshots, the builder fixes what they find, and the loop repeats.
+{/* TODO for Boris: ChatGPT launched in late 2022 and GPT-4 in March 2023; the thennow repo dates from May 2023. "End of 2023" may be a slip. */}
 
-- He puts his own UI experiment at about \$400 and 17.6 hours of agent time.
-- He says a \$200 subscription “can do \$12,000 of usage in a month”.
-- His cost dashboard shows about \$75.6K in total, two-thirds of it on Claude Opus. TODO: the post with this screenshot, and the period it covers.
+At the end of 2023, ChatGPT 3.5 came out, then 4. Almost as soon as ChatGPT landed in my hands, I had an idea to make a website, [thennow.nz](https://thennow.nz). I did not understand anything about React development, and I still don't, so I built the whole site by copy-pasting with ChatGPT 3.5 and ChatGPT 4. I managed to take a few photos and drive around a bit, but then I got very busy and forgot the site existed.
 
-<img
-  src="/static/images/thennow-theo/theo-token-spend.webp"
-  alt="Theo's cost dashboard broken down by speed and by model"
-  className="mx-auto w-full rounded-lg"
-/>
-
-> **Boris to dictate:** how you found the post, and why it got to you.
-
-## The site before
-
-[thennow.nz](https://thennow.nz) pairs old photographs of New Zealand places with modern retakes, with a slider between them. It has been around since 2023.
+I came back to it now and then, took a few more photos and played with artificial intelligence a little to measure how much easier it had become. It had become much easier. For example, I no longer had to copy anything into a chat and back. Everything worked on the computer from the terminal.
 
 <video
   autoPlay
@@ -60,13 +48,15 @@ Theo from t3.gg pinned a post saying agents can be good at UI “if you burn eno
   src="/static/videos/thennow-theo/phone-prod.mp4"
 />
 
-_The live site on a phone._
+_The live site on a phone, before all of this._
 
-> **Boris to dictate:** what you thought of it.
+Recently something pushed me to come back to it again. A good friend of mine reminded me about it when she suggested I buy frames with old photos of Auckland, because she remembers better than I do what I like. She said: you like old Auckland, you can hang the frames at your place. I didn't buy the frames, because they turned out to be cheap crap from Kmart. But I am grateful to my friend for reminding me about my website.
 
 ## Tricks that did not help
 
-Earlier the same day, two Claude sessions redesigned the site: one plain, one with a popular skill pack. Both got a second try. The results looked almost the same.
+Since I am an autist obsessed with artificial intelligence, x.com, Telegram and the rest of the internet are, for me, one continuous stream of news and content about AI. Lately I keep seeing skills and methods for improving UX and UI. This week alone I came across two. I tried them today on my website.
+
+One of them was, I think, the Dennison skill. I asked ChatGPT to set up two sessions in Claude Code. One session worked in vanilla Claude Code, and the second used Dennison’s skills.
 
 <div className="grid grid-cols-2 gap-4">
   <video
@@ -93,30 +83,38 @@ Earlier the same day, two Claude sessions redesigned the site: one plain, one wi
   />
 </div>
 
-_Left: plain Claude. Right: Claude with the skill pack._
+_Left: vanilla Claude Code. Right: Claude Code with Dennison’s skill pack._
 
-> **Boris to dictate:** “Both look like complete shit”, and your take on skill packs and similar gimmicks.
+I did not notice any difference in design improvement when I used the skill. I think I would have got a slightly better result if I had typed in by hand what exactly I wanted from the redesign, and then the skill would not be needed anyway. So either I could not apply this skill, or it is not powerful enough, or I am using it wrong. I am sure Dennison is a respected person. He has his own products, he is rich and successful, but somehow I just could not appreciate and apply his skill properly.
+
+## Theo’s tip
+
+The second skill I found by accident, literally today. More precisely, it found me: it turned up in my x.com feed. It comes from Theo, a developer, investor and who knows what else, as he calls himself. He has a development environment, T3 Code. I saw glowing reviews of it from respected people on x.com and installed it too. And I really liked the editor, from installation and onboarding to actual use. I think I will use it for a while. The quality of the product hooked me.
+
+So when I saw a new pinned post from Theo in my feed, saying he knows how to save a whole lot of developers by sharply improving UX and UI at the cost of burning a lot of tokens, I got interested. It was perfect timing. I had just been reminded about my hobby project, I had spare tokens left before my subscription reset, and I had a website that obviously needed a dramatic UX and UI improvement.
+
+- Theo’s method: one model builds, other models judge screenshots, the builder fixes what they find, and the loop repeats.
+- He puts his own UI experiment at about \$400 and 17.6 hours of agent time.
+- He says a \$200 subscription “can do \$12,000 of usage in a month”.
+- His cost dashboard shows about \$75.6K in total, two-thirds of it on Claude Opus. TODO: the post with this screenshot, and the period it covers.
+
+<img
+  src="/static/images/thennow-theo/theo-token-spend.webp"
+  alt="Theo's cost dashboard broken down by speed and by model"
+  className="mx-auto w-full rounded-lg"
+/>
 
 ## What I asked GPT to do
 
-> Forget Dennison, probably it is not for me. Next experiment for you is to apply Theo’s approach. I have Claude and GPT subs. Claude has more usage so lean on it more. Watch what Theo explains and do a few rounds of his approach on a new home screen mock, make it target to become much better than what it is now. Use Theo’s T3 to set it up and run as he describes. Share results with me on Telegram in Soyclaw. Don’t delete old previews.
+Again, I did it very simply. I opened the same chat with GPT that I had been using before. I told it: launch T3 and run an experiment there. Redo the homepage the way Theo recommends in his post on x.com. Then I told it to do the same for the Stories section. You can see the result in the videos.
 
-_Lightly cleaned up from the original message._
+{/* TODO for Boris: the T3 reviewers were Claude Opus 5.5 and GPT-6.1 Sol, not Astra. */}
 
-- GPT (in Codex) organised it and did no design work itself.
-- Claude built the site in Theo’s T3 Code app.
-- A fresh Claude and a fresh GPT judged screenshots each round, without seeing earlier scores.
-- It all ran on the two ordinary subscriptions, with no extra API spend.
-
-### T3 on Android
-
-- The T3 Android app is still in beta. Boris’s note: very good, from onboarding through real use.
-
-> **Boris to dictate:** following along from your phone, and what you expect from v1.
+I did not burn as many tokens as Theo might recommend. My model chose for itself how much to spend on iterations. I think I had 4 or 5 experiments for the homepage and for the stories, while in screenshots and reviews other developers wrote that they did 10 experiments, if I remember correctly, 10 iterations. And maybe they used more powerful models. I used only Astra and Claude. I don’t even know at what power. The agent decided that for me too, naturally.
 
 ## Round one: the homepage
 
-Three rounds of build and judge, about an hour and a quarter. The homepage went dark and photo-first, under the line “The same corner, ninety-three years apart.”
+Three rounds of build and judge, about an hour and a quarter.
 
 <video
   autoPlay
@@ -132,11 +130,9 @@ Three rounds of build and judge, about an hour and a quarter. The homepage went 
 
 _After round one: new homepage, old story pages._
 
-> **Boris to dictate:** “Holy shit brother even the first preview looks Fiiiiire.” What you saw.
-
 ## Round two: the story pages
 
-Four rounds, about an hour and a half. The story pages now match the homepage, show both full photos, and read like a photo essay on a phone.
+Four rounds, about an hour and a half.
 
 <video
   autoPlay
@@ -152,20 +148,15 @@ Four rounds, about an hour and a half. The story pages now match the homepage, s
 
 _After round two._
 
-> **Boris to dictate:** “FML this is sooo fire.” What blew your mind.
-
 ## Round three: the edge fix
 
-On a Pixel, the new slider could get so close to the screen edge that Android’s back gesture took over. Earlier versions of the site avoided this on purpose. A short third round moved the line back from both edges.
+On a Pixel, the new slider could get so close to the screen edge that Android’s back gesture took over. A short third round moved the line back from both edges.
 
-- Status: the fix and its review are done, but it is not deployed yet. TODO: add a video once the preview is live.
-
-> **Boris to dictate:** how it feels on the Pixel now.
+- Status: the fix is done but not deployed yet. TODO: add a video once the preview is live.
 
 ## Before and after
 
 <video
-  loop
   autoPlay
   loop
   muted
@@ -177,31 +168,30 @@ On a Pixel, the new slider could get so close to the screen edge that Android’
   src="/static/videos/thennow-theo/before-after-phone.mp4"
 />
 
-_Left: plain Claude’s redesign. Right: after Theo’s method. Same phone, same moves._
+_Left: vanilla Claude Code’s redesign. Right: after Theo’s method. Same phone, same moves._
 
-> **Boris to dictate:** optional comment.
+## Why I am writing this
 
-## What the AI judges said
+I am writing this post because it blew my mind. I almost cried from an overflow of feelings. The jump in UX and UI quality was just impossible. For the effort spent versus the result, I have never done anything like it in my life. It feels like magic. I did not suffer, I did not write, I did not slave away. I just sent a screenshot of Theo’s post on x.com and got an explosive jump in UX and UI quality, without even explaining what exactly I want. I just said: make it pretty and send me the results.
 
-- Scores stayed around 7 to 7.5 out of 10 throughout.
-- On the homepage, GPT still preferred plain Claude’s version. On the story pages, both judges preferred the new design every round.
+I can’t even imagine what will happen if I do really deep research, understand what I actually want from the site and give the agents a direction. I’m afraid I’ll just lose sleep for a week. I don’t think I’ll survive it, because I have already lost sleep over what just happened. I’m dictating this post at half past midnight because I can’t sleep. There is one more reason I can’t sleep, but I can’t tell you about it. It’s my little secret. And it has nothing to do with artificial intelligence, thank God.
 
-> **Boris to dictate:** model scores against your own reaction.
+Anyway, a chaotic post, but I want it chaotic, so it comes from the heart. And I beg you: if you have pet projects at work or at home, or any interface with UX and UI, install T3 at any cost and spend 10 iterations improving some part of the UX and UI that is dear to you. I bet you will either shed a tear or have some other strong emotions, and in short, you will be very surprised by the result.
+
+See you next time. I’ll try to go to sleep. And I’ll spend the last half hour editing this post for my website and for a LinkedIn post.
 
 ## Timeline
 
 All on 6 November 2026, New Zealand time.
 
-| Time  | What happened                                         |
-| ----- | ----------------------------------------------------- |
-| 15:00 | Plain Claude and Claude with the skill pack redesign  |
-| 15:30 | “Both look like complete shit.” Second try for both   |
-| 18:24 | “Apply Theo’s approach”                               |
-| 19:48 | Round one preview: “even the first preview looks Fiiiiire” |
-| 20:08 | Round two requested, for the story pages              |
-| 21:58 | Round two preview: “FML this is sooo fire”            |
-| 22:00 | Round three started, for the Pixel edge problem       |
-| TODO  | Round three live                                      |
+| Time  | What happened                                                    |
+| ----- | ---------------------------------------------------------------- |
+| 15:00 | Vanilla Claude Code and Claude Code with Dennison’s skill redesign |
+| 18:24 | “Apply Theo’s approach”                                          |
+| 19:48 | Round one preview                                                |
+| 21:58 | Round two preview                                                |
+| 22:00 | Round three started, for the Pixel edge problem                  |
+| TODO  | Round three live                                                 |
 
 ## Sources
 
@@ -209,6 +199,6 @@ All on 6 November 2026, New Zealand time.
 - Theo’s video: [Agents Sucked At UI (Until Today)](https://www.youtube.com/watch?v=xq0eB8vxeqk)
 - Theo’s method as a skill: [t3dotgg/tstack](https://github.com/t3dotgg/tstack/blob/1085050f3baed1ac724caa4a8166145fb2ac88af/skills/council/SKILL.md)
 - T3 Code: [pingdotgg/t3code](https://github.com/pingdotgg/t3code)
-- The skill pack: [dennisonbertram/developer-skill-pack](https://github.com/dennisonbertram/developer-skill-pack)
+- Dennison’s skill pack: [dennisonbertram/developer-skill-pack](https://github.com/dennisonbertram/developer-skill-pack)
 - The site: [thennow.nz](https://thennow.nz) and the [experiment branch](https://github.com/kpoxo6op/thennow/tree/experiment/theo-home-20261106)
-- Previews: [plain Claude](https://thennow-pnyww9crm-kpoxo6ops-projects.vercel.app), [skill pack](https://thennow-21ua2z8yn-kpoxo6ops-projects.vercel.app), [round one](https://thennow-qua4yr3l0-kpoxo6ops-projects.vercel.app), [round two](https://thennow-8mgqsuls3-kpoxo6ops-projects.vercel.app/mill-house)
+- Previews: [vanilla Claude Code](https://thennow-pnyww9crm-kpoxo6ops-projects.vercel.app), [Dennison’s skill](https://thennow-21ua2z8yn-kpoxo6ops-projects.vercel.app), [round one](https://thennow-qua4yr3l0-kpoxo6ops-projects.vercel.app), [round two](https://thennow-8mgqsuls3-kpoxo6ops-projects.vercel.app/mill-house)
