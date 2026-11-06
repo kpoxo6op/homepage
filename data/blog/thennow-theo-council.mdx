@@ -28,9 +28,7 @@ _Translated from my Russian dictation._
 
 ## How the site started
 
-{/* TODO for Boris: ChatGPT launched in late 2022 and GPT-4 in March 2023; the thennow repo dates from May 2023. "End of 2023" may be a slip. */}
-
-At the end of 2023, ChatGPT 3.5 came out, then 4. Almost as soon as ChatGPT landed in my hands, I had an idea to make a website, [thennow.nz](https://thennow.nz). I did not understand anything about React development, and I still don't, so I built the whole site by copy-pasting with ChatGPT 3.5 and ChatGPT 4. I managed to take a few photos and drive around a bit, but then I got very busy and forgot the site existed.
+ChatGPT came out at the end of 2022, and GPT-4 followed in March 2023. Almost as soon as ChatGPT landed in my hands, I had an idea to make a website, [thennow.nz](https://thennow.nz). The first commit is from May 2023. I did not understand anything about React development, and I still don't, so I built the whole site by copy-pasting with ChatGPT. I managed to take a few photos and drive around a bit, but then I got very busy and forgot the site existed.
 
 I came back to it now and then, took a few more photos and played with artificial intelligence a little to measure how much easier it had become. It had become much easier. For example, I no longer had to copy anything into a chat and back. Everything worked on the computer from the terminal.
 
@@ -133,9 +131,22 @@ _For scale, Theo’s own token bill: about \$75.6K. [TODO: source and period](ht
 
 Again, I did it very simply. I opened the same chat with GPT that I had been using before. I told it: launch T3 and run an experiment there. Redo the homepage the way Theo recommends in his post on x.com. Then I told it to do the same for the Stories section. You can see the result in the videos.
 
-{/* TODO for Boris: the T3 reviewers were Claude Opus 5.5 and GPT-6.1 Sol, not Astra. */}
+I did not burn as many tokens as Theo might recommend. My model chose for itself how much to spend on iterations. I think I had 4 or 5 experiments for the homepage and for the stories, while in screenshots and reviews other developers wrote that they did 10 experiments, if I remember correctly, 10 iterations. And maybe they used more powerful models. I used only Claude Opus 5.5 and GPT-6.1 Sol. I don’t even know at what power. The agent decided that for me too, naturally.
 
-I did not burn as many tokens as Theo might recommend. My model chose for itself how much to spend on iterations. I think I had 4 or 5 experiments for the homepage and for the stories, while in screenshots and reviews other developers wrote that they did 10 experiments, if I remember correctly, 10 iterations. And maybe they used more powerful models. I used only Astra and Claude. I don’t even know at what power. The agent decided that for me too, naturally.
+<div className="grid grid-cols-2 items-center gap-4">
+  <img
+    src="/static/images/thennow-theo/codex-review-sessions.webp"
+    alt="Codex on my phone: the thennow-theo-home project with a long list of review sub-agent sessions"
+    className="m-0 w-full rounded-lg"
+  />
+  <img
+    src="/static/images/thennow-theo/codex-review-scores.webp"
+    alt="One review sub-agent's score table: the candidate design against two reference sites"
+    className="m-0 w-full rounded-lg"
+  />
+</div>
+
+_What it looked like on my phone that night: a new review session for every round, each one scoring the design blind._
 
 <img
   src="/static/images/thennow-theo/kaelig-post.webp"
